@@ -24,7 +24,7 @@
   --deep:#0b1a3d;
   --warm:#fffaf0;--cool:#f5f8ff;--link:#3182f6;--err:#ff4d4f;
   --g900:#191e28;--g800:#333c4b;--g700:#4e5968;--g600:#6b7684;--g300:#d1d6db;--g200:#e5e8eb;--g100:#f2f4f6;--g50:#f9fafb;
-  --bh:80px;            /* 상단 띠 높이 (닫으면 0) */
+  --bh:60px;            /* 상단 띠 높이 (닫으면 0) */
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:calc(var(--bh) + 80px)}
@@ -44,10 +44,8 @@ ul,ol{list-style:none}
 .btn-t i{font-size:20px}
 
 /* 상단 띠 */
-.topbar{position:fixed;inset:0 0 auto;z-index:110;height:var(--bh);display:flex;align-items:center;justify-content:center;gap:12px;padding:0 44px 0 12px;background:var(--g900);color:#fff;text-align:center}
+.topbar{position:fixed;inset:0 0 auto;z-index:110;height:var(--bh);display:flex;align-items:center;justify-content:center;gap:12px;padding:0 44px;background:var(--g900);color:#fff;text-align:center}
 .topbar p{font-size:16px;font-weight:500;line-height:22px}
-.topbar .tb-btn{flex:none;display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--g900);background:#fff;border-radius:8px;padding:6px 14px 6px 8px}
-.topbar .tb-btn .ico-k{width:20px;height:20px}
 .topbar .tb-x{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:32px;height:32px;border:0;background:none;color:#fff;font-size:22px;cursor:pointer}
 body.no-bar{--bh:0px}
 body.no-bar .topbar{display:none}
@@ -160,7 +158,6 @@ body.no-bar .topbar{display:none}
 .pc-amt b small{margin-left:2px;font-size:18px;font-weight:700}
 .pc-more{margin-top:auto;display:inline-flex;align-items:center;justify-content:center;gap:4px;width:200px;height:44px;border:1px solid var(--p);border-radius:4px;padding:0 16px;font-size:14px;line-height:1.6;font-weight:700;letter-spacing:-.14px;color:var(--p)}
 .pc-more i{font-size:18px}
-.prods .cta{margin-top:40px}
 
 /* ⑥ 큰 이미지 띠 */
 .wide{max-width:1440px;margin:60px auto;padding:0 20px}
@@ -258,7 +255,7 @@ body.no-bar .topbar{display:none}
 
 @media (min-width:768px){
   :root{--bh:60px}
-  .topbar{padding:0 64px 0 20px;gap:16px}
+  .topbar{padding:0 64px;gap:16px}
   .hero{padding:96px 60px 0}
   .notice p,.m-notice p{font-size:14px;letter-spacing:-.01em}
   .limit{padding:120px 60px}
@@ -290,6 +287,7 @@ body.no-bar .topbar{display:none}
 
 @media (min-width:1024px){
   html{scroll-padding-top:calc(var(--bh) + 100px)}
+  .fab{display:none} /* 동그라미 상담 버튼은 휴대폰·태블릿에서만 (큰 화면은 상단 버튼·오른쪽 상담 창) */
   .hd{height:80px}
   .hd-in{padding:0 56px}
   .hd-logo{height:34px}
@@ -338,7 +336,6 @@ body.no-bar .topbar{display:none}
   .prods .sub{margin-bottom:40px;font-size:18px;line-height:32px;letter-spacing:-.36px}
   .pcards{grid-template-columns:repeat(4,minmax(0,340px));gap:20px}
   .pcard{max-width:none;padding:48px 20px 32px}
-  .prods .cta{margin-top:80px}
 
   .uses{padding:120px 0}
   .uses-in{padding:0 40px}
@@ -385,9 +382,9 @@ body.no-bar .topbar{display:none}
   .aside{display:block;position:fixed;top:50%;right:20px;z-index:90;width:380px;transform:translateY(-50%);padding:20px;border:1px solid var(--tint-line);border-radius:16px;background:var(--tint-bg);box-shadow:0 12px 40px rgba(11,26,61,.14);text-align:center;opacity:0;pointer-events:none;transition:opacity .3s}
   .aside.show{opacity:1;pointer-events:auto}
   .aside .as-x{position:absolute;top:8px;right:8px;z-index:1;width:28px;height:28px;border:0;border-radius:9999px;background:rgba(255,255,255,.9);font-size:18px;line-height:1;color:var(--g600);cursor:pointer}
-  .aside .as-img{aspect-ratio:16/9;border-radius:8px;border:1px solid var(--g200)}
+  .aside .as-img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;object-position:50% 20%;border-radius:8px}
   .aside .badge{margin-top:16px}
-  .aside h2{margin-top:10px;font-size:18px;line-height:1.4;font-weight:700;color:var(--deep)}
+  .aside h2{margin-top:10px;font-size:20px;line-height:1.4;font-weight:700;color:var(--deep)}
   .aside .desc{margin:8px 0 16px;font-size:14px;line-height:1.6;color:var(--g600)}
   .aside .cta-row{flex-direction:column}
 }
@@ -415,7 +412,7 @@ body.no-bar .topbar{display:none}
    · 칸 크기는 움직이는 동안에도 그대로 (글자 넓이 고정) ───── */
 
 /* 버튼 : 마우스 올리면 진해지고, 누르면 살짝 눌림 */
-.btn-k,.btn-t,.cta-row a,.hd-r .btn,.tb-btn{transition:background .15s,box-shadow .15s,transform .1s}
+.btn-k,.btn-t,.cta-row a,.hd-r .btn{transition:background .15s,box-shadow .15s,transform .1s}
 .btn-k:hover,.cta-row .k:hover,.hd-r .btn.kk:hover{box-shadow:inset 0 0 0 1px var(--g600)}
 .btn-t:hover,.cta-row .t:hover,.hd-r .btn.tt:hover{background:#1a43c0}
 .btn-k:active,.btn-t:active,.cta-row a:active,.hd-r .btn:active,.fab a:active{transform:scale(.97)}
@@ -489,7 +486,6 @@ body.no-bar .topbar{display:none}
 <!-- 상단 띠 -->
 <div class="topbar">
   <p>2026 대한민국 소비자 만족 브랜드 1위</p>
-  <a class="tb-btn" data-kakao target="_blank" rel="noopener"><svg class="ico-k" aria-hidden="true"><use href="#ico-k"/></svg>카카오톡 상담</a>
   <button class="tb-x" type="button" aria-label="닫기">&times;</button>
 </div>
 
@@ -631,10 +627,6 @@ body.no-bar .topbar{display:none}
       <a class="pcard" data-kakao target="_blank" rel="noopener"><div class="pc-ico"><i class="ph-duotone ph-house-line"></i></div><h3>주부·사회초년생</h3><p class="pc-prod">모바일 생활자금</p><p class="pc-amt"><span>한도 최대</span><b><span class="cnt">500</span><small>만원</small></b></p><span class="pc-more">상담하기<i class="ph-bold ph-caret-right"></i></span></a>
       <a class="pcard" data-kakao target="_blank" rel="noopener"><div class="pc-ico"><i class="ph-duotone ph-handshake"></i></div><h3>기대출·저신용</h3><p class="pc-prod">두 상품 모두 상담</p><p class="pc-amt"><span>한도 최대</span><b><span class="cnt">1,000</span><small>만원</small></b></p><span class="pc-more">상담하기<i class="ph-bold ph-caret-right"></i></span></a>
     </div>
-    <div class="btn-pair cta">
-      <a class="btn-k" data-kakao target="_blank" rel="noopener"><svg class="ico-k" aria-hidden="true"><use href="#ico-k"/></svg>카카오톡 상담</a>
-      <a class="btn-t" data-tel><i class="ph-bold ph-phone"></i>전화 상담 신청</a>
-    </div>
   </div>
 </section>
 
@@ -704,11 +696,14 @@ body.no-bar .topbar{display:none}
   <div class="faq-box">
     <div class="faq-head"><h2>상담 전 많이 궁금해하는 내용</h2></div>
     <div class="faqs">
-      <details><summary>수수료는 얼마인가요?</summary><p>고객님의 상황에 따라 달라 일괄적으로 안내하지 않습니다. 진행 전에 정확한 금액을 먼저 안내해 드리며, 법정 최고금리를 넘는 수수료는 어떠한 경우에도 받지 않습니다.</p></details>
-      <details><summary>상담하면 반드시 진행해야 하나요?</summary><p>아닙니다. 조건을 확인한 뒤 원하지 않으면 진행하지 않아도 됩니다. 진행을 권유하거나 재촉하지 않습니다.</p></details>
-      <details><summary>신용점수에 영향이 있나요?</summary><p>상담만으로는 신용조회를 하지 않으므로 조회 기록이 남지 않으며, 신용점수에도 영향이 없습니다.</p></details>
-      <details><summary>준비할 서류가 있나요?</summary><p>상담 단계에서는 서류가 필요하지 않습니다. 이후 필요한 서류가 있으면 상담원이 미리 안내해 드립니다.</p></details>
-      <details><summary>사칭 업체는 어떻게 구별하나요?</summary><p>한국비상금협회는 이 페이지의 상담 버튼과 대표번호 외의 채널을 운영하지 않습니다. 대출 전 입금을 요구하는 경우 응하면 안 됩니다.</p></details>
+      <details><summary>수수료(이자)는 어떻게 되나요?</summary><p><span>필요한 금액과 기간, 상품에 따라 달라지기 때문에 페이지에 한 가지 금액으로 적어 두지 않습니다. 진행 전에 상담에서 이자와 총 상환 금액을 먼저 알려 드리고, 확인한 뒤 진행 여부를 정하면 됩니다. 법정 최고금리(연 20%)를 넘는 이자나 별도 중개수수료는 어떤 경우에도 받지 않습니다.</span></p></details>
+      <details><summary>상담하면 꼭 진행해야 하나요?</summary><p><span>아닙니다. 조건을 듣고 마음에 들지 않으면 그대로 상담을 끝내도 됩니다. 이후에 따로 연락하거나 진행을 재촉하지 않으며, 진행을 정하기 전까지 개인정보를 요구하지 않습니다.</span></p></details>
+      <details><summary>신용점수에 영향이 있나요?</summary><p><span>상담 단계에서는 신용조회를 하지 않아 조회 기록이 남지 않고, 신용점수에도 영향이 없습니다. 기존 대출이 있어도 그것만으로 상담이 제한되지 않습니다.</span></p></details>
+      <details><summary>개인정보는 안전한가요?</summary><p><span>진행을 정하기 전까지는 개인정보를 받지 않습니다. 진행할 때도 꼭 필요한 정보만 확인하며, 상담과 진행 외의 다른 용도로 쓰지 않습니다. 만일의 경우에 대비해 배상책임보험(5억 원)에 가입되어 있습니다.</span></p></details>
+      <details><summary>시간이 얼마나 걸리나요?</summary><p><span>상담부터 진행 완료까지 <b>평균 5분</b>이고, 진행이 끝나면 5분 안에 입금됩니다. 문의가 몰리는 시간에는 조금 더 걸릴 수 있지만, 한도와 조건을 확인하는 데에는 오래 걸리지 않습니다.</span></p></details>
+      <details><summary>준비해야 할 서류가 있나요?</summary><p><span>본인 명의 휴대폰 하나면 됩니다. 방문할 필요가 없고, 소득증빙·통장사본·재직증명서 같은 서류도 따로 내지 않습니다.</span></p></details>
+      <details><summary>주말이나 밤에도 상담할 수 있나요?</summary><p><span>네. 365일 24시간 카카오톡과 전화로 상담을 받습니다. 주말과 공휴일, 늦은 밤에도 같은 방식으로 진행됩니다.</span></p></details>
+      <details><summary>사칭 업체는 어떻게 구별하나요?</summary><p><span>한국비상금협회는 이 페이지의 카카오톡·전화 상담 외에 다른 채널을 운영하지 않습니다. 진행 전에 보증금이나 수수료 명목으로 먼저 입금을 요구하거나, 다른 메신저로 옮기자고 하면 사칭 업체이니 응하면 안 됩니다. 의심되면 대표번호로 먼저 확인하는 것이 안전합니다.</span></p></details>
     </div>
     <a class="ask" data-kakao target="_blank" rel="noopener">카카오톡으로 문의 →</a>
   </div>
@@ -747,10 +742,10 @@ body.no-bar .topbar{display:none}
 <!-- 오른쪽 상담 창 (큰 화면) -->
 <aside class="aside" aria-label="상담 안내">
   <button class="as-x" type="button" aria-label="닫기">&times;</button>
-  <div class="as-img ph-box">【이미지】</div>
-  <span class="badge">365일 24시간</span>
-  <h2><span>카카오톡으로</span><span>바로 상담</span></h2>
-  <p class="desc">상담 무료 · 신용조회 없음</p>
+  <img class="as-img" src="img/award.jpg" alt="2026 대한민국 소비자 만족 브랜드 1위 상장" loading="lazy">
+  <span class="badge">국내 인증 업체</span>
+  <h2><span>정식 등록 업체에서</span><span>즉시 비대면 상담</span></h2>
+  <p class="desc">365일 24시간 · 상담 무료 · 신용조회 없음</p>
   <div class="cta-row">
     <a class="k" data-kakao target="_blank" rel="noopener"><svg class="ico-k" aria-hidden="true"><use href="#ico-k"/></svg>카카오톡 상담</a>
     <a class="t" data-tel><i class="ph-bold ph-phone"></i>전화 상담 신청</a>

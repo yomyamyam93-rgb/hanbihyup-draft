@@ -32,7 +32,14 @@ img{display:block;max-width:100%}
 .top{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .top .wrap{display:flex;align-items:center;gap:12px;height:60px}
 .top .logo{height:30px;margin-right:auto}
-.top .cta{font-size:13px;font-weight:700;color:#fff;background:var(--p);border-radius:4px;padding:9px 14px}
+/* 상담 버튼 통일 : 카카오톡 = 노랑 + 검은 말풍선, 전화 = 흰색 + 파란 전화 아이콘 */
+.bk,.bt{display:inline-flex;align-items:center;justify-content:center;gap:7px;border-radius:4px;font-weight:800;white-space:nowrap}
+.bk{background:#fee500;color:#191919}
+.bt{background:#fff;color:var(--p);box-shadow:inset 0 0 0 1px #c5d3ea}
+.ico-kb{flex:none;width:20px;height:20px}
+.top .cta{font-size:13px;padding:9px 12px}
+.top .cta .ico-kb{width:18px;height:18px}
+.top .cta.bt{display:none}
 .burger{width:40px;height:40px;border:0;background:none;display:grid;place-content:center;gap:5px;cursor:pointer}
 .burger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px}
 .gnb{display:none}
@@ -56,13 +63,15 @@ img{display:block;max-width:100%}
 .kv h1{font-size:34px;line-height:1.32;font-weight:700;letter-spacing:-.03em;margin:18px 0 12px}
 .kv h1 em{font-style:normal;color:var(--p)}
 .kv-sub{font-size:16px;color:var(--sub)}
+.kv-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:24px}
+.kv-btns a{height:52px;font-size:15px}
 .stats{position:relative;z-index:2;display:grid;grid-template-columns:repeat(2,1fr);background:#fff;border:1px solid var(--line);border-radius:4px;box-shadow:0 10px 28px rgba(30,60,140,.08);margin:16px 0 0;padding:0}
 .stats div{padding:18px 6px}
 .stats div:nth-child(even){border-left:1px solid var(--line)}
 .stats div:nth-child(n+3){border-top:1px solid var(--line)}
 .stats dt{font-size:12px;color:var(--sub);font-weight:600}
-.stats dd{font-size:24px;font-weight:900;color:var(--p);letter-spacing:-.03em;margin-top:4px}
-.stats dd span{font-size:13px;margin-left:1px}
+.stats dd{font-size:24px;font-weight:700;color:var(--p);letter-spacing:-.03em;margin-top:4px}
+.stats dd span{font-size:13px;font-weight:600;margin-left:2px}
 .kv-note{font-size:11px;color:#98a3b8;margin:12px 0 0;padding-bottom:56px}
 
 /* ② 특징 5가지 */
@@ -190,9 +199,8 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
 .bchips li{font-size:14px;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:4px;padding:7px 12px}
 .bbtns{display:grid;gap:10px;max-width:420px;margin:0 auto}
 .bbtns a{display:flex;align-items:center;justify-content:center;gap:8px;height:58px;border-radius:4px;font-size:17px;font-weight:800}
-.bbtns .k{background:#fee500;color:#191919}
-.bbtns .t{background:#fff;color:var(--p)}
 .bbtns i{font-size:22px}
+.bbtns .ico-kb{width:22px;height:22px}
 
 /* 푸터 */
 .legal{background:#08132e;color:#a7b4cc;font-size:13px;padding:44px 0 110px;line-height:1.75}
@@ -206,6 +214,7 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
 .fab a{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-size:27px;box-shadow:0 10px 24px rgba(0,0,0,.2)}
 .fab .t{background:#fff;color:var(--p);border:1px solid var(--line)}
 .fab .k{background:#fee500;color:#191919}
+.fab .k .ico-kb{width:30px;height:30px}
 
 .reveal{opacity:0;transform:translateY(20px);transition:.7s cubic-bezier(.2,.7,.2,1)}
 .reveal.on{opacity:1;transform:none}
@@ -222,7 +231,8 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
   .gnb{display:flex;gap:36px;margin:0 auto 0 56px}
   .gnb a{font-size:16px;font-weight:700}
   .gnb a:hover{color:var(--p)}
-  .top .cta{font-size:15px;padding:12px 24px}
+  .top .cta{font-size:15px;padding:12px 20px}
+  .top .cta.bt i{font-size:19px}
   .burger{display:none}
   .notice{font-size:15px}
 
@@ -232,6 +242,10 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
   .kv h1{font-size:54px;margin:22px 0 14px}
   .kv h1 br:nth-of-type(2){display:none}
   .kv-sub{font-size:20px}
+  .kv-btns{display:flex;justify-content:center;gap:12px;margin-top:32px}
+  .kv-btns a{height:56px;min-width:200px;padding:0 28px;font-size:17px}
+  .kv-btns .ico-kb{width:22px;height:22px}
+  .kv-btns i{font-size:21px}
   .stats{grid-template-columns:repeat(4,1fr);margin:20px 0 0;text-align:center}
   .stats div{padding:30px 10px}
   .stats div+div{border-left:1px solid var(--line)}
@@ -357,16 +371,23 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
   .awd .org-g{flex-wrap:nowrap;gap:28px}
   .awd + .aw-hist{margin-top:80px}
 }
+/* 상단 메뉴의 전화 상담 버튼은 메뉴가 줄바꿈되지 않는 넓은 화면에서만 */
+@media (min-width:1280px){
+  .top .cta.bt{display:inline-flex}
+}
 </style>
 </head>
 <body>
+<!-- 카카오톡 말풍선 (노란 버튼 위 검은 말풍선) — 아래에서 <use href="#ico-kb"> 로 불러 씀 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="ico-kb" viewBox="4 4.6 16 15"><path fill="#191919" d="M12 5.6c-3.9 0-7 2.45-7 5.5 0 1.95 1.3 3.67 3.27 4.64l-.66 2.44c-.06.22.19.4.38.27l2.9-1.93c.36.05.73.08 1.11.08 3.9 0 7-2.46 7-5.5s-3.1-5.5-7-5.5z"/></symbol></svg>
 
 <!-- 헤더 : 로고 · 메뉴 · 상담 신청 · 햄버거(휴대폰) -->
 <header class="top">
   <div class="wrap">
     <img class="logo" src="img/logo.png" alt="한국비상금협회">
     <nav class="gnb"><a href="#about">협회 소개</a><a href="#prod">상품 안내</a><a href="#step">진행 절차</a><a href="#review">이용 기록</a><a href="#faq">자주 묻는 질문</a></nav>
-    <a class="cta" data-kakao target="_blank" rel="noopener">카카오톡 상담</a>
+    <a class="cta bk" data-kakao target="_blank" rel="noopener"><svg class="ico-kb" aria-hidden="true"><use href="#ico-kb"/></svg>카카오톡 상담</a>
+    <a class="cta bt" data-tel><i class="ph-bold ph-phone"></i>전화 상담</a>
     <button class="burger" type="button" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
   </div>
 </header>
@@ -388,6 +409,10 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
     <p class="kv-lead">365일 24시간 응대</p>
     <h1>급하게 필요한 자금,<br><em>방법이 있습니다</em></h1>
     <p class="kv-sub">상황에 맞는 소액대출 상품을 안내해 드립니다</p>
+    <div class="kv-btns">
+      <a class="bk" data-kakao target="_blank" rel="noopener"><svg class="ico-kb" aria-hidden="true"><use href="#ico-kb"/></svg>카카오톡 상담</a>
+      <a class="bt" data-tel><i class="ph-bold ph-phone"></i>전화 상담 신청</a>
+    </div>
     <figure class="kv-fig"><img src="img/한국 기관 캠퍼스의 전문적인 초상2.png" alt="한국비상금협회" fetchpriority="high"></figure>
   </div>
   </div>
@@ -505,12 +530,13 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
   <div class="wrap">
     <div class="head reveal"><span class="pill">자주 묻는 질문</span><h2>상담 전<br><em>많이 궁금해하는 내용</em>입니다</h2></div>
     <div class="faq reveal">
-      <details open><summary>수수료는 얼마인가요?</summary><p>고객님의 상황에 따라 달라 일괄적으로 안내하지 않습니다. 진행 전에 정확한 금액을 먼저 안내해 드리며, 법정 최고금리를 넘는 수수료는 어떠한 경우에도 받지 않습니다.</p></details>
-      <details><summary>상담하면 반드시 진행해야 하나요?</summary><p>아닙니다. 조건을 확인한 뒤 원하지 않으면 진행하지 않아도 됩니다. 진행을 권유하거나 재촉하지 않습니다.</p></details>
-      <details><summary>신용점수에 영향이 있나요?</summary><p>상담만으로는 신용조회를 하지 않으므로 조회 기록이 남지 않으며, 신용점수에도 영향이 없습니다.</p></details>
-      <details><summary>개인정보는 어떻게 관리되나요?</summary><p>상담 과정에서 꼭 필요한 최소한의 정보만 확인합니다.</p></details>
-      <details><summary>상담은 얼마나 걸리나요?</summary><p>보통 5분 내외로 완료됩니다. 365일 24시간 문의를 받고 있어 야간과 주말에도 답변해 드립니다.</p></details>
-      <details><summary>준비할 서류가 있나요?</summary><p>상담 단계에서는 서류가 필요하지 않습니다. 이후 필요한 서류가 있으면 상담원이 미리 안내해 드립니다.</p></details>
+      <details open><summary>수수료(이자)는 어떻게 되나요?</summary><p>필요한 금액과 기간, 상품에 따라 달라지기 때문에 페이지에 한 가지 금액으로 적어 두지 않습니다. 진행 전에 상담에서 이자와 총 상환 금액을 먼저 알려 드리고, 확인한 뒤 진행 여부를 정하면 됩니다. 법정 최고금리(연 20%)를 넘는 이자나 별도 중개수수료는 어떤 경우에도 받지 않습니다.</p></details>
+      <details><summary>상담하면 꼭 진행해야 하나요?</summary><p>아닙니다. 조건을 듣고 마음에 들지 않으면 그대로 상담을 끝내도 됩니다. 이후에 따로 연락하거나 진행을 재촉하지 않으며, 진행을 정하기 전까지 개인정보를 요구하지 않습니다.</p></details>
+      <details><summary>신용점수에 영향이 있나요?</summary><p>상담 단계에서는 신용조회를 하지 않아 조회 기록이 남지 않고, 신용점수에도 영향이 없습니다. 기존 대출이 있어도 그것만으로 상담이 제한되지 않습니다.</p></details>
+      <details><summary>개인정보는 안전한가요?</summary><p>진행을 정하기 전까지는 개인정보를 받지 않습니다. 진행할 때도 꼭 필요한 정보만 확인하며, 상담과 진행 외의 다른 용도로 쓰지 않습니다. 만일의 경우에 대비해 배상책임보험(5억 원)에 가입되어 있습니다.</p></details>
+      <details><summary>시간이 얼마나 걸리나요?</summary><p>상담부터 진행 완료까지 <b>평균 5분</b>이고, 진행이 끝나면 5분 안에 입금됩니다. 문의가 몰리는 시간에는 조금 더 걸릴 수 있지만, 한도와 조건을 확인하는 데에는 오래 걸리지 않습니다.</p></details>
+      <details><summary>준비해야 할 서류가 있나요?</summary><p>본인 명의 휴대폰 하나면 됩니다. 방문할 필요가 없고, 소득증빙·통장사본·재직증명서 같은 서류도 따로 내지 않습니다.</p></details>
+      <details><summary>주말이나 밤에도 상담할 수 있나요?</summary><p>네. 365일 24시간 카카오톡과 전화로 상담을 받습니다. 주말과 공휴일, 늦은 밤에도 같은 방식으로 진행됩니다.</p></details>
     </div>
     <div class="warn reveal" style="max-width:760px;margin:32px auto 0"><i class="ph-duotone ph-warning"></i><div><h3>사칭 업체 주의</h3><p>한국비상금협회는 이 페이지의 상담 버튼과 대표번호 외의 채널을 운영하지 않습니다. 대출 전 입금을 요구하는 경우 응하면 안 됩니다.</p></div></div>
   </div>
@@ -524,8 +550,8 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
     <p class="reveal" style="margin-top:12px;opacity:.9">상담은 무료이며, 진행 여부는 직접 결정할 수 있습니다</p>
     <ul class="bchips reveal"><li>상담 무료</li><li>24시간 상담</li><li>신용조회 없음</li></ul>
     <div class="bbtns reveal">
-      <a class="k" data-kakao target="_blank" rel="noopener"><i class="ph-duotone ph-chat-circle-dots"></i>카카오톡 상담</a>
-      <a class="t" data-tel><i class="ph-duotone ph-phone"></i>전화 상담</a>
+      <a class="bk" data-kakao target="_blank" rel="noopener"><svg class="ico-kb" aria-hidden="true"><use href="#ico-kb"/></svg>카카오톡 상담</a>
+      <a class="bt" data-tel><i class="ph-bold ph-phone"></i>전화 상담 신청</a>
     </div>
   </div>
 </section>
@@ -543,8 +569,8 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
 </footer>
 
 <div class="fab">
-  <a class="t" data-tel aria-label="전화 상담"><i class="ph-duotone ph-phone"></i></a>
-  <a class="k" data-kakao target="_blank" rel="noopener" aria-label="카카오톡 상담"><i class="ph-duotone ph-chat-circle-dots"></i></a>
+  <a class="t" data-tel aria-label="전화 상담"><i class="ph-bold ph-phone"></i></a>
+  <a class="k" data-kakao target="_blank" rel="noopener" aria-label="카카오톡 상담"><svg class="ico-kb" aria-hidden="true"><use href="#ico-kb"/></svg></a>
 </div>
 
 <script>
