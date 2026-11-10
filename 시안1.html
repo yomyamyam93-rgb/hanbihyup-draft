@@ -63,7 +63,8 @@ img{display:block;max-width:100%}
 .kv-hero{position:relative;overflow:hidden;background:#00338d;color:#fff}
 .kv-bg{display:block;width:100%;height:360px;object-fit:cover;object-position:50% 50%}
 .kv-box{position:relative}
-.kv-in{padding:24px 16px 72px;background:#00338d;text-align:left} /* 아래 48px는 숫자 상자가 올라와 덮는 자리 */
+.kv-in{padding:24px 16px 28px;background:#00338d;text-align:left}
+.kv-badge{display:none}
 .kv h1{margin:0 0 32px;font-size:36px;line-height:48px;font-weight:800;letter-spacing:-.03em;color:#fff}
 .kv-sub{font-size:20px;line-height:28px;font-weight:600}
 .kv-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:32px}
@@ -71,31 +72,47 @@ img{display:block;max-width:100%}
 /* 파란 배너 위 버튼 : 채널톡 = 흰 바탕 KPMG 파랑 글자, 전화 = 흰 테두리 */
 .bw{background:#fff;color:#1e49e2}
 .bo{background:transparent;color:#fff;box-shadow:inset 0 0 0 1px #fff}
+/* 휴대폰 첫 화면 : 세로로 더 긴 사무실 사진(…상담2.jpg)을 위에 크게 깔고(손짓·서류·웃는 고객), 아래 책상 부분부터 짙은 파랑으로 자연스럽게 이어지며 그 위에 글자
+   (파랑 덮개는 첫 화면 전체에 한 장 → 사진이 움직여도 아래로 삐져나와 갈라져 보이지 않음) */
+@media (max-width:767px){
+  .notice{display:none} /* 회색 안내 띠 대신 첫 화면 안 제목 위에 한 줄로 */
+  .kv-hero{display:block}
+  .kv-bg{height:420px;object-position:66% 0%}
+  .kv-hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,51,141,0) 0,rgba(0,51,141,0) 190px,rgba(0,51,141,.72) 290px,#00338d 380px,#00338d 100%)}
+  .kv-badge{display:flex;align-items:center;gap:6px;margin-bottom:10px;font-size:14px;font-weight:600;color:rgba(255,255,255,.88)}
+  .kv-badge i{font-size:17px;color:#9cc0ff}
+  .kv-box{z-index:2}
+  .kv-in{margin-top:-150px;padding:0 20px 30px;background:none}
+  .kv h1{margin-bottom:12px;font-size:32px;line-height:42px}
+  .kv-sub{font-size:16px;line-height:24px;font-weight:500;color:rgba(255,255,255,.86)}
+  .kv-btns{margin-top:24px}
+}
 @media (min-width:768px){
   .kv-hero{height:452px}
   .kv-bg{position:absolute;inset:0;height:100%}
   .kv-box{position:absolute;z-index:2;inset:0;max-width:1366px;margin:0 auto}
   /* 파랑 덮개는 배너 전체에 한 장으로 (두 장을 이어 붙이면 이음새에 세로선이 생김). 왼쪽 260px까지 진하고 560px에서 사라짐 */
   .kv-hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(0,51,141,.92) 0,rgba(0,51,141,.92) 260px,rgba(0,51,141,0) 560px)}
-  .kv-in{display:grid;align-items:center;width:465px;height:100%;padding:24px 24px 64px;background:none}
+  .kv-in{display:grid;align-items:center;width:465px;height:100%;padding:24px;background:none}
   .kv-txt{max-width:310px}
   .kv h1{margin-bottom:24px;font-size:32px;line-height:44px}
 
   .kv-btns{display:flex;flex-wrap:wrap;gap:12px}
   .kv-btns a{padding:12px 24px}
 }
-.stats{position:relative;z-index:2;display:grid;grid-template-columns:repeat(2,1fr);background:#fff;border:1px solid var(--line);border-radius:4px;box-shadow:0 10px 28px rgba(30,60,140,.08);margin:-48px 0 0;padding:0} /* 숫자 상자 : 첫 배너 아래쪽에 살짝 걸쳐 덮이게 */
-.stats div{padding:18px 6px}
-.stats div:nth-child(even){border-left:1px solid var(--line)}
-.stats div:nth-child(n+3){border-top:1px solid var(--line)}
-.stats dt{font-size:12px;color:var(--sub);font-weight:600}
-.stats dd{font-size:24px;font-weight:700;color:var(--p);letter-spacing:-.03em;margin-top:4px}
-.stats dd span{font-size:13px;font-weight:600;margin-left:2px}
+/* 숫자 4개 : 떠 있는 흰 상자 대신 첫 배너 바로 아래 같은 파랑 띠 안에 흰 숫자 → 배너와 한 덩어리 */
+.kv-band{background:#00338d;color:#fff;border-top:1px solid rgba(255,255,255,.16)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);margin:0;padding:18px 0 12px;text-align:center}
+.stats div{padding:0 2px}
+.stats div+div{border-left:1px solid rgba(255,255,255,.18)}
+.stats dt{font-size:11px;font-weight:500;color:rgba(255,255,255,.7)}
+.stats dd{margin-top:4px;font-size:20px;font-weight:700;letter-spacing:-.02em;color:#fff;white-space:nowrap}
+.stats dd span{margin-left:1px;font-size:11px;font-weight:600;color:rgba(255,255,255,.85)}
 /* 누적 상담 : 휴대폰은 15만명+, 태블릿·PC는 150,000명+ */
 .stats dd i{font-style:normal}
 .stats dd .n-pc{display:none}
 @media (min-width:768px){.stats dd .n-pc{display:inline}.stats dd .n-mo{display:none}}
-.kv-note{font-size:11px;color:#98a3b8;margin:12px 0 0;padding-bottom:56px}
+.kv-note{margin:0;padding:0 0 14px;font-size:11px;color:rgba(255,255,255,.5);text-align:center}
 
 /* ② 특징 5가지 */
 .feat-sec{background:#fff}
@@ -247,20 +264,17 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
 
   /* PC : KPMG 실측 (배너 476 · 덮개 696 · 여백 32 · 글 폭 464 · 제목 48/56 · 부제 24/32) */
   .kv-hero{height:476px}
-  .kv-in{width:696px;padding:32px 32px 104px}
+  .kv-in{width:696px;padding:32px}
   /* PC : 글 상자 왼쪽 끝(화면 가운데 1366px 기준) + 400px까지 진하고, +820px에서 사라짐 (KPMG보다 약간 진하고 오른쪽으로) */
   .kv-hero::before{background:linear-gradient(90deg,rgba(0,51,141,.92) 0,rgba(0,51,141,.92) calc(max(0px,(100% - 1366px) / 2) + 400px),rgba(0,51,141,0) calc(max(0px,(100% - 1366px) / 2) + 820px))}
   .kv-txt{max-width:464px}
   .kv h1{margin-bottom:24px;font-size:48px;line-height:56px}
   .kv-sub{font-size:24px;line-height:32px}
-  .stats{grid-template-columns:repeat(4,1fr);margin:-72px 0 0;text-align:center}
-  .stats div{padding:30px 10px}
-  .stats div+div{border-left:1px solid var(--line)}
-  .stats div:nth-child(n+3){border-top:0}
+  .stats{padding:30px 0 20px}
   .stats dt{font-size:15px}
-  .stats dd{font-size:40px}
-  .stats dd span{font-size:18px}
-  .kv-note{font-size:13px;padding-bottom:90px}
+  .stats dd{margin-top:6px;font-size:36px}
+  .stats dd span{font-size:17px}
+  .kv-note{font-size:13px;padding-bottom:22px}
 
   .feats{max-width:640px;gap:14px}
   .feat{padding:24px 30px}
@@ -403,7 +417,7 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
 @media (min-width:1366px){
   .top .wrap{padding:0 48px}
   .kv-hero{height:clamp(540px,34vw,720px)}
-  .kv-in{padding:48px 48px 120px}
+  .kv-in{padding:48px}
 }
 /* 상단 메뉴의 전화 상담 버튼은 메뉴가 줄바꿈되지 않는 넓은 화면에서만 */
 @media (min-width:1280px){
@@ -511,8 +525,9 @@ summary:hover{color:var(--p)}
 <!-- ① 첫 화면 -->
 <section class="kv">
   <div class="kv-hero">
-    <img class="kv-bg" src="img/현대적인-사무실-비즈니스-상담.jpg" alt="" fetchpriority="high">
+    <picture><source media="(max-width:767px)" srcset="img/현대적인-사무실-비즈니스-상담2.jpg"><img class="kv-bg" src="img/현대적인-사무실-비즈니스-상담.jpg" alt="" fetchpriority="high"></picture>
     <div class="kv-box"><div class="kv-in"><div class="kv-txt">
+      <p class="kv-badge"><i class="ph-fill ph-seal-check"></i>국내 최초 정식 등록 업체</p>
       <h1>급하게 필요한 자금<br>365일 지원 받으세요</h1>
       <p class="kv-sub">맞춤형 생활지원 서비스</p>
       <div class="kv-btns">
@@ -521,15 +536,15 @@ summary:hover{color:var(--p)}
       </div>
     </div></div></div>
   </div>
-  <div class="wrap">
+  <div class="kv-band"><div class="wrap">
     <dl class="stats">
       <div><dt>운영 기간</dt><dd><i class="cnt">6</i><span>년+</span></dd></div>
       <div><dt>누적 상담</dt><dd><i class="n-pc"><i class="cnt">150,000</i><span>명+</span></i><i class="n-mo"><i class="cnt">15</i><span>만명+</span></i></dd></div>
       <div><dt>평균 처리</dt><dd><i class="cnt">5</i><span>분</span></dd></div>
       <div><dt>연중무휴</dt><dd><i class="cnt">365</i><span>일</span></dd></div>
     </dl>
-    <p class="kv-note">*누적 상담은 【집계 시작 연도】부터 집계한 기준입니다.</p>
-  </div>
+    <p class="kv-note">*2020년도 이후로 집계한 기준입니다.</p>
+  </div></div>
 </section>
 
 <!-- ② 특징 5가지 -->
@@ -710,7 +725,7 @@ summary:hover{color:var(--p)}
         if(!t0)t0=t;
         var p=Math.min((t-t0)/1200,1);
         el.textContent=Math.round(to*(1-Math.pow(1-p,3))).toLocaleString('ko-KR');
-        if(p<1)requestAnimationFrame(f);
+        if(p<1)requestAnimationFrame(f);else el.style.minWidth=''; // 다 세면 고정 넓이를 풀어 이름과 정확히 가운데 정렬
       });
     };
     var io2=new IntersectionObserver(function(es){es.forEach(function(e){
