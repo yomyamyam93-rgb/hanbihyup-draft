@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>한국비상금협회 | 소액대출 상담</title>
+<!-- 배치·구성 : 비상금마켓 사이트 순서 / 색·글꼴·말투 : 한국비상금협회
+     ★ 【 】 = 실제 정보로 교체할 자리 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/duotone/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<style>
+:root{--p:#1d4ed8;--p2:#3b82f6;--pd:#0b1a3d;--ink:#0f1b33;--sub:#5d6b85;--line:#e3e9f3;--bg:#f4f7fc}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:Pretendard,system-ui,sans-serif;color:var(--ink);background:#fff;line-height:1.55;word-break:keep-all;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{max-width:560px;margin:0 auto;padding:0 20px}
+.sec{padding:72px 0}
+.alt{background:var(--bg)}
+.head{text-align:center;margin-bottom:32px}
+.pill{display:inline-block;font-size:13px;font-weight:700;color:var(--p);background:#e6efff;border-radius:99px;padding:6px 14px;margin-bottom:14px}
+.head h2{font-size:27px;line-height:1.38;font-weight:700;letter-spacing:-.03em}
+.head h2 em{font-style:normal;color:var(--p)}
+.more{display:inline-flex;align-items:center;gap:6px;font-size:15px;font-weight:700;color:var(--p);border:1.5px solid #c9d7fb;border-radius:99px;padding:11px 22px;background:#fff}
+.center{text-align:center;margin-top:28px}
+.foot{font-size:12px;color:var(--sub);text-align:center;margin-top:14px}
+
+/* 헤더 */
+.top{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:12px;height:60px}
+.top .logo{height:30px;margin-right:auto}
+.top .cta{font-size:13px;font-weight:700;color:#fff;background:var(--p);border-radius:4px;padding:9px 14px}
+.burger{width:40px;height:40px;border:0;background:none;display:grid;place-content:center;gap:5px;cursor:pointer}
+.burger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px}
+.gnb{display:none}
+.drawer{position:fixed;inset:0 0 0 auto;width:min(300px,82vw);background:#fff;z-index:60;transform:translateX(100%);transition:.3s;padding:24px;box-shadow:-10px 0 30px rgba(0,0,0,.1)}
+.drawer.open{transform:none}
+.drawer button{border:0;background:none;font-size:30px;line-height:1;cursor:pointer;display:block;margin:0 0 20px auto}
+.drawer a{display:flex;align-items:center;gap:12px;font-size:17px;font-weight:700;padding:16px 4px;border-bottom:1px solid var(--line)}
+.drawer a i{color:var(--p);font-size:22px}
+.dim{position:fixed;inset:0;background:rgba(10,20,40,.45);z-index:50;opacity:0;pointer-events:none;transition:.3s}
+.dim.open{opacity:1;pointer-events:auto}
+.notice{background:var(--bg);border-bottom:1px solid var(--line);font-size:14px;text-align:center;padding:10px 16px;color:var(--sub)}
+.notice b{color:var(--ink)}
+.notice em{font-style:normal;font-weight:800;color:var(--p);margin-right:8px}
+
+/* ① 첫 화면 */
+.kv{position:relative;text-align:center;background:#fff}
+.kv-hero{padding-top:40px}
+.kv-fig{margin:28px 0 0}
+.kv-fig img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 100%;border-radius:4px}
+.kv-lead{display:inline-block;font-size:14px;font-weight:700;color:var(--p);background:#fff;border:1px solid #c5d3ea;border-radius:4px;padding:6px 14px}
+.kv h1{font-size:34px;line-height:1.32;font-weight:700;letter-spacing:-.03em;margin:18px 0 12px}
+.kv h1 em{font-style:normal;color:var(--p)}
+.kv-sub{font-size:16px;color:var(--sub)}
+.stats{position:relative;z-index:2;display:grid;grid-template-columns:repeat(2,1fr);background:#fff;border:1px solid var(--line);border-radius:4px;box-shadow:0 10px 28px rgba(30,60,140,.08);margin:16px 0 0;padding:0}
+.stats div{padding:18px 6px}
+.stats div:nth-child(even){border-left:1px solid var(--line)}
+.stats div:nth-child(n+3){border-top:1px solid var(--line)}
+.stats dt{font-size:12px;color:var(--sub);font-weight:600}
+.stats dd{font-size:24px;font-weight:900;color:var(--p);letter-spacing:-.03em;margin-top:4px}
+.stats dd span{font-size:13px;margin-left:1px}
+.kv-note{font-size:11px;color:#98a3b8;margin:12px 0 0;padding-bottom:56px}
+
+/* ② 특징 5가지 */
+.feat-sec{background:#fff}
+.feats{display:grid;gap:12px;padding:0;max-width:560px;margin:0 auto}
+.feat{display:flex;align-items:center;gap:18px;background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:4px;padding:20px 22px;box-shadow:0 10px 28px rgba(30,60,140,.08)}
+.feat i{flex:none;width:44px;color:var(--p);font-size:36px;line-height:44px;text-align:center}
+.feat b{display:block;font-size:17px;font-weight:800}
+.feat span{display:block;font-size:14px;color:var(--sub);margin-top:2px}
+
+/* ③ 소개 배너 */
+.intro-sec{background:#0f2257;color:#fff;padding:44px 0 36px}
+.intro{display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px}
+.intro-vis img{width:120px;height:120px;object-fit:contain;display:block}
+.intro-eye{font-size:14px;font-weight:700;color:#e3c169;letter-spacing:.02em}
+.intro h2{font-size:25px;line-height:1.4;font-weight:700;margin:8px 0 16px}
+.intro h2 em{font-style:normal;color:#9db8ff}
+.intro a{display:inline-flex;gap:6px;font-size:15px;font-weight:700;border-bottom:1px solid rgba(255,255,255,.5);padding-bottom:2px}
+.intro-cat{font-size:15px;font-weight:700;color:#dbe4fb;margin:-6px 0 16px}
+.aw-org{display:flex;flex-direction:column;gap:16px;align-items:center;margin-top:28px;padding-top:22px;border-top:1px solid rgba(227,193,105,.4)}
+.org-g{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 14px}
+.org-g span{flex-basis:100%;text-align:center;font-size:13px;font-weight:800;color:#e3c169}
+.aw-org img{height:24px;width:auto}
+.aw-org .o-kpba{height:40px}
+.aw-org .o-kcsb{height:30px}
+.seals{display:grid;grid-template-columns:repeat(3,1fr);margin-top:30px;border-top:1px solid rgba(227,193,105,.4);padding-top:22px}
+.seals li{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12px;font-weight:700;color:#dbe4fb;text-align:center}
+.seals li+li{border-left:1px solid rgba(255,255,255,.15)}
+.seals i{display:block;font-size:30px;line-height:30px;color:#e3c169}
+
+/* ④ 상품 */
+.plans{display:grid;gap:14px}
+.plan{background:#fff;border:1.5px solid var(--line);border-radius:4px;padding:26px 22px;transition:.25s}
+.plan-h{display:flex;align-items:center;gap:10px}
+.plan-h i{width:40px;height:40px;border-radius:4px;background:#e6efff;color:var(--p);font-size:22px;line-height:40px;text-align:center}
+.plan-h h3{font-size:19px;font-weight:800}
+.plan-h small{margin-left:auto;font-size:12px;font-weight:800;color:var(--p);background:#e6efff;border-radius:4px;padding:4px 8px}
+.plan-amt{margin:20px 0 6px;font-size:13px;color:var(--sub)}
+.plan-amt b{display:block;font-size:38px;font-weight:900;color:var(--ink);letter-spacing:-.04em;line-height:1.1}
+.plan-amt b span{font-size:20px;margin-left:2px}
+.plan p{font-size:15px;color:var(--sub)}
+.plan ul{list-style:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--line);display:grid;gap:8px}
+.plan li{display:flex;gap:8px;align-items:center;font-size:15px;font-weight:600}
+.plan li i{color:var(--p)}
+.plan.on{background:linear-gradient(160deg,var(--p),#1e3a8a);border-color:transparent;color:#fff;box-shadow:0 20px 44px rgba(29,78,216,.3)}
+.plan.on .plan-amt,.plan.on p{color:#c9d8ff}
+.plan.on .plan-amt b{color:#fff}
+.plan.on .plan-h i,.plan.on .plan-h small{background:rgba(255,255,255,.16);color:#fff}
+.plan.on ul{border-color:rgba(255,255,255,.2)}
+.plan.on li i{color:#fff}
+
+/* ⑤ 진행 절차 */
+.guide{display:grid;gap:20px}
+.guide-photo img{width:100%;aspect-ratio:16/11;object-fit:cover;border-radius:4px}
+.gsteps{list-style:none;display:grid;gap:10px}
+.gstep{display:flex;gap:14px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:4px;padding:16px 18px}
+.gstep em{flex:none;width:34px;height:34px;border-radius:50%;background:#e6efff;color:var(--p);font-style:normal;font-weight:900;display:grid;place-items:center}
+.gstep b{display:block;font-size:17px}
+.gstep span{font-size:14px;color:var(--sub)}
+.gstep.on{background:var(--p);border-color:var(--p);color:#fff}
+.gstep.on em{background:#fff;color:var(--p)}
+.gstep.on span{color:#dbe6ff}
+.usp{display:flex;flex-direction:column;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:4px;padding:20px;margin-top:20px;text-align:center}
+.usp p{font-size:15px;font-weight:700}
+.usp a{font-size:14px;font-weight:700;color:var(--p)}
+
+/* ⑥ 이용 기록 */
+.rev{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 20px 18px;scrollbar-width:none}
+.rev::-webkit-scrollbar{display:none}
+.rcard{flex:none;width:250px;scroll-snap-align:center;background:#fff;border:1px solid var(--line);border-radius:4px;padding:22px;box-shadow:0 10px 28px rgba(30,60,140,.07)}
+.rcard .tag{display:inline-flex;gap:5px;align-items:center;font-size:12px;font-weight:800;color:var(--p);background:#e6efff;border-radius:4px;padding:4px 8px}
+.rcard .num{font-size:34px;font-weight:900;letter-spacing:-.03em;margin:14px 0 2px}
+.rcard .num small{font-size:16px;margin-left:2px}
+.rcard .sum{font-size:14px;color:var(--sub)}
+.rcard .sum b{color:var(--ink)}
+.rcard .who{display:flex;justify-content:space-between;margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:14px}
+.rcard .who b{font-weight:800}
+.rcard .who span{color:var(--sub)}
+.rnote{font-size:12px;color:#98a3b8;text-align:center}
+
+/* ⑦ 등록·인증 + 사칭 주의 */
+.certs{display:grid;gap:12px}
+.cert{display:flex;gap:16px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:4px;padding:14px}
+.cert img{flex:none;width:76px;height:100px;object-fit:cover;border-radius:4px;border:1px solid var(--line)}
+.cert h3{display:flex;align-items:center;gap:6px;font-size:16px;font-weight:800}
+.cert h3 i{color:var(--p)}
+.cert p{font-size:13px;color:var(--sub);margin-top:4px}
+.warn{display:flex;gap:14px;background:#fff4f4;border:1px solid #f6d0d0;border-radius:4px;padding:20px;margin-top:20px}
+.warn i{flex:none;font-size:28px;color:#d63a3a}
+.warn h3{font-size:17px;font-weight:800;color:#c02f2f;margin-bottom:6px}
+.warn p{font-size:14px;color:#6b4a4a}
+
+/* ⑧ 연혁 */
+.hist{background:#0f2257;color:#fff}
+.hist-gap{height:48px}
+.hist .hline{max-width:1000px;margin:0 auto}
+.hist .intro h2{margin:0 0 12px}
+.hline li::before{border-color:#0f2257!important}
+.hist-photo img{width:100%;aspect-ratio:16/8;object-fit:cover;border-radius:4px;margin-bottom:28px}
+.hist h2{font-size:24px;line-height:1.42;font-weight:700;text-align:center;margin-bottom:30px}
+.hline{list-style:none;position:relative;display:grid;gap:22px;padding-left:28px}
+.hline::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:rgba(157,184,255,.4)}
+.hline li{position:relative}
+.hline li::before{content:"";position:absolute;left:-27px;top:6px;width:14px;height:14px;border-radius:50%;background:#4f86ff;border:3px solid #0b1a3d;box-shadow:0 0 0 2px #4f86ff}
+.hline li.now::before{background:#fff;box-shadow:0 0 0 2px #fff}
+.hline b{display:block;font-size:22px;font-weight:900;color:#9db8ff}
+.hline li.now b{color:#fff}
+.hline p{font-size:15px;color:#d5e0f7;margin-top:2px}
+
+/* ⑨ 자주 묻는 질문 */
+.faq{max-width:760px;margin:0 auto}
+details{border-bottom:1px solid var(--line);padding:20px 4px}
+summary{display:flex;align-items:center;gap:12px;font-size:16px;font-weight:700;cursor:pointer;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"Q";flex:none;font-size:20px;font-weight:900;color:var(--p);width:24px}
+summary::after{content:"+";margin-left:auto;color:var(--p);font-size:22px;line-height:1}
+details[open] summary::after{content:"−"}
+details p{position:relative;margin-top:14px;padding:16px 18px 16px 54px;background:#f4f7fc;border-radius:4px;font-size:15px;color:var(--sub)}
+details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20px;font-weight:900;color:#8a97b0}
+
+/* ⑩ 마무리 띠 */
+.band{background:#102252;color:#fff;text-align:center}
+.band h2{font-size:27px;line-height:1.4;font-weight:700}
+.bchips{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:22px 0 28px}
+.bchips li{font-size:14px;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:4px;padding:7px 12px}
+.bbtns{display:grid;gap:10px;max-width:420px;margin:0 auto}
+.bbtns a{display:flex;align-items:center;justify-content:center;gap:8px;height:58px;border-radius:4px;font-size:17px;font-weight:800}
+.bbtns .k{background:#fee500;color:#191919}
+.bbtns .t{background:#fff;color:var(--p)}
+.bbtns i{font-size:22px}
+
+/* 푸터 */
+.legal{background:#08132e;color:#a7b4cc;font-size:13px;padding:44px 0 110px;line-height:1.75}
+.legal .logo{height:28px;margin-bottom:16px;filter:brightness(0) invert(1);opacity:.85}
+.legal b{color:#fff}
+.legal .lw{border:1px solid #2a3d6b;border-radius:4px;padding:16px;margin:18px 0;color:#fff;font-size:14px}
+.legal a{color:#a7b4cc}
+
+/* 오른쪽 아래 상담 버튼 */
+.fab{position:fixed;right:16px;bottom:18px;z-index:30;display:grid;gap:10px;justify-items:end}
+.fab a{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-size:27px;box-shadow:0 10px 24px rgba(0,0,0,.2)}
+.fab .t{background:#fff;color:var(--p);border:1px solid var(--line)}
+.fab .k{background:#fee500;color:#191919}
+
+.reveal{opacity:0;transform:translateY(20px);transition:.7s cubic-bezier(.2,.7,.2,1)}
+.reveal.on{opacity:1;transform:none}
+
+/* ═══ PC ═══ */
+@media (min-width:1024px){
+  .wrap{max-width:1160px;padding:0 40px}
+  .sec{padding:120px 0}
+  .head{margin-bottom:56px}
+  .head h2{font-size:42px}
+  .pill{font-size:15px;padding:8px 18px}
+  .top .wrap{height:76px}
+  .top .logo{height:38px;margin-right:0}
+  .gnb{display:flex;gap:36px;margin:0 auto 0 56px}
+  .gnb a{font-size:16px;font-weight:700}
+  .gnb a:hover{color:var(--p)}
+  .top .cta{font-size:15px;padding:12px 24px}
+  .burger{display:none}
+  .notice{font-size:15px}
+
+  .kv-hero{padding-top:72px}
+  .kv-fig{margin-top:44px}
+  .kv-fig img{aspect-ratio:1672/706}
+  .kv h1{font-size:54px;margin:22px 0 14px}
+  .kv h1 br:nth-of-type(2){display:none}
+  .kv-sub{font-size:20px}
+  .stats{grid-template-columns:repeat(4,1fr);margin:20px 0 0;text-align:center}
+  .stats div{padding:30px 10px}
+  .stats div+div{border-left:1px solid var(--line)}
+  .stats div:nth-child(n+3){border-top:0}
+  .stats dt{font-size:15px}
+  .stats dd{font-size:40px}
+  .stats dd span{font-size:18px}
+  .kv-note{font-size:13px;padding-bottom:90px}
+
+  .feats{max-width:640px;gap:14px}
+  .feat{padding:24px 30px}
+  .feat b{font-size:20px}
+  .feat span{font-size:16px}
+
+  .intro-sec{padding:64px 0 52px}
+  .intro{gap:20px;max-width:1000px;margin:0 auto}
+  .intro-vis img{width:170px;height:170px}
+  .intro h2{font-size:36px;margin-bottom:18px}
+  .intro-eye{font-size:17px}
+  .intro-cat{font-size:19px}
+  .aw-org{flex-direction:row;justify-content:center;gap:40px;max-width:1000px;margin:40px auto 0;padding-top:26px}
+  .org-g{flex-wrap:nowrap;gap:22px}
+  .org-g span{flex-basis:auto;font-size:16px}
+  .org-g+.org-g{padding-left:40px;border-left:1px solid rgba(255,255,255,.18)}
+  .aw-org img{height:28px}
+  .aw-org .o-kpba{height:48px}
+  .aw-org .o-kcsb{height:36px}
+  .seals{max-width:1000px;margin:44px auto 0;padding-top:28px}
+  .seals li{flex-direction:row;justify-content:center;gap:12px;font-size:17px}
+  .seals i{font-size:34px;line-height:34px}
+
+  .plans{grid-template-columns:1fr 1fr;gap:24px;max-width:900px;margin:0 auto}
+  .plan{padding:40px 36px}
+  .plan-amt b{font-size:52px}
+
+  .guide{grid-template-columns:1.1fr 1fr;gap:48px;align-items:center}
+  .guide-photo img{aspect-ratio:4/3.4}
+  .gstep{padding:22px 24px}
+  .gstep b{font-size:19px}
+  .usp{flex-direction:row;justify-content:space-between;padding:24px 32px;margin-top:32px}
+  .usp p{font-size:17px}
+
+  .rev{justify-content:center;flex-wrap:wrap;overflow:visible;padding:4px 0 24px}
+  .rcard{width:340px;padding:28px}
+
+  .certs{grid-template-columns:repeat(3,1fr);gap:20px}
+  .cert{flex-direction:column;text-align:center;padding:28px 22px}
+  .cert img{width:150px;height:200px}
+  .cert h3{justify-content:center;font-size:18px}
+  .cert p{font-size:15px}
+  .warn{padding:28px 32px;margin-top:32px}
+
+  .hist-photo img{aspect-ratio:16/6}
+  .hist h2{font-size:38px;margin-bottom:60px}
+  .hline{grid-template-columns:repeat(4,1fr);padding:30px 0 0;gap:24px}
+  .hline::before{left:0;right:0;top:7px;bottom:auto;width:auto;height:2px}
+  .hline li::before{left:0;top:-30px}
+  .hline b{font-size:30px}
+
+  .band h2{font-size:42px}
+  .bbtns{grid-template-columns:1fr 1fr;max-width:600px}
+  .bbtns a{height:66px;font-size:19px}
+  .legal{font-size:14px;padding:60px 0 50px}
+  .fab{right:28px;bottom:28px}
+  .fab a{width:66px;height:66px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}.reveal{opacity:1;transform:none}}
+
+/* 수상·연혁 */
+.aw{display:grid;gap:36px}
+.aw-main{text-align:center}
+.aw-medal{width:130px;height:130px;object-fit:contain;margin:0 auto 18px}
+.hist .aw h2{font-size:26px;line-height:1.35;margin:0 0 8px}
+.aw h2 em{font-style:normal;color:#e3c169}
+.aw-cat{font-size:15px;color:#c9d6f2}
+.aw .aw-org{margin-top:26px;padding-top:22px;border-top:1px solid rgba(255,255,255,.15)}
+.aw-hist h3{font-size:15px;font-weight:800;color:#e3c169;padding-bottom:12px;border-bottom:2px solid #e3c169}
+.aw-hist ol{list-style:none;padding:0;margin:0}
+.aw-hist li{display:flex;gap:20px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.15)}
+.aw-hist b{flex:none;width:52px;font-size:18px;font-weight:900;color:#fff}
+.aw-hist p{font-size:16px;font-weight:600;color:#e6ecfa}
+.aw-hist small{display:block;font-size:13px;font-weight:500;color:#9fb0d4;margin-top:3px}
+@media (min-width:1024px){
+  .aw{grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1100px;margin:0 auto}
+  .aw-medal{width:160px;height:160px}
+  .hist .aw h2{font-size:36px}
+  .aw-cat{font-size:17px}
+  .aw .aw-org{flex-direction:column;gap:14px;max-width:none;padding:22px 0 0}
+  .aw .org-g+.org-g{padding-left:0;border-left:0}
+  .aw .org-g{gap:14px 18px;flex-wrap:wrap}
+  .aw .aw-org img{height:22px}
+  .aw .aw-org .o-kpba{height:36px}
+  .aw .aw-org .o-kcsb{height:26px}
+  .aw-hist h3{font-size:17px}
+  .aw-hist li{padding:22px 0;gap:28px}
+  .aw-hist b{width:64px;font-size:22px}
+  .aw-hist p{font-size:18px}
+}
+
+/* 수상·인증 */
+.awd{text-align:center}
+.awd h2{font-size:28px;line-height:1.3;color:#e8c977;margin:0 0 12px}
+.awd .aw-cat{font-size:16px;font-weight:700;color:#fff;margin-bottom:20px}
+.aw-who{display:inline-grid;gap:6px;margin:0 0 22px;text-align:left}
+.aw-who div{display:flex;gap:16px;font-size:15px}
+.aw-who dt{width:64px;color:#a9bbdc}
+.aw-who dd{font-weight:700;margin:0}
+.aw-msg{font-size:15px;line-height:1.8;color:#dbe3f5;padding:20px 0;border-top:1px solid rgba(227,193,105,.35);border-bottom:1px solid rgba(227,193,105,.35);margin-bottom:28px}
+.aw-docs{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 28px}
+.aw-docs li{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12px;color:#dbe3f5}
+.aw-docs img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:4px;border:1px solid rgba(255,255,255,.25);background:#fff}
+.awd .aw-org{margin-top:0}
+.awd + .aw-hist{max-width:760px;margin:56px auto 0}
+@media (min-width:1024px){
+  .awd h2{font-size:48px}
+  .awd h2 br{display:none}
+  .awd .aw-cat{font-size:20px}
+  .aw-who div{font-size:17px}
+  .aw-msg{max-width:720px;margin:0 auto 36px;font-size:17px;padding:26px 0}
+  .aw-docs{max-width:640px;margin:0 auto 40px;gap:20px}
+  .aw-docs li{font-size:14px}
+  .awd .aw-org{flex-direction:row;max-width:900px;margin:0 auto}
+  .awd .org-g{flex-wrap:nowrap;gap:28px}
+  .awd + .aw-hist{margin-top:80px}
+}
+</style>
+</head>
+<body>
+
+<!-- 헤더 : 로고 · 메뉴 · 상담 신청 · 햄버거(휴대폰) -->
+<header class="top">
+  <div class="wrap">
+    <img class="logo" src="img/logo.png" alt="한국비상금협회">
+    <nav class="gnb"><a href="#about">협회 소개</a><a href="#prod">상품 안내</a><a href="#step">진행 절차</a><a href="#review">이용 기록</a><a href="#faq">자주 묻는 질문</a></nav>
+    <a class="cta" data-kakao target="_blank" rel="noopener">카카오톡 상담</a>
+    <button class="burger" type="button" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<nav class="drawer" aria-label="메뉴">
+  <button type="button" aria-label="메뉴 닫기">&times;</button>
+  <a href="#about"><i class="ph-duotone ph-buildings"></i>협회 소개</a>
+  <a href="#prod"><i class="ph-duotone ph-wallet"></i>상품 안내</a>
+  <a href="#step"><i class="ph-duotone ph-list-numbers"></i>진행 절차</a>
+  <a href="#review"><i class="ph-duotone ph-users-three"></i>이용 기록</a>
+  <a href="#faq"><i class="ph-duotone ph-question"></i>자주 묻는 질문</a>
+</nav>
+<div class="dim"></div>
+<div class="notice"><em>안내</em>국내 최초 <b>정식 등록 업체</b>입니다</div>
+
+<!-- ① 첫 화면 -->
+<section class="kv">
+  <div class="kv-hero">
+  <div class="wrap">
+    <p class="kv-lead">365일 24시간 응대</p>
+    <h1>급하게 필요한 자금,<br><em>방법이 있습니다</em></h1>
+    <p class="kv-sub">상황에 맞는 소액대출 상품을 안내해 드립니다</p>
+    <figure class="kv-fig"><img src="img/한국 기관 캠퍼스의 전문적인 초상2.png" alt="한국비상금협회" fetchpriority="high"></figure>
+  </div>
+  </div>
+  <div class="wrap">
+    <dl class="stats">
+      <div><dt>운영 기간</dt><dd>6<span>년+</span></dd></div>
+      <div><dt>누적 상담</dt><dd>15<span>만 명+</span></dd></div>
+      <div><dt>평균 처리</dt><dd>5<span>분</span></dd></div>
+      <div><dt>연중무휴</dt><dd>365<span>일</span></dd></div>
+    </dl>
+    <p class="kv-note">*누적 상담은 【집계 시작 연도】부터 집계한 기준입니다.</p>
+  </div>
+</section>
+
+<!-- ② 특징 5가지 -->
+<section class="sec feat-sec">
+  <div class="wrap">
+    <div class="head reveal"><span class="pill">이용 안내</span><h2>부담 없이<br><em>상담받을 수 있습니다</em></h2></div>
+    <ul class="feats reveal" style="list-style:none">
+      <li class="feat"><i class="ph-duotone ph-device-mobile"></i><div><b>휴대폰 하나로 상담</b><span>본인 명의 휴대폰만 있으면 시작할 수 있습니다</span></div></li>
+      <li class="feat"><i class="ph-duotone ph-shield-check"></i><div><b>신용점수 영향 없음</b><span>상담 단계에서는 신용조회를 하지 않습니다</span></div></li>
+      <li class="feat"><i class="ph-duotone ph-check-circle"></i><div><b>기대출·저신용 상담 가능</b><span>기존 대출이 있어도 상담받을 수 있습니다</span></div></li>
+      <li class="feat"><i class="ph-duotone ph-file-x"></i><div><b>100% 비대면</b><span>방문과 서류 제출 없이 카카오톡으로 진행됩니다</span></div></li>
+      <li class="feat"><i class="ph-duotone ph-clock"></i><div><b>365일 24시간</b><span>야간과 주말에도 상담해 드립니다</span></div></li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ④ 상품 (★ 한도는 예시) -->
+<section class="sec alt" id="prod">
+  <div class="wrap">
+    <div class="head reveal"><span class="pill">상품 안내</span><h2>상황에 따라<br><em>이용할 수 있는 상품</em>이 있습니다</h2></div>
+    <div class="plans reveal">
+      <article class="plan">
+        <div class="plan-h"><i class="ph-duotone ph-device-mobile"></i><h3>모바일 생활자금</h3></div>
+        <p class="plan-amt">한도 최대<b>500<span>만원</span></b></p>
+        <p>본인 명의 휴대폰 사용자 대상</p>
+        <ul><li><i class="ph-bold ph-check"></i>휴대폰 본인인증 후 진행</li><li><i class="ph-bold ph-check"></i>비대면 계약</li></ul>
+      </article>
+      <article class="plan on">
+        <div class="plan-h"><i class="ph-duotone ph-credit-card"></i><h3>신용카드 생활자금</h3><small>큰 금액</small></div>
+        <p class="plan-amt">한도 최대<b>1,000<span>만원</span></b></p>
+        <p>신용카드 소지자 대상</p>
+        <ul><li><i class="ph-bold ph-check"></i>카드 보유 확인 후 진행</li><li><i class="ph-bold ph-check"></i>비대면 계약</li></ul>
+      </article>
+    </div>
+    <p class="foot reveal">※ 한도와 금리는 심사 결과에 따라 달라질 수 있습니다.</p>
+  </div>
+</section>
+
+<!-- ⑤ 진행 절차 -->
+<section class="sec" id="step">
+  <div class="wrap">
+    <div class="head reveal"><span class="pill">진행 절차</span><h2>상담부터 입금까지<br><em>네 단계</em>로 진행됩니다</h2></div>
+    <div class="guide reveal">
+      <div class="guide-photo"><img src="img/한국비상금협회 깃발과 푸른 하늘.png" alt="" loading="lazy"></div>
+      <ol class="gsteps">
+        <li class="gstep"><em>1</em><div><b>상담 신청</b><span>카카오톡 또는 전화</span></div></li>
+        <li class="gstep"><em>2</em><div><b>상황 확인</b><span>필요 금액과 조건 확인</span></div></li>
+        <li class="gstep"><em>3</em><div><b>상품 안내</b><span>이용 가능한 상품 안내</span></div></li>
+        <li class="gstep on"><em>4</em><div><b>입금 완료</b><span>진행 완료 후 5분 내 입금</span></div></li>
+      </ol>
+    </div>
+    <div class="usp reveal"><p>방문 · 서류 제출 없이 비대면으로 진행됩니다</p><a href="#faq">자주 묻는 질문 보기 →</a></div>
+  </div>
+</section>
+
+<!-- ⑥ 이용 기록 (★ 예시 — 실제 기록으로 교체) -->
+<section class="sec alt" id="review">
+  <div class="wrap"><div class="head reveal"><span class="pill">이용 기록</span><h2>한국비상금협회는<br><em>꾸준히 이용하는 고객</em>이 가장 많습니다</h2></div></div>
+  <div class="rev reveal">
+    <article class="rcard"><span class="tag"><i class="ph-bold ph-check"></i>재이용 고객</span><p class="num">8<small>회 이용</small></p><p class="sum">누적 이용 <b>1,960만원</b></p><p class="who"><b>직장인 김OO 님</b><span>첫 이용 2021.07</span></p></article>
+    <article class="rcard"><span class="tag"><i class="ph-bold ph-check"></i>재이용 고객</span><p class="num">11<small>회 이용</small></p><p class="sum">누적 이용 <b>2,410만원</b></p><p class="who"><b>자영업자 이OO 님</b><span>첫 이용 2023.01</span></p></article>
+    <article class="rcard"><span class="tag"><i class="ph-bold ph-check"></i>재이용 고객</span><p class="num">15<small>회 이용</small></p><p class="sum">누적 이용 <b>1,790만원</b></p><p class="who"><b>프리랜서 박OO 님</b><span>첫 이용 2022.08</span></p></article>
+  </div>
+  <p class="rnote">개인 사례이며 결과는 상황에 따라 다를 수 있습니다.</p>
+</section>
+
+<!-- ⑦ 수상·인증·연혁 -->
+<section class="sec hist" id="hist">
+  <div class="wrap">
+    <div id="about"></div>
+    <div class="awd reveal">
+      <img class="aw-medal" src="img/emblem.png" alt="2026 대한민국 소비자 만족 브랜드 1위 엠블럼">
+      <h2>2026 대한민국 <br>소비자 만족 브랜드 1위</h2>
+      <p class="aw-cat">금융서비스 (디지털 금융 플랫폼) 부문 수상</p>
+      <dl class="aw-who">
+        <div><dt>기업명</dt><dd>한국비상금협회</dd></div>
+        <div><dt>브랜드명</dt><dd>한국비상금협회</dd></div>
+      </dl>
+      <p class="aw-msg">6년 넘게 이어온 안정적인 운영과 이용자 만족도를 인정받아<br>2026 대한민국 소비자 만족 브랜드로 선정되었습니다.</p>
+      <ul class="aw-docs">
+        <li><img src="img/award.jpg" alt="소비자 만족 브랜드 1위 상패" loading="lazy"><span>수상 상패</span></li>
+        <li><img src="img/사업자.jpg" alt="사업자등록증" loading="lazy"><span>사업자등록증</span></li>
+        <li><img src="img/통신판매업.jpg" alt="통신판매업 신고증" loading="lazy"><span>통신판매업 신고증</span></li>
+        <li><img src="img/배상책임.jpg" alt="배상책임보험 5억 가입증서" loading="lazy"><span>배상책임보험 5억</span></li>
+      </ul>
+      <div class="aw-org"><div class="org-g"><img src="img/logo-kpba-d.png" alt="한국프리미엄브랜드진흥원" class="o-kpba"><img src="img/logo-kcsb-d.png" alt="대한민국 고객만족브랜드협회" class="o-kcsb"><img src="img/logo-enews-d.png" alt="이뉴스투데이"><img src="img/logo-daily-d.png" alt="데일리경제"><img src="img/logo-sisa.jpg" alt="시사타임"></div></div>
+    </div>
+    <div class="aw-hist reveal">
+      <h3>연혁</h3>
+      <ol>
+        <li><b>2026</b><p>대한민국 소비자 만족 브랜드 1위<small>금융서비스 (디지털 금융 플랫폼) 부문 · 미주중앙일보 보도</small></p></li>
+        <li><b>2025</b><p>디지털데일리 서비스 소개 보도<small>365일 24시간 상담 체계 운영</small></p></li>
+        <li><b>2024</b><p>ICBA 브랜드혁신기업대상 수상<small>금융경제 부문 · AP신문 보도</small></p></li>
+        <li><b>2020</b><p>한국비상금협회 설립</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ⑨ 자주 묻는 질문 -->
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="head reveal"><span class="pill">자주 묻는 질문</span><h2>상담 전<br><em>많이 궁금해하는 내용</em>입니다</h2></div>
+    <div class="faq reveal">
+      <details open><summary>수수료는 얼마인가요?</summary><p>고객님의 상황에 따라 달라 일괄적으로 안내하지 않습니다. 진행 전에 정확한 금액을 먼저 안내해 드리며, 법정 최고금리를 넘는 수수료는 어떠한 경우에도 받지 않습니다.</p></details>
+      <details><summary>상담하면 반드시 진행해야 하나요?</summary><p>아닙니다. 조건을 확인한 뒤 원하지 않으면 진행하지 않아도 됩니다. 진행을 권유하거나 재촉하지 않습니다.</p></details>
+      <details><summary>신용점수에 영향이 있나요?</summary><p>상담만으로는 신용조회를 하지 않으므로 조회 기록이 남지 않으며, 신용점수에도 영향이 없습니다.</p></details>
+      <details><summary>개인정보는 어떻게 관리되나요?</summary><p>상담 과정에서 꼭 필요한 최소한의 정보만 확인합니다.</p></details>
+      <details><summary>상담은 얼마나 걸리나요?</summary><p>보통 5분 내외로 완료됩니다. 365일 24시간 문의를 받고 있어 야간과 주말에도 답변해 드립니다.</p></details>
+      <details><summary>준비할 서류가 있나요?</summary><p>상담 단계에서는 서류가 필요하지 않습니다. 이후 필요한 서류가 있으면 상담원이 미리 안내해 드립니다.</p></details>
+    </div>
+    <div class="warn reveal" style="max-width:760px;margin:32px auto 0"><i class="ph-duotone ph-warning"></i><div><h3>사칭 업체 주의</h3><p>한국비상금협회는 이 페이지의 상담 버튼과 대표번호 외의 채널을 운영하지 않습니다. 대출 전 입금을 요구하는 경우 응하면 안 됩니다.</p></div></div>
+  </div>
+</section>
+
+<!-- ⑩ 마무리 -->
+<section class="sec band">
+  <div class="wrap">
+    <p class="reveal" style="font-size:15px;opacity:.8;margin-bottom:8px">2026 대한민국 소비자 만족 브랜드 1위 · 동종분야 최초 선정</p>
+    <h2 class="reveal">이용 가능한 상품이 있는지<br>먼저 확인할 수 있습니다</h2>
+    <p class="reveal" style="margin-top:12px;opacity:.9">상담은 무료이며, 진행 여부는 직접 결정할 수 있습니다</p>
+    <ul class="bchips reveal"><li>상담 무료</li><li>24시간 상담</li><li>신용조회 없음</li></ul>
+    <div class="bbtns reveal">
+      <a class="k" data-kakao target="_blank" rel="noopener"><i class="ph-duotone ph-chat-circle-dots"></i>카카오톡 상담</a>
+      <a class="t" data-tel><i class="ph-duotone ph-phone"></i>전화 상담</a>
+    </div>
+  </div>
+</section>
+
+<!-- 법정 표시 (축소 금지) -->
+<footer class="legal">
+  <div class="wrap">
+    <img class="logo" src="img/logo.png" alt="한국비상금협회">
+    <p><b>주식회사 한국비상금협회</b> · 대표 【홍길동】 · 사업자등록번호 【000-00-00000】</p>
+    <p>대부업 등록번호 【2026-서울강남-0000】</p>
+    <p>주소 【서울특별시 강남구 테헤란로 000, 0층】 · 전화 <span data-tel-text></span></p>
+    <p class="lw">중개수수료를 요구하거나 받는 것은 불법입니다. 과도한 빚은 당신에게 큰 불행을 안겨줄 수 있습니다. 대출 시 귀하의 신용등급 또는 개인신용평점이 하락할 수 있습니다. 대부업체 이자율 연 20% 이내 (연체이자율 연 20% 이내), 조기상환수수료 없음.</p>
+    <p><a href="#">이용약관</a> · <a href="#">개인정보처리방침</a></p>
+  </div>
+</footer>
+
+<div class="fab">
+  <a class="t" data-tel aria-label="전화 상담"><i class="ph-duotone ph-phone"></i></a>
+  <a class="k" data-kakao target="_blank" rel="noopener" aria-label="카카오톡 상담"><i class="ph-duotone ph-chat-circle-dots"></i></a>
+</div>
+
+<script>
+(function(){
+  // ★ 여기 두 줄만 바꾸면 모든 버튼이 따라 바뀝니다
+  var KAKAO='https://han.gl/EE2MC', TEL='1600-0000';
+  document.querySelectorAll('[data-kakao]').forEach(function(a){a.href=KAKAO});
+  document.querySelectorAll('[data-tel]').forEach(function(a){a.href='tel:'+TEL});
+  document.querySelectorAll('[data-tel-text]').forEach(function(s){s.textContent=TEL});
+  // 메뉴 열고 닫기
+  var dr=document.querySelector('.drawer'),dim=document.querySelector('.dim');
+  function tog(o){dr.classList.toggle('open',o);dim.classList.toggle('open',o)}
+  document.querySelector('.burger').onclick=function(){tog(true)};
+  dim.onclick=dr.querySelector('button').onclick=function(){tog(false)};
+  dr.querySelectorAll('a').forEach(function(a){a.onclick=function(){tog(false)}});
+  // 상품 카드 : 마우스를 댄 카드로 파란색이 옮겨감
+  var plans=document.querySelectorAll('.plan');
+  plans.forEach(function(p){p.addEventListener('mouseenter',function(){plans.forEach(function(q){q.classList.toggle('on',q===p)})})});
+  // 스크롤하면 나타나기
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+})();
+</script>
+</body>
+</html>

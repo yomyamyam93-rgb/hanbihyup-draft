@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>한국비상금협회 | 소액대출 상담</title>
+<!-- 고위드 '법인카드' 화면 틀 (칸 크기·둥글기·글자 크기는 고위드 실측값) + 한국비상금협회 내용
+     이미지 자리는 비워 둠 (【 】 회색 칸)
+     ★ 대상별 추천 상품·말풍선·이용 상황은 예시 — 실제 기준으로 교체
+     ★ 【 】 = 실제 정보로 교체할 자리
+     주 색은 --p 한 곳만 바꾸면 전체가 바뀜 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/duotone/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<style>
+:root{
+  --p:#1d4ed8;          /* 주 색 */
+  --p50:#eef3ff;        /* 단계 동그라미 바탕 */
+  --p100:#dbe5fd;       /* 단계 잇는 선 */
+  --p-light:#9cbcff;    /* 상단 띠 버튼 */
+  --hero-tint:#f3f7ff;  /* 배너 왼쪽 은은한 색 */
+  --tint:#eaf0ff;--tint-line:#c2d3fb;--tint-bg:#f4f7fd;
+  --deep:#0b1a3d;
+  --warm:#fffaf0;--cool:#f5f8ff;--link:#3182f6;--err:#ff4d4f;
+  --g900:#191e28;--g800:#333c4b;--g700:#4e5968;--g600:#6b7684;--g300:#d1d6db;--g200:#e5e8eb;--g100:#f2f4f6;--g50:#f9fafb;
+  --bh:80px;            /* 상단 띠 높이 (닫으면 0) */
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--bh) + 80px)}
+body{font-family:Pretendard,sans-serif;color:#1a211e;background:#fff;line-height:1.5;word-break:keep-all;overflow-x:hidden;padding-top:var(--bh)}
+a{color:inherit;text-decoration:none}
+button,input{font-family:inherit}
+img{display:block;max-width:100%}
+ul,ol{list-style:none}
+.ph-box{display:grid;place-items:center;background:var(--g200);color:var(--g600);font-size:13px;font-weight:600;text-align:center}
+.pc{color:var(--p)}
+/* 상담 버튼 : 카카오톡 = 흰 바탕 + 노란 카톡 아이콘, 전화 = 파란 바탕 + 전화 아이콘 */
+.ico-k{flex:none;width:22px;height:22px}
+.btn-pair{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.btn-k,.btn-t{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:4px;padding:12px 24px;font-size:16px;line-height:24px;font-weight:700;white-space:nowrap}
+.btn-k{background:#fff;color:var(--g900);box-shadow:inset 0 0 0 1px var(--g300)}
+.btn-t{background:var(--p);color:#fff}
+.btn-t i{font-size:20px}
+
+/* 상단 띠 */
+.topbar{position:fixed;inset:0 0 auto;z-index:110;height:var(--bh);display:flex;align-items:center;justify-content:center;gap:12px;padding:0 44px 0 12px;background:var(--g900);color:#fff;text-align:center}
+.topbar p{font-size:16px;font-weight:500;line-height:22px}
+.topbar .tb-btn{flex:none;display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--g900);background:#fff;border-radius:8px;padding:6px 14px 6px 8px}
+.topbar .tb-btn .ico-k{width:20px;height:20px}
+.topbar .tb-x{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:32px;height:32px;border:0;background:none;color:#fff;font-size:22px;cursor:pointer}
+body.no-bar{--bh:0px}
+body.no-bar .topbar{display:none}
+
+/* 헤더 */
+.hd{position:fixed;left:0;right:0;top:var(--bh);z-index:100;height:60px;background:#fff}
+.hd-in{display:flex;align-items:center;height:100%;padding:0 20px}
+.hd-logo{height:28px;width:auto}
+.gnb,.hd-r{display:none}
+.burger{margin-left:auto;width:40px;height:40px;border:0;background:none;display:grid;place-content:center;gap:5px;cursor:pointer}
+.burger span{display:block;width:20px;height:2px;background:var(--g900)}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:130;width:min(380px,100vw);background:#fff;transform:translateX(100%);transition:transform .3s;padding:12px 0}
+.drawer.open{transform:none}
+.drawer .dr-x{display:block;margin:0 12px 8px auto;width:40px;height:40px;border:0;background:none;font-size:26px;cursor:pointer}
+.drawer a{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;font-size:18px;font-weight:700;color:var(--g900)}
+.dim{position:fixed;inset:0;z-index:120;background:rgba(25,30,40,.16);opacity:0;pointer-events:none;transition:opacity .3s}
+.dim.open{opacity:1;pointer-events:auto}
+
+/* ① 배너 */
+.hero{padding:96px 20px 0}
+.hero-box{position:relative;height:652px;overflow:hidden;border-radius:28px;background:var(--g50)}
+.hero-img{position:absolute;top:0;left:0;width:100%;height:60%;object-fit:cover;object-position:50% 30%;-webkit-mask-image:linear-gradient(180deg,#000 50%,transparent 100%);mask-image:linear-gradient(180deg,#000 50%,transparent 100%)}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,transparent 45%,#fff 78%)}
+.hero-txt{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:40px;text-align:center}
+.hero h1{font-size:20px;line-height:1.3;font-weight:400;color:var(--g800)}
+.hero h1 strong{font-weight:700}
+.hero p{margin-top:20px;font-size:16px;line-height:1.7;color:var(--g700)}
+.hero .btn-pair{flex-direction:column;align-items:center;margin-top:44px}
+.hero .btn-pair a{width:220px}
+
+/* ② 안내 띠 */
+.notice{max-width:1440px;margin:0 auto;padding:20px 20px 0}
+.notice p,.m-notice p{background:var(--g100);border-radius:20px;padding:16px 24px;text-align:center;font-size:12px;line-height:1.6;color:var(--g600)}
+.notice b,.m-notice b{font-weight:700}
+
+/* ③ 말풍선 + 큰 설명 카드 */
+.limit{max-width:1440px;margin:0 auto;padding:80px 20px 40px}
+.lbl{margin-bottom:8px;text-align:center;font-size:18px;line-height:1.5;font-weight:700;color:#848d96}
+.lbl span{color:#333940}
+.lbl.g{color:var(--g600)}
+.h2c{text-align:center;font-size:20px;line-height:1.35;font-weight:700;color:var(--g800)}
+.bubbles{display:flex;flex-direction:column;gap:36px;max-width:960px;margin:28px auto 80px}
+.bq{position:relative;width:fit-content;max-width:85%;border-radius:28px;padding:20px 24px;font-size:18px;line-height:1.6;font-weight:700;color:var(--g800);filter:drop-shadow(0 4px 8px var(--g200))}
+.bq span{font-weight:400}
+.bq::after{content:"";position:absolute;bottom:-24px;border-left:18px solid transparent;border-right:18px solid transparent;border-top:24px solid}
+.bq.l{align-self:flex-start;background:var(--warm)}
+.bq.l::after{left:32px;border-top-color:var(--warm)}
+.bq.r{align-self:flex-end;background:var(--cool)}
+.bq.r::after{right:32px;border-top-color:var(--cool)}
+.arts{display:grid;gap:24px;margin-top:44px}
+.art{display:flex;flex-direction:column;width:100%;min-height:460px;margin:0 auto;overflow:hidden;border-radius:28px;background:linear-gradient(180deg,var(--g50) 0%,#fff 100%)}
+.art-txt{display:flex;flex-direction:column;justify-content:center;gap:16px;padding:32px}
+.art h3{font-size:24px;line-height:1.4;font-weight:700;color:var(--g800)}
+.art p{font-size:16px;line-height:1.7;color:var(--g600)}
+.art p strong{font-weight:700;color:var(--g700)}
+.art-img{position:relative;min-height:460px}
+/* 그래프 */
+.viz{position:absolute;top:50%;left:50%;width:calc(100% - 40px);max-width:400px;margin:0;transform:translate(-50%,-50%)}
+.viz svg{display:block;width:100%;height:auto;overflow:visible}
+.viz .bar{fill:#e6edfd;stroke:#d2defa;stroke-width:1;transition:fill .15s}
+.viz .bar:hover{fill:#d7e3fc}
+.viz .v-ax{stroke:var(--g200);stroke-width:1}
+.viz .v-dot{fill:none;stroke:#c9ced6;stroke-width:4;stroke-linecap:round;stroke-dasharray:.1 9}
+.viz .v-arrow{fill:none;stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
+.viz .v-leg{font-size:13px;font-weight:600;fill:var(--g600)}
+.viz .v-yr{font-size:13px;text-anchor:middle;fill:var(--g600)}
+.viz .v-tick{font-size:13px;text-anchor:end;fill:var(--g600)}
+/* 카카오톡 상담 대화 */
+.chat{position:absolute;top:50%;left:50%;width:min(340px,calc(100% - 40px));transform:translate(-50%,-50%);overflow:hidden;border-radius:20px;background:#b2c7da;box-shadow:0 12px 32px rgba(11,26,61,.14);text-align:left}
+.chat-hd{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid rgba(0,0,0,.06);font-size:15px;color:#191919}
+.chat-hd b{flex:1;font-weight:700}
+.chat-hd i{font-size:18px}
+.chat-bd{display:flex;flex-direction:column;gap:12px;padding:14px 14px 20px}
+.chat .chat-day{align-self:center;border-radius:9999px;background:rgba(0,0,0,.16);padding:3px 10px;font-size:11px;line-height:1.5;letter-spacing:0;color:#fff}
+.msg{display:flex;align-items:flex-end;gap:6px}
+.msg.l{align-items:flex-start;gap:8px}
+.msg.r{justify-content:flex-end}
+.av{flex:none;display:grid;place-items:center;width:36px;height:36px;border-radius:14px;background:#fff}
+.av img{width:26px;height:26px}
+.mc em{display:block;margin-bottom:4px;font-style:normal;font-size:12px;color:#4a5562}
+.mc .row{display:flex;align-items:flex-end;gap:6px}
+.chat .bb{max-width:210px;border-radius:12px;background:#fff;padding:8px 11px;font-size:13px;line-height:1.5;letter-spacing:0;color:#191919}
+.chat .msg.r .bb{background:#fee500}
+.msg time{flex:none;font-size:10px;color:#556170}
+
+/* ④ 단계 4개 (휴대폰은 2칸×2줄, 태블릿 이상은 4칸 한 줄 + 잇는 선) */
+.steps{max-width:1440px;margin:40px auto;padding:0 20px;text-align:center}
+.steps .sub{max-width:960px;margin:8px auto 0;font-size:16px;line-height:1.7;color:var(--g600)}
+.steps ol{position:relative;display:grid;grid-template-columns:repeat(2,1fr);gap:32px 16px;max-width:1200px;margin:40px auto 0}
+.steps ol::before{content:"";display:none;position:absolute;top:36px;left:0;right:0;border-top:1px solid var(--p100)}
+.steps li{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px}
+.steps .circ{position:relative;z-index:1;display:grid;place-items:center;width:68px;height:68px;border-radius:9999px;background:var(--p50);color:var(--p);font-size:40px}
+.steps li span{font-size:16px;line-height:1.5;color:var(--g600)}
+.steps li strong{font-size:20px;line-height:1.5;font-weight:700;color:var(--g800)}
+
+/* ⑤ 대상별 카드 4개 */
+.prods{padding-top:80px;text-align:center}
+.prods-in{max-width:1200px;margin:0 auto;padding:0 20px}
+.prods .sub{max-width:960px;margin:8px auto 52px;font-size:16px;line-height:1.7;color:var(--g600)}
+.prods .sub strong{font-weight:700;color:var(--g700)}
+.pcards{display:grid;gap:24px}
+.pcard{display:flex;flex-direction:column;align-items:center;width:100%;overflow:hidden;border-radius:24px;background:linear-gradient(180deg,#f8f9fa,#fff);padding:40px 20px 32px;transition:box-shadow .2s}
+.pcard:hover{box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.pc-ico{display:grid;place-items:center;width:72px;height:72px;border-radius:9999px;background:var(--p50);color:var(--p);font-size:40px}
+.pcard h3{margin-top:20px;font-size:20px;line-height:1.4;font-weight:700;letter-spacing:-.4px;color:var(--g800)}
+.pc-prod{margin-top:4px;font-size:16px;line-height:1.6;font-weight:500;color:var(--g700)}
+.pc-amt{display:flex;flex-direction:column;align-items:center;gap:2px;margin:24px 0 32px}
+.pc-amt>span{font-size:14px;line-height:1.6;color:var(--g600)}
+.pc-amt b{font-size:36px;line-height:1.2;font-weight:800;letter-spacing:-.03em;color:var(--p)}
+.pc-amt b small{margin-left:2px;font-size:18px;font-weight:700}
+.pc-more{margin-top:auto;display:inline-flex;align-items:center;justify-content:center;gap:4px;width:200px;height:44px;border:1px solid var(--p);border-radius:4px;padding:0 16px;font-size:14px;line-height:1.6;font-weight:700;letter-spacing:-.14px;color:var(--p)}
+.pc-more i{font-size:18px}
+.prods .cta{margin-top:40px}
+
+/* ⑥ 큰 이미지 띠 */
+.wide{max-width:1440px;margin:60px auto;padding:0 20px}
+.wide-box{display:none}
+.wide-m{display:flex;flex-direction:column;align-items:center;text-align:center}
+.wide-m h2{margin-bottom:8px;font-size:28px;line-height:1.4;font-weight:700;color:var(--g800)}
+.wide-m p{margin-bottom:40px;font-size:14px;line-height:1.6;color:var(--g800)}
+.wide-m-img{width:100%;margin-bottom:22px;overflow:hidden;border-radius:28px}
+.wide-m-img img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:0% 50%}
+.wide a.lk{font-size:14px;line-height:1.7;font-weight:700;color:var(--link);text-decoration:underline;text-underline-offset:4px}
+.certs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;width:100%;max-width:360px;margin-top:32px;text-align:center}
+.certs li{min-width:0}
+.certs img{display:block;width:100%;aspect-ratio:170/237;object-fit:cover;padding:5px;border-radius:4px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+.certs span{display:block;margin-top:10px;font-size:13px;line-height:1.4;font-weight:600;letter-spacing:-.03em;white-space:nowrap;color:var(--g800)}
+
+/* ⑦ 이용 상황 목록 */
+.uses{background:#fff;padding:80px 0;color:var(--g900)}
+.uses-in{max-width:1200px;margin:0 auto;padding:0 20px}
+.uses h2{font-size:32px;line-height:1.25;font-weight:600;letter-spacing:-.03em}
+.uses-list{margin-top:48px;border-bottom:1px solid var(--g200)}
+.uses-list>div{display:grid;gap:4px;border-top:1px solid var(--g200);padding:20px 0}
+.lim-box{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:48px;border-radius:8px;background:var(--p);padding:28px 24px;color:#fff;transition:background .2s}
+.lim-box:hover{background:#1a43c0}
+.lim-box h3{font-size:20px;line-height:1.4;font-weight:700}
+.lim-box p{margin-top:4px;font-size:16px;line-height:1.5;opacity:.85}
+.lim-box .nw{white-space:nowrap}
+.lim-go{flex:none;display:flex;align-items:center;gap:8px;font-size:18px;font-weight:700}
+.lim-go span{display:none}
+.lim-go i{font-size:28px;transition:transform .2s}
+.lim-box:hover .lim-go i{transform:translateX(4px)}
+.uses-list .cat{font-size:14px;font-weight:700;color:var(--p)}
+.uses-list .txt{font-size:18px;line-height:1.5;font-weight:600}
+
+/* ⑧ 상담 안내 (휴대폰·태블릿에서만) */
+.broch{background:#fff;padding:48px 20px;text-align:center}
+.broch-in{max-width:560px;margin:0 auto}
+.badge{display:inline-block;border-radius:9999px;background:var(--tint);box-shadow:inset 0 0 0 1px var(--tint-line);padding:4px 10px;font-size:12px;line-height:1.5;font-weight:700;color:var(--p)}
+.broch h2{margin-top:12px;font-size:24px;line-height:1.4;font-weight:700;color:var(--deep)}
+.broch h2 span,.aside h2 span{display:block}
+.broch .desc{margin:12px 0 24px;font-size:14px;line-height:1.65;color:var(--g600)}
+.cta-row{display:flex;flex-direction:column;gap:10px}
+.cta-row a{display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;border-radius:8px;padding:10px 16px;font-size:14px;font-weight:700}
+.cta-row a i{font-size:18px}
+.cta-row .k{background:#fff;color:var(--g900);box-shadow:inset 0 0 0 1px var(--g300)}
+.cta-row .k .ico-k{width:20px;height:20px}
+.cta-row .t{background:var(--p);color:#fff}
+
+/* ⑨ 자주 묻는 질문 */
+.faq{padding:60px 20px 80px}
+.faq-box{display:flex;flex-direction:column;align-items:center;gap:32px;padding:60px 20px 80px;border-radius:28px;background:linear-gradient(180deg,#f8f9fa 0%,#fff 100%)}
+.faq-head{width:290px;text-align:center}
+.faq-head h2{font-size:24px;line-height:1.4;font-weight:700;letter-spacing:-.02em;color:var(--g800)}
+.faqs{display:flex;flex-direction:column;gap:16px;width:100%;max-width:880px}
+.faqs>*{height:fit-content;background:#fff;border:1px solid transparent;border-radius:16px;box-shadow:0 0 20px #f0f3f5;transition:transform .2s}
+.faqs details:hover{transform:translateY(-2px)}
+.faqs details[open]{border-color:var(--g200)}
+.faqs summary{list-style:none;cursor:pointer;display:flex;align-items:flex-start;gap:14px;padding:22px 24px;font-size:17px;line-height:1.6;font-weight:700;letter-spacing:-.01em;color:var(--g800)}
+.faqs summary::-webkit-details-marker{display:none}
+.faqs summary::before{content:"Q";flex:none;width:20px;font-weight:800;color:var(--p)}
+.faqs summary::after{content:"";flex:none;width:9px;height:9px;margin:8px 4px 0 auto;border-right:2px solid var(--g600);border-bottom:2px solid var(--g600);transform:rotate(45deg);transition:transform .2s}
+.faqs details[open] summary::after{margin-top:12px;transform:rotate(-135deg)}
+.faqs details p{display:flex;gap:14px;margin:0 24px;padding:18px 0 22px;border-top:1px solid var(--g200);font-size:16px;line-height:1.7;color:var(--g700)}
+.faqs details p::before{content:"A";flex:none;width:20px;font-weight:800;color:var(--g600)}
+.faq .ask{font-size:17px;line-height:1.6;font-weight:700;color:var(--g600)}
+.faq .ask:hover{color:var(--p)}
+
+/* 하단 (법정 표시 · 축소 금지) */
+.m-notice{padding:20px}
+.ft{padding:48px 16px}
+.ft-in{display:flex;flex-direction:column;gap:24px;max-width:1200px;margin:0 auto}
+.ft-l{display:flex;flex-direction:column;gap:24px}
+.ft-top{display:flex;flex-direction:column;gap:24px}
+.ft-logo{height:28px;width:auto}
+.ft-note{display:none}
+.ft-info{display:flex;flex-direction:column;gap:8px;font-size:12px;line-height:1.6;color:var(--g900)}
+.ft-info .ln{display:flex;flex-direction:column}
+.ft-info .bar{display:none}
+.ft-info .m-only{display:flex;flex-direction:column;gap:4px}
+.ft-info b{white-space:nowrap}
+.ft-legal{max-width:640px;border:1px solid var(--g200);border-radius:8px;background:var(--g50);padding:14px 16px;font-size:14px;line-height:1.6;color:var(--g800)}
+.ft-nav{display:grid;gap:16px}
+.ft-nav a{font-size:14px;line-height:1.6;font-weight:700;color:var(--g900)}
+.ft-nav a.hl{color:var(--p);text-decoration:underline;text-underline-offset:1px}
+.ft-nav .contact{display:none}
+
+/* 떠 있는 상담 버튼 */
+.fab{position:fixed;right:32px;bottom:calc(env(safe-area-inset-bottom) + 48px);z-index:100;display:grid;gap:12px}
+.fab a{display:grid;place-items:center;width:56px;height:56px;border-radius:9999px;box-shadow:0 2px 10px rgba(0,0,0,.14)}
+.fab .fk{background:#fff}
+.fab .fk .ico-k{width:30px;height:30px}
+.fab .fp{background:var(--p);color:#fff;font-size:26px}
+
+/* 오른쪽 상담 창 (큰 화면에서 스크롤하면 나타남) */
+.aside{display:none}
+
+@media (min-width:768px){
+  :root{--bh:60px}
+  .topbar{padding:0 64px 0 20px;gap:16px}
+  .hero{padding:96px 60px 0}
+  .notice p,.m-notice p{font-size:14px;letter-spacing:-.01em}
+  .limit{padding:120px 60px}
+  .bq{padding:24px 32px}
+  .bubbles{margin-bottom:200px}
+  .steps{margin:60px auto;padding:0 40px}
+  .pcards{grid-template-columns:repeat(2,minmax(0,380px));justify-content:center;gap:36px}
+  .pcard{max-width:380px}
+  .wide{max-width:none;margin:240px auto 40px;padding:0 60px}
+  .wide-m{max-width:720px;margin:0 auto}
+  /* 큰 화면용 배너 (1360px 이상에서만 보임) : 상패는 왼쪽, 글자는 오른쪽 빈 바닥 위
+     사진 높이 964px 기준 사진 폭 1886px, 상패 오른쪽 끝 = 981px
+     --off : 배너가 좁으면 사진을 왼쪽으로 최대 170px 밀어 글자 자리를 확보
+     --pr  : 상패 오른쪽 끝 (아주 넓은 화면에서는 사진이 커지므로 52%) */
+  .wide-box{position:relative;height:964px;overflow:hidden;border-radius:48px;background:#c9c6c1;--off:clamp(-170px,calc(100% - 1401px),0px);--pr:calc(max(981px,52%) + var(--off))}
+  .wide-emb{position:absolute;top:0;left:var(--off);height:100%;width:auto;max-width:none;min-width:calc(100% - var(--off));object-fit:cover;object-position:0% 50%}
+  /* 글자 : 상패 오른쪽 끝에서 80px 띄움 (배너 오른쪽 끝과는 최소 40px) */
+  .wide-in{position:absolute;z-index:1;top:50%;left:min(calc(var(--pr) + 80px),calc(100% - 380px));width:340px;transform:translateY(-50%);text-align:left}
+  .wide-in h2{margin-bottom:12px;font-size:36px;line-height:1.4;font-weight:700;color:var(--g800)}
+  .wide-in p{margin-bottom:16px;font-size:18px;line-height:1.6;color:var(--g800)}
+  .wide a.lk{font-size:18px;line-height:1.8}
+  .broch{padding:64px 20px}
+  .steps ol{grid-template-columns:repeat(4,1fr)}
+  .steps ol::before{display:block}
+  .lim-go span{display:inline}
+  .cta-row{flex-direction:row}
+  .cta-row a{flex:1}
+}
+
+@media (min-width:1024px){
+  html{scroll-padding-top:calc(var(--bh) + 100px)}
+  .hd{height:80px}
+  .hd-in{padding:0 56px}
+  .hd-logo{height:34px}
+  .gnb{display:flex;align-items:center;margin-left:40px}
+  .gnb a{display:flex;align-items:center;gap:4px;padding:8px 16px;font-size:15px;line-height:24px;font-weight:500;color:var(--g900)}
+  .gnb a:hover{color:var(--p)}
+  .hd-r{display:flex;align-items:center;margin-left:auto}
+  .hd-r .txt{padding:8px 16px;margin-right:8px;font-size:15px;font-weight:500;color:var(--g900)}
+  .hd-r .btn{display:inline-flex;align-items:center;gap:6px;height:44px;padding:0 16px;border-radius:4.5px;font-size:14px;font-weight:700}
+  .hd-r .btn.kk{background:#fff;color:var(--g900);box-shadow:inset 0 0 0 1px var(--g300);margin-right:8px}
+  .hd-r .btn.kk .ico-k{width:20px;height:20px}
+  .hd-r .btn.tt{background:var(--p);color:#fff}
+  .hd-r .btn.tt i{font-size:18px}
+  .burger{display:none}
+
+  .hero-box{height:600px}
+  .hero-img{left:auto;right:0;width:60%;height:100%;object-position:50% 100%;-webkit-mask-image:none;mask-image:none}
+  .hero-ov{background:linear-gradient(to top,#fff,var(--hero-tint));-webkit-mask-image:var(--hero-fade);mask-image:var(--hero-fade)}
+  /* 글자 오른쪽 끝(가운데에서 약 160px 왼쪽)은 완전히 덮고, 가운데 조금 왼쪽부터 오른쪽으로 400px 동안 사진이 나타남 */
+  :root{--hero-fade:linear-gradient(90deg,#000 0,#000 calc(50% - 80px),rgba(0,0,0,.85) 50%,rgba(0,0,0,.62) calc(50% + 80px),rgba(0,0,0,.38) calc(50% + 160px),rgba(0,0,0,.16) calc(50% + 240px),rgba(0,0,0,.05) calc(50% + 290px),transparent calc(50% + 320px))}
+  .hero-txt{max-width:1200px;margin:0 auto;align-items:flex-start;justify-content:flex-start;padding:100px 60px;text-align:left}
+  .hero h1{font-size:40px;line-height:1.2}
+  .hero p{font-size:18px;line-height:1.6}
+  .hero .btn-pair{flex-direction:row;justify-content:flex-start}
+  .hero .btn-pair a{width:auto;min-width:180px}
+
+  .lbl{font-size:24px}
+  .h2c{font-size:32px}
+  .art{flex-direction:row;align-items:center;min-height:500px}
+  .art{width:min(100%,1200px)}
+  .art-txt{width:50%;padding:60px}
+  .art h3{font-size:32px}
+  .art p{font-size:20px;line-height:1.4;letter-spacing:-.02em}
+  .art-img{width:50%}
+
+  .steps h2{font-size:36px}
+  .steps .sub{font-size:20px}
+  .steps ol{margin-top:60px;gap:40px}
+  .steps .circ{width:92px;height:92px}
+  .steps li span{font-size:20px}
+  .steps li strong{font-size:26px}
+
+  .prods{padding-top:120px}
+  .prods-in{max-width:1420px;padding:0}
+  .prods .h2c{line-height:56px;letter-spacing:-.96px}
+  .prods .sub{margin-bottom:40px;font-size:18px;line-height:32px;letter-spacing:-.36px}
+  .pcards{grid-template-columns:repeat(4,minmax(0,340px));gap:20px}
+  .pcard{max-width:none;padding:48px 20px 32px}
+  .prods .cta{margin-top:80px}
+
+  .uses{padding:120px 0}
+  .uses-in{padding:0 40px}
+  .uses h2{font-size:40px}
+  /* 왼쪽 1칸 = 제목, 오른쪽 2칸 = 목록, 아래 파란 배너는 전체 폭 */
+  .uses-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);column-gap:80px;align-items:start}
+  .uses-list{margin-top:0}
+  .uses-list>div{grid-template-columns:160px minmax(0,1fr);gap:24px;align-items:center;padding:24px 0}
+  .uses-list .cat{font-size:15px}
+  .uses-list .txt{font-size:20px}
+  .lim-box{grid-column:1 / -1}
+  .lim-box{gap:40px;padding:36px 48px}
+  .lim-box h3{font-size:24px}
+  .lim-box p{font-size:18px}
+  .lim-go{font-size:20px}
+  .lim-go i{font-size:32px}
+
+  .faq{padding:160px 60px 120px}
+  .faq-box{gap:52px;padding:80px 60px}
+  .faq-head{width:100%}
+  .faq-head h2{font-size:28px}
+  .faqs summary{padding:26px 32px;font-size:18px}
+  .faqs details p{margin:0 32px;font-size:17px}
+
+  .m-notice{display:none}
+  .ft{padding:60px 80px}
+  .ft-in{flex-direction:row;justify-content:space-between;align-items:flex-start;gap:40px}
+  .ft-l{gap:40px;min-width:0}
+  .ft-logo{height:40px}
+  .ft-note{display:block;max-width:480px;font-size:12px;line-height:1.6;letter-spacing:-.01em;color:var(--g600)}
+  .ft-info{gap:4px;font-size:16px}
+  .ft-info .ln{flex-direction:row;align-items:center}
+  .ft-info .bar{display:inline-block;width:1px;height:16px;margin:0 8px;background:var(--g300)}
+  .ft-info .m-only{display:none}
+  .ft-nav{flex:none;grid-template-columns:repeat(2,max-content);column-gap:40px;row-gap:4px}
+  .ft-nav a{font-size:16px}
+  .ft-nav .contact{display:flex;flex-direction:column;gap:4px;margin-top:8px;font-size:14px;line-height:1.6;color:var(--g900)}
+}
+
+@media (min-width:1280px){
+  .topbar{padding:0 64px}
+  .ft-top{flex-direction:row;gap:40px}
+  .broch{display:none}
+  .aside{display:block;position:fixed;top:50%;right:20px;z-index:90;width:380px;transform:translateY(-50%);padding:20px;border:1px solid var(--tint-line);border-radius:16px;background:var(--tint-bg);box-shadow:0 12px 40px rgba(11,26,61,.14);text-align:center;opacity:0;pointer-events:none;transition:opacity .3s}
+  .aside.show{opacity:1;pointer-events:auto}
+  .aside .as-x{position:absolute;top:8px;right:8px;z-index:1;width:28px;height:28px;border:0;border-radius:9999px;background:rgba(255,255,255,.9);font-size:18px;line-height:1;color:var(--g600);cursor:pointer}
+  .aside .as-img{aspect-ratio:16/9;border-radius:8px;border:1px solid var(--g200)}
+  .aside .badge{margin-top:16px}
+  .aside h2{margin-top:10px;font-size:18px;line-height:1.4;font-weight:700;color:var(--deep)}
+  .aside .desc{margin:8px 0 16px;font-size:14px;line-height:1.6;color:var(--g600)}
+  .aside .cta-row{flex-direction:column}
+}
+
+/* 수상 배너 : 상패 옆에 글자가 들어갈 만큼 넓을 때만 큰 배너, 그보다 좁으면 글자 위·사진 아래 */
+@media (min-width:1360px){
+  .wide-m{display:none}
+  .wide-box{display:block}
+}
+
+@media (min-width:1440px){
+  .notice{padding:20px 60px 0}
+  .steps{margin:80px auto 160px;padding:0 60px}
+  .aside{right:32px}
+}
+
+/* 좁은 컴퓨터 화면 : 글자가 가운데 가까이 와서 덮는 범위를 오른쪽으로 늘림 */
+@media (min-width:1024px) and (max-width:1334px){
+  :root{--hero-fade:linear-gradient(90deg,#000 0,#000 48%,rgba(0,0,0,.8) 52%,rgba(0,0,0,.5) 57%,rgba(0,0,0,.2) 62%,transparent 67%)}
+}
+
+/* ───── 움직임·강조
+   · html 에 .mo 가 붙을 때만 작동 (기기에서 '동작 줄이기'를 켠 사람은 꺼짐)
+   · 화면에 들어올 때 한 번만 재생 (.in) — 떠오르기·반짝임·빛 번짐은 쓰지 않음
+   · 칸 크기는 움직이는 동안에도 그대로 (글자 넓이 고정) ───── */
+
+/* 버튼 : 마우스 올리면 진해지고, 누르면 살짝 눌림 */
+.btn-k,.btn-t,.cta-row a,.hd-r .btn,.tb-btn{transition:background .15s,box-shadow .15s,transform .1s}
+.btn-k:hover,.cta-row .k:hover,.hd-r .btn.kk:hover{box-shadow:inset 0 0 0 1px var(--g600)}
+.btn-t:hover,.cta-row .t:hover,.hd-r .btn.tt:hover{background:#1a43c0}
+.btn-k:active,.btn-t:active,.cta-row a:active,.hd-r .btn:active,.fab a:active{transform:scale(.97)}
+/* 상품 카드 : 마우스 올리면 아이콘 원이 파랗게 */
+.pc-ico{transition:background .2s,color .2s}
+.pcard:hover .pc-ico{background:var(--p);color:#fff}
+/* 섹션 제목의 파란 글자 : 형광펜 밑줄 */
+.h2c .pc{background:linear-gradient(var(--p100),var(--p100)) 0 100%/100% .38em no-repeat;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+/* 숫자 세기 : 숫자 칸 넓이 고정 */
+.cnt{display:inline-block;text-align:right;font-variant-numeric:tabular-nums}
+
+.mo .h2c .pc{background-size:0 .38em;transition:background-size .9s cubic-bezier(.6,0,.2,1) .25s}
+.mo .h2c.in .pc{background-size:100% .38em}
+/* 첫 화면 사진 : 살짝 크게 시작해서 제자리로 */
+.mo .hero-img{animation:mo-settle 1.8s cubic-bezier(.2,.6,.2,1) both}
+@keyframes mo-settle{from{transform:scale(1.06)}}
+/* 말풍선 : 꼬리 쪽에서 톡 하고 차례로 */
+.mo .bq{opacity:0;transform:scale(.9);transition:opacity .35s,transform .5s cubic-bezier(.3,1.5,.5,1)}
+.mo .bq.l{transform-origin:50px 100%}
+.mo .bq.r{transform-origin:calc(100% - 50px) 100%;transition-delay:.6s}
+.mo .bubbles.in .bq{opacity:1;transform:none}
+/* 그래프 : 막대가 바닥에서 차례로 자라고, 선이 왼쪽에서 그려짐 */
+.mo .viz .bar{transform:scaleY(0);transform-box:fill-box;transform-origin:50% 100%;transition:transform .6s cubic-bezier(.3,0,.2,1),fill .15s}
+.mo .viz.in .bar{transform:none}
+.mo .viz .bar:nth-of-type(2){transition-delay:.08s}
+.mo .viz .bar:nth-of-type(3){transition-delay:.16s}
+.mo .viz .bar:nth-of-type(4){transition-delay:.24s}
+.mo .viz .bar:nth-of-type(5){transition-delay:.32s}
+.mo .viz .bar:nth-of-type(6){transition-delay:.4s}
+.mo .viz .v-lines{clip-path:inset(-12px calc(100% + 12px) -12px -12px);transition:clip-path 1.3s cubic-bezier(.5,0,.25,1) .6s}
+.mo .viz.in .v-lines{clip-path:inset(-12px)}
+/* 상담 대화 : 메시지가 한 줄씩 도착 */
+.mo .chat .msg{opacity:0;transform:scale(.94);transition:opacity .3s,transform .35s cubic-bezier(.3,1.4,.5,1)}
+.mo .chat .msg.l{transform-origin:0 0}
+.mo .chat .msg.r{transform-origin:100% 100%}
+.mo .chat.in .msg{opacity:1;transform:none}
+.mo .chat .msg:nth-of-type(1){transition-delay:.3s}
+.mo .chat .msg:nth-of-type(2){transition-delay:1.1s}
+.mo .chat .msg:nth-of-type(3){transition-delay:1.9s}
+.mo .chat .msg:nth-of-type(4){transition-delay:2.6s}
+/* 네 단계 : 파란 선이 왼쪽부터 차오르고, 선이 닿는 순서대로 원이 파랗게 */
+.steps ol::after{content:"";display:none;position:absolute;top:35px;left:0;right:0;border-top:2px solid var(--p);transform-origin:0 50%}
+.mo .steps ol::after{display:block;transform:scaleX(0);transition:transform 1.6s linear}
+.mo .steps ol.in::after{transform:none}
+.mo .steps .circ{transition:background .35s,color .35s}
+.mo .steps ol.in .circ{background:var(--p);color:#fff}
+.mo .steps li:nth-child(1) .circ{transition-delay:.2s}
+.mo .steps li:nth-child(2) .circ{transition-delay:.6s}
+.mo .steps li:nth-child(3) .circ{transition-delay:1s}
+.mo .steps li:nth-child(4) .circ{transition-delay:1.4s}
+@media (max-width:767px){.mo .steps ol::after{display:none}}
+/* 파란 한도 배너 화살표 · 오른쪽 아래 전화 버튼 : 가끔 움직여 눈길 끌기 */
+.mo .lim-go i{animation:mo-nudge 2.4s ease-in-out infinite}
+@keyframes mo-nudge{0%,50%,100%{transform:none}25%{transform:translateX(6px)}}
+.mo .fab .fp i{animation:mo-ring 5s ease-in-out infinite}
+@keyframes mo-ring{0%,80%,100%{transform:none}83%{transform:rotate(-16deg)}86%{transform:rotate(14deg)}89%{transform:rotate(-10deg)}92%{transform:rotate(6deg)}95%{transform:none}}
+/* 자주 묻는 질문 : 답이 부드럽게 펼쳐짐 (지원하는 브라우저만) */
+@supports (interpolate-size:allow-keywords){
+  .mo{interpolate-size:allow-keywords}
+  .mo .faqs details::details-content{block-size:0;overflow:hidden;transition:block-size .3s ease,content-visibility .3s allow-discrete}
+  .mo .faqs details[open]::details-content{block-size:auto}
+}
+</style>
+<script>if('IntersectionObserver' in window&&matchMedia('(prefers-reduced-motion: no-preference)').matches)document.documentElement.classList.add('mo')</script>
+</head>
+<body>
+
+<!-- 카카오톡 아이콘 (노란 네모 + 말풍선) — 아래에서 <use href="#ico-k"> 로 불러 씀 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="ico-k" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#FEE500"/><path fill="#3C1E1E" d="M12 5.6c-3.9 0-7 2.45-7 5.5 0 1.95 1.3 3.67 3.27 4.64l-.66 2.44c-.06.22.19.4.38.27l2.9-1.93c.36.05.73.08 1.11.08 3.9 0 7-2.46 7-5.5s-3.1-5.5-7-5.5z"/></symbol></svg>
+
+<!-- 상단 띠 -->
+<div class="topbar">
+  <p>2026 대한민국 소비자 만족 브랜드 1위</p>
+  <a class="tb-btn" data-kakao target="_blank" rel="noopener"><svg class="ico-k" aria-hidden="true"><use href="#ico-k"/></svg>카카오톡 상담</a>
+  <button class="tb-x" type="button" aria-label="닫기">&times;</button>
+</div>
+
+<!-- 헤더 -->
+<header class="hd">
+  <div class="hd-in">
+    <img class="hd-logo" src="img/logo.png" alt="한국비상금협회">
+    <nav class="gnb">
+      <a href="#prod">상품 안내</a>
+      <a href="#step">진행 절차</a>
+      <a href="#uses">이용 상황</a>
+    </nav>
+    <div class="hd-r">
+      <a class="txt" href="#faq">자주 묻는 질문</a>
+      <a class="btn kk" data-kakao target="_blank" rel="noopener"><svg class="ico-k" aria-hidden="true"><use href="#ico-k"/></svg>카카오톡 상담</a>
+      <a class="btn tt" data-tel><i class="ph-bold ph-phone"></i>전화 상담</a>
+    </div>
+    <button class="burger" type="button" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<nav class="drawer" aria-label="메뉴">
+  <button class="dr-x" type="button" aria-label="메뉴 닫기">&times;</button>
+  <a href="#prod">상품 안내</a>
+  <a href="#step">진행 절차</a>
+  <a href="#uses">이용 상황</a>
+  <a href="#faq">자주 묻는 질문</a>
+</nav>
+<div class="dim"></div>
+
+<main>
+<!-- ① 배너 -->
+<section class="hero">
+  <div class="hero-box">
+    <img class="hero-img" src="img/한국 기관 캠퍼스의 전문적인 초상2.png" alt="" fetchpriority="high">
+    <div class="hero-ov"></div>
+    <div class="hero-txt">
+      <h1><strong>급하게 필요한 자금</strong>,<br><strong>방법</strong>이 있습니다<br><strong>한국비상금협회</strong></h1>
+      <p>대상과 상황에 맞는 생활자금<br>모바일 생활자금 · 신용카드 생활자금 서비스</p>
+      <div class="btn-pair">
+        <a class="btn-k" data-kakao target="_blank" rel="noopener"><svg class="ico-k" aria-hidden="true"><use href="#ico-k"/></svg>카카오톡 상담</a>
+        <a class="btn-t" data-tel><i class="ph-bold ph-phone"></i>전화 상담 신청</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ② 안내 띠 -->
+<div class="notice"><p><b>한국비상금협회</b>는 국내 최초 <b>정식 등록 업체</b>입니다 · 대부업 등록번호 【2026-서울강남-0000】</p></div>
+
+<!-- ③ 말풍선 2개 + 큰 설명 카드 2개 (★ 말풍선은 예시) -->
+<section class="limit">
+  <p class="lbl"><span>급하게 돈이 필요할 때</span> 자주 듣는</p>
+  <h2 class="h2c">기존 대출의 <span class="pc">높은 문턱</span></h2>
+  <div class="bubbles">
+    <blockquote class="bq l">🤦🏻‍♂️ : "<span>월급은 </span>꼬박꼬박<span> 받는데, </span>기존 대출<span> 때문에 은행에선 바로 </span>거절<span>이래요.</span>"</blockquote>
+    <blockquote class="bq r">🙍🏻 : "<span>월급날은 </span>열흘<span>이나 남았는데, </span>병원비 200만원<span>이 당장 어떻게 구하죠..?</span>"</blockquote>
+  </div>
+  <p class="lbl g">많은 사람이 다시 찾는 이유</p>
+  <h2 class="h2c"><span class="pc">꾸준한 신뢰</span>에 <span class="pc">간편함</span>을 더하다</h2>
+  <div class="arts">
+    <article class="art">
+      <div class="art-txt">
+        <h3><span class="pc">6년째</span> 꾸준히<br><span class="pc">늘어나는 이용자</span></h3>
+        <p>2020년 설립 · 누적 상담 15만 명+<br><strong>해마다 이용자 증가</strong></p>
+      </div>
+      <!-- ★ 눈금 : 1만 = 12칸 (y 300 = 0, y 120 = 15만). 2026년 막대 끝 = 누적 상담 15만 명+ 기준
+           ★ 2021~2025년 막대 높이·곡선은 예시 — 실제 연도별 수치로 교체 (높이 = 수치(만) × 12) -->
+      <div class="art-img"><figure class="viz">
+        <svg viewBox="0 0 385 341" role="img" aria-label="2021년부터 2026년까지 해마다 늘어난 상담 건수와 이용자 수">
+          <defs><linearGradient id="v-grad" gradientUnits="userSpaceOnUse" x1="76" y1="288" x2="345" y2="172"><stop offset="0" stop-color="#bcd0fc"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient></defs>
+          <line x1="48" y1="20" x2="48" y2="300" class="v-ax"/>
+          <text x="40" y="124.5" class="v-tick">15만</text>
+          <text x="40" y="184.5" class="v-tick">10만</text>
+          <text x="40" y="244.5" class="v-tick">5만</text>
+          <text x="40" y="304.5" class="v-tick">0</text>
+          <rect class="bar" x="65.25" y="249" width="32" height="51"><title>2021년</title></rect>
+          <rect class="bar" x="117.75" y="242" width="32" height="58"><title>2022년</title></rect>
+          <rect class="bar" x="170.25" y="227" width="32" height="73"><title>2023년</title></rect>
+          <rect class="bar" x="222.75" y="202" width="32" height="98"><title>2024년</title></rect>
+          <rect class="bar" x="275.25" y="166" width="32" height="134"><title>2025년</title></rect>
+          <rect class="bar" x="327.75" y="111" width="32" height="189"><title>2026년</title></rect>
+          <line x1="48" y1="300.5" x2="372" y2="300.5" class="v-ax"/>
+          <g class="v-lines"><path class="v-dot" d="M78,236 C190,230 300,170 362,70"/>
+          <path class="v-arrow" stroke="url(#v-grad)" d="M76,288 C200,285 300,250 345,172"/>
+          <path class="v-arrow" stroke="#1d4ed8" d="M328.7,179.6 L345,172 L346.6,189.9"/></g>
+          <text x="64" y="40" class="v-leg">상담 건수</text>
+          <line x1="128" y1="35" x2="168" y2="35" class="v-dot"/>
+          <text x="64" y="68" class="v-leg">이용자 수</text>
+          <line x1="128" y1="63" x2="168" y2="63" class="v-arrow" stroke="#1d4ed8"/>
+          <text x="81.25" y="324" class="v-yr">2021</text>
+          <text x="133.75" y="324" class="v-yr">2022</text>
+          <text x="186.25" y="324" class="v-yr">2023</text>
+          <text x="238.75" y="324" class="v-yr">2024</text>
+          <text x="291.25" y="324" class="v-yr">2025</text>
+          <text x="343.75" y="324" class="v-yr">2026</text>
+        </svg>
+      </figure></div>
+    </article>
+    <article class="art">
+      <div class="art-txt">
+        <h3><span class="pc">방문·서류 없이</span>,<br>카카오톡으로 <span class="pc">비대면 진행</span></h3>
+        <p>방문 없음 · 서류 제출 없음<br><strong>진행 완료 후 5분 내 입금</strong></p>
+      </div>
+      <!-- ★ 상담 대화는 예시 -->
+      <div class="art-img"><div class="chat" role="img" aria-label="카카오톡 상담 대화 예시">
+        <div class="chat-hd"><i class="ph-bold ph-caret-left"></i><b>한국비상금협회</b><i class="ph-bold ph-magnifying-glass"></i></div>
+        <div class="chat-bd">
+          <p class="chat-day">오늘</p>
+          <div class="msg l"><span class="av"><img src="img/logo-mark.png" alt=""></span><div class="mc"><em>한국비상금협회</em><div class="row"><p class="bb">안녕하세요, 한국비상금협회입니다.<br>필요한 금액이 얼마인가요?</p><time>오후 2:01</time></div></div></div>
+          <div class="msg r"><time>오후 2:02</time><p class="bb">200만원 정도 필요해요</p></div>
+          <div class="msg l"><span class="av"><img src="img/logo-mark.png" alt=""></span><div class="mc"><em>한국비상금협회</em><div class="row"><p class="bb">확인해 보니 진행 가능합니다.<br>진행 완료 후 5분 내 입금됩니다.</p><time>오후 2:03</time></div></div></div>
+          <div class="msg r"><time>오후 2:03</time><p class="bb">네, 진행할게요!</p></div>
+        </div>
+      </div></div>
+    </article>
+  </div>
+</section>
+
+<!-- ④ 단계 3개 -->
+<section class="steps" id="step">
+  <h2 class="h2c"><span class="pc">상담부터 입금까지</span> 네 단계</h2>
+  <p class="sub">평균 처리 5분 · 365일 24시간 상담</p>
+  <ol>
+    <li><div class="circ"><i class="ph-bold ph-chat-circle-dots"></i></div><span>카카오톡 또는 전화</span><strong>상담 신청</strong></li>
+    <li><div class="circ"><i class="ph-bold ph-list-checks"></i></div><span>필요 금액과 조건 확인</span><strong>상황 확인</strong></li>
+    <li><div class="circ"><i class="ph-bold ph-cards"></i></div><span>이용 가능한 상품 안내</span><strong>상품 안내</strong></li>
+    <li><div class="circ"><i class="ph-bold ph-wallet"></i></div><span>진행 완료 후 5분 내</span><strong>입금 완료</strong></li>
+  </ol>
+</section>
+
+<!-- ⑤ 대상별 카드 4개 (★ 대상별 추천 상품은 예시) -->
+<section class="prods" id="prod">
+  <div class="prods-in">
+    <h2 class="h2c">대상에 맞춘 <span class="pc">생활자금</span></h2>
+    <p class="sub">모바일 생활자금 최대 500만원 · 신용카드 생활자금 최대 1,000만원<br><strong>한도와 금리는 심사 결과에 따라 달라질 수 있습니다</strong></p>
+    <div class="pcards">
+      <a class="pcard" data-kakao target="_blank" rel="noopener"><div class="pc-ico"><i class="ph-duotone ph-briefcase"></i></div><h3>직장인·자영업자</h3><p class="pc-prod">신용카드 생활자금</p><p class="pc-amt"><span>한도 최대</span><b><span class="cnt">1,000</span><small>만원</small></b></p><span class="pc-more">상담하기<i class="ph-bold ph-caret-right"></i></span></a>
+      <a class="pcard" data-kakao target="_blank" rel="noopener"><div class="pc-ico"><i class="ph-duotone ph-laptop"></i></div><h3>프리랜서</h3><p class="pc-prod">모바일 생활자금</p><p class="pc-amt"><span>한도 최대</span><b><span class="cnt">500</span><small>만원</small></b></p><span class="pc-more">상담하기<i class="ph-bold ph-caret-right"></i></span></a>
+      <a class="pcard" data-kakao target="_blank" rel="noopener"><div class="pc-ico"><i class="ph-duotone ph-house-line"></i></div><h3>주부·사회초년생</h3><p class="pc-prod">모바일 생활자금</p><p class="pc-amt"><span>한도 최대</span><b><span class="cnt">500</span><small>만원</small></b></p><span class="pc-more">상담하기<i class="ph-bold ph-caret-right"></i></span></a>
+      <a class="pcard" data-kakao target="_blank" rel="noopener"><div class="pc-ico"><i class="ph-duotone ph-handshake"></i></div><h3>기대출·저신용</h3><p class="pc-prod">두 상품 모두 상담</p><p class="pc-amt"><span>한도 최대</span><b><span class="cnt">1,000</span><small>만원</small></b></p><span class="pc-more">상담하기<i class="ph-bold ph-caret-right"></i></span></a>
+    </div>
+    <div class="btn-pair cta">
+      <a class="btn-k" data-kakao target="_blank" rel="noopener"><svg class="ico-k" aria-hidden="true"><use href="#ico-k"/></svg>카카오톡 상담</a>
+      <a class="btn-t" data-tel><i class="ph-bold ph-phone"></i>전화 상담 신청</a>
+    </div>
+  </div>
+</section>
+
+<!-- ⑥ 큰 이미지 띠 -->
+<section class="wide">
+  <div class="wide-box">
+    <img class="wide-emb" src="img/수상2_web.jpg?v=2" alt="2026 대한민국 소비자 만족 브랜드 1위 상패" loading="lazy">
+    <div class="wide-in">
+      <h2>2026 대한민국<br>소비자 만족 브랜드 1위</h2>
+      <p>금융서비스 (디지털 금융 플랫폼) 부문 수상<br>6년 이상 운영 · 누적 상담 15만 명+</p>
+      <a class="lk" data-kakao target="_blank" rel="noopener">카카오톡 상담 →</a>
+      <ul class="certs">
+        <li><img src="img/사업자.jpg" alt="사업자등록증" loading="lazy"><span>사업자등록증</span></li>
+        <li><img src="img/통신판매업.jpg" alt="통신판매업 신고증" loading="lazy"><span>통신판매업 신고증</span></li>
+        <li><img src="img/배상책임.jpg" alt="배상책임보험 5억 가입증서" loading="lazy"><span>배상책임보험 5억</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wide-m">
+    <h2>2026 대한민국<br><span class="pc">소비자 만족</span><br><span class="pc">브랜드 1위</span></h2>
+    <p>금융서비스 (디지털 금융 플랫폼) 부문 수상<br>6년 이상 운영 · 누적 상담 15만 명+</p>
+    <div class="wide-m-img"><img src="img/수상2_web.jpg?v=2" alt="2026 대한민국 소비자 만족 브랜드 1위 상패" loading="lazy"></div>
+    <a class="lk" data-kakao target="_blank" rel="noopener">카카오톡 상담 →</a>
+    <ul class="certs">
+      <li><img src="img/사업자.jpg" alt="사업자등록증" loading="lazy"><span>사업자등록증</span></li>
+      <li><img src="img/통신판매업.jpg" alt="통신판매업 신고증" loading="lazy"><span>통신판매업 신고증</span></li>
+      <li><img src="img/배상책임.jpg" alt="배상책임보험 5억 가입증서" loading="lazy"><span>배상책임보험 5억</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ⑦ 이용 상황 목록 (★ 예시) -->
+<section class="uses" id="uses">
+  <div class="uses-in">
+    <h2>이런 상황에 이용합니다</h2>
+    <div class="uses-list">
+      <div><span class="cat">직장인</span><span class="txt">월급날 전 생활비가 부족할 때</span></div>
+      <div><span class="cat">직장인</span><span class="txt">카드값과 공과금 납부일이 겹칠 때</span></div>
+      <div><span class="cat">자영업자</span><span class="txt">매출 정산 전 급한 비용이 생겼을 때</span></div>
+      <div><span class="cat">프리랜서</span><span class="txt">작업 대금 입금이 늦어질 때</span></div>
+      <div><span class="cat">주부</span><span class="txt">갑작스러운 병원비가 생겼을 때</span></div>
+      <div><span class="cat">사회초년생</span><span class="txt">이사 비용이 부족할 때</span></div>
+      <div><span class="cat">기대출·저신용</span><span class="txt">은행 대출이 어려울 때</span></div>
+    </div>
+    <a class="lim-box" data-kakao target="_blank" rel="noopener">
+      <div><h3>내 한도는 얼마나 나올지 궁금하다면?</h3><p>상담 무료 · 신용조회 없음 · <span class="nw">365일 24시간</span></p></div>
+      <span class="lim-go"><span>한도 확인하기</span><i class="ph-bold ph-arrow-right"></i></span>
+    </a>
+  </div>
+</section>
+
+<!-- ⑧ 상담 안내 (휴대폰·태블릿에서만 보임) -->
+<section class="broch">
+  <div class="broch-in">
+    <span class="badge">365일 24시간</span>
+    <h2><span>카카오톡으로</span><span>바로 상담</span></h2>
+    <p class="desc">상담 무료 · 신용조회 없음</p>
+    <div class="cta-row">
+      <a class="k" data-kakao target="_blank" rel="noopener"><svg class="ico-k" aria-hidden="true"><use href="#ico-k"/></svg>카카오톡 상담</a>
+      <a class="t" data-tel><i class="ph-bold ph-phone"></i>전화 상담 신청</a>
+    </div>
+  </div>
+</section>
+
+<!-- ⑨ 자주 묻는 질문 -->
+<section class="faq" id="faq">
+  <div class="faq-box">
+    <div class="faq-head"><h2>상담 전 많이 궁금해하는 내용</h2></div>
+    <div class="faqs">
+      <details><summary>수수료는 얼마인가요?</summary><p>고객님의 상황에 따라 달라 일괄적으로 안내하지 않습니다. 진행 전에 정확한 금액을 먼저 안내해 드리며, 법정 최고금리를 넘는 수수료는 어떠한 경우에도 받지 않습니다.</p></details>
+      <details><summary>상담하면 반드시 진행해야 하나요?</summary><p>아닙니다. 조건을 확인한 뒤 원하지 않으면 진행하지 않아도 됩니다. 진행을 권유하거나 재촉하지 않습니다.</p></details>
+      <details><summary>신용점수에 영향이 있나요?</summary><p>상담만으로는 신용조회를 하지 않으므로 조회 기록이 남지 않으며, 신용점수에도 영향이 없습니다.</p></details>
+      <details><summary>준비할 서류가 있나요?</summary><p>상담 단계에서는 서류가 필요하지 않습니다. 이후 필요한 서류가 있으면 상담원이 미리 안내해 드립니다.</p></details>
+      <details><summary>사칭 업체는 어떻게 구별하나요?</summary><p>한국비상금협회는 이 페이지의 상담 버튼과 대표번호 외의 채널을 운영하지 않습니다. 대출 전 입금을 요구하는 경우 응하면 안 됩니다.</p></details>
+    </div>
+    <a class="ask" data-kakao target="_blank" rel="noopener">카카오톡으로 문의 →</a>
+  </div>
+</section>
+</main>
+
+<!-- 하단 (법정 표시 · 축소 금지) -->
+<div class="m-notice"><p><b>한국비상금협회</b>는 국내 최초 <b>정식 등록 업체</b>입니다 · 대부업 등록번호 【2026-서울강남-0000】</p></div>
+<footer class="ft">
+  <div class="ft-in">
+    <div class="ft-l">
+      <div class="ft-top">
+        <img class="ft-logo" src="img/logo.png" alt="한국비상금협회">
+        <p class="ft-note">한국비상금협회는 국내 최초 정식 등록 업체입니다 · 대부업 등록번호 【2026-서울강남-0000】</p>
+      </div>
+      <div class="ft-info">
+        <div class="ln"><span>주식회사 한국비상금협회</span><span class="bar"></span><span>대표 【홍길동】</span></div>
+        <div class="ln"><span>사업자등록번호 【000-00-00000】</span><span class="bar"></span><span>대부업 등록번호 【2026-서울강남-0000】</span></div>
+        <span>주소 【서울특별시 강남구 테헤란로 000, 0층】</span>
+        <div class="m-only"><span>전화 <b data-tel-text></b></span><span>상담 365일 24시간</span></div>
+      </div>
+      <p class="ft-legal">중개수수료를 요구하거나 받는 것은 불법입니다. 과도한 빚은 당신에게 큰 불행을 안겨줄 수 있습니다. 대출 시 귀하의 신용등급 또는 개인신용평점이 하락할 수 있습니다. 대부업체 이자율 연 20% 이내 (연체이자율 연 20% 이내), 조기상환수수료 없음.</p>
+    </div>
+    <nav class="ft-nav">
+      <a href="#prod">상품 안내</a>
+      <a href="#">이용약관</a>
+      <a href="#step">진행 절차</a>
+      <a href="#" class="hl">개인정보처리방침</a>
+      <a href="#faq">자주 묻는 질문</a>
+      <a data-kakao target="_blank" rel="noopener">카카오톡 상담</a>
+      <div class="contact"><span>전화 <b data-tel-text></b></span><span>상담 365일 24시간</span></div>
+    </nav>
+  </div>
+</footer>
+
+<!-- 오른쪽 상담 창 (큰 화면) -->
+<aside class="aside" aria-label="상담 안내">
+  <button class="as-x" type="button" aria-label="닫기">&times;</button>
+  <div class="as-img ph-box">【이미지】</div>
+  <span class="badge">365일 24시간</span>
+  <h2><span>카카오톡으로</span><span>바로 상담</span></h2>
+  <p class="desc">상담 무료 · 신용조회 없음</p>
+  <div class="cta-row">
+    <a class="k" data-kakao target="_blank" rel="noopener"><svg class="ico-k" aria-hidden="true"><use href="#ico-k"/></svg>카카오톡 상담</a>
+    <a class="t" data-tel><i class="ph-bold ph-phone"></i>전화 상담 신청</a>
+  </div>
+</aside>
+
+<div class="fab">
+  <a class="fk" data-kakao target="_blank" rel="noopener" aria-label="카카오톡 상담"><svg class="ico-k" aria-hidden="true"><use href="#ico-k"/></svg></a>
+  <a class="fp" data-tel aria-label="전화 상담"><i class="ph-bold ph-phone"></i></a>
+</div>
+
+<script>
+(function(){
+  // ★ 여기 두 줄만 바꾸면 모든 버튼이 따라 바뀝니다
+  var KAKAO='https://han.gl/EE2MC', TEL='1600-0000';
+  document.querySelectorAll('[data-kakao]').forEach(function(a){a.href=KAKAO});
+  document.querySelectorAll('[data-tel]').forEach(function(a){a.href='tel:'+TEL});
+  document.querySelectorAll('[data-tel-text]').forEach(function(s){s.textContent=TEL});
+  // 상단 띠 닫기
+  document.querySelector('.tb-x').onclick=function(){document.body.classList.add('no-bar')};
+  // 메뉴 열고 닫기
+  var dr=document.querySelector('.drawer'),dim=document.querySelector('.dim');
+  function tog(o){dr.classList.toggle('open',o);dim.classList.toggle('open',o)}
+  document.querySelector('.burger').onclick=function(){tog(true)};
+  dim.onclick=dr.querySelector('.dr-x').onclick=function(){tog(false)};
+  dr.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){tog(false)})});
+  // 오른쪽 상담 창 : 첫 화면을 지나면 나타남, 닫으면 다시 안 나옴
+  var as=document.querySelector('.aside'),hero=document.querySelector('.hero'),closed=false;
+  as.querySelector('.as-x').onclick=function(){closed=true;as.classList.remove('show')};
+  addEventListener('scroll',function(){as.classList.toggle('show',!closed&&hero.getBoundingClientRect().bottom<0)},{passive:true});
+  // 움직임 : 화면에 35% 들어오면 .in 을 붙여 한 번만 재생
+  if(!document.documentElement.classList.contains('mo'))return;
+  function count(el){
+    var to=+el.dataset.to,t0=0;
+    requestAnimationFrame(function f(t){
+      if(!t0)t0=t;
+      var p=Math.min((t-t0)/1200,1);
+      el.textContent=Math.round(to*(1-Math.pow(1-p,3))).toLocaleString('ko-KR');
+      if(p<1)requestAnimationFrame(f);
+    });
+  }
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(!e.isIntersecting)return;
+    e.target.classList.add('in');
+    e.target.querySelectorAll('.cnt[data-to]').forEach(count);
+    io.unobserve(e.target);
+  })},{threshold:.35});
+  // 숫자 칸 넓이를 글꼴이 다 불러와진 뒤 원래 숫자 기준으로 고정하고 0부터 시작
+  (document.fonts?document.fonts.ready:Promise.resolve()).then(function(){
+    document.querySelectorAll('.cnt').forEach(function(el){
+      el.style.minWidth=el.getBoundingClientRect().width+'px';
+      el.dataset.to=el.textContent.replace(/,/g,'');
+      el.textContent='0';
+    });
+    document.querySelectorAll('.h2c,.bubbles,.viz,.chat,.steps ol,.pcards').forEach(function(el){io.observe(el)});
+  });
+})();
+</script>
+</body>
+</html>

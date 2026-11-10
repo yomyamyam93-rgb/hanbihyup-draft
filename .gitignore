@@ -1,0 +1,23 @@
+# GitHub 에는 시안1·시안2 와 두 시안이 쓰는 사진만 올린다 (나머지는 전부 제외)
+/*
+!/.gitignore
+!/.nojekyll
+!/시안1.html
+!/시안2.html
+!/img/
+/img/*
+!/img/award.jpg
+!/img/emblem.png
+!/img/logo-daily-d.png
+!/img/logo-enews-d.png
+!/img/logo-kcsb-d.png
+!/img/logo-kpba-d.png
+!/img/logo-mark.png
+!/img/logo-sisa.jpg
+!/img/logo.png
+!/img/배상책임.jpg
+!/img/사업자.jpg
+!/img/수상2_web.jpg
+!/img/통신판매업.jpg
+!/img/한국 기관 캠퍼스의 전문적인 초상2.png
+!/img/한국비상금협회 깃발과 푸른 하늘.png
