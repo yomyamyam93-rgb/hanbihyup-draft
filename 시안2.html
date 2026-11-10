@@ -138,10 +138,11 @@ body.no-bar .topbar{display:none}
 /* ④ 단계 4개 (휴대폰은 2칸×2줄, 태블릿 이상은 4칸 한 줄 + 잇는 선) */
 .steps{max-width:1440px;margin:40px auto;padding:0 20px;text-align:center}
 .steps .sub{max-width:960px;margin:8px auto 0;font-size:16px;line-height:1.7;color:var(--g600)}
-.steps ol{position:relative;display:grid;grid-template-columns:repeat(2,1fr);gap:32px 16px;max-width:1200px;margin:40px auto 0}
-.steps ol::before{content:"";display:none;position:absolute;top:36px;left:0;right:0;border-top:1px solid var(--p100)}
+/* 잇는 선 : 첫 원 가운데 ~ 마지막 원 가운데, 원 높이의 정가운데 (--sg = 칸 사이 간격, --cs = 원 크기) */
+.steps ol{--sg:16px;--cs:68px;position:relative;display:grid;grid-template-columns:repeat(2,1fr);gap:32px var(--sg);max-width:1200px;margin:40px auto 0}
+.steps ol::before{content:"";display:none;position:absolute;top:calc(var(--cs) / 2 - .5px);left:calc((100% - 3 * var(--sg)) / 8);right:calc((100% - 3 * var(--sg)) / 8);border-top:1px solid var(--p100)}
 .steps li{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px}
-.steps .circ{position:relative;z-index:1;display:grid;place-items:center;width:68px;height:68px;border-radius:9999px;background:var(--p50);color:var(--p);font-size:40px}
+.steps .circ{position:relative;z-index:1;display:grid;place-items:center;width:var(--cs);height:var(--cs);border-radius:9999px;background:var(--p50);color:var(--p);font-size:40px}
 .steps li span{font-size:16px;line-height:1.5;color:var(--g600)}
 .steps li strong{font-size:20px;line-height:1.5;font-weight:700;color:var(--g800)}
 
@@ -370,8 +371,7 @@ body.no-bar .topbar{display:none}
 
   .steps h2{font-size:36px}
   .steps .sub{font-size:20px}
-  .steps ol{margin-top:60px;gap:40px}
-  .steps .circ{width:92px;height:92px}
+  .steps ol{--sg:40px;--cs:92px;margin-top:60px;gap:40px}
   .steps li span{font-size:20px}
   .steps li strong{font-size:26px}
 
@@ -499,7 +499,7 @@ body.no-bar .topbar{display:none}
 .mo .chat .msg:nth-of-type(3){transition-delay:1.9s}
 .mo .chat .msg:nth-of-type(4){transition-delay:2.6s}
 /* 네 단계 : 파란 선이 왼쪽부터 차오르고, 선이 닿는 순서대로 원이 파랗게 */
-.steps ol::after{content:"";display:none;position:absolute;top:35px;left:0;right:0;border-top:2px solid var(--p);transform-origin:0 50%}
+.steps ol::after{content:"";display:none;position:absolute;top:calc(var(--cs) / 2 - 1px);left:calc((100% - 3 * var(--sg)) / 8);right:calc((100% - 3 * var(--sg)) / 8);border-top:2px solid var(--p);transform-origin:0 50%}
 .mo .steps ol::after{display:block;transform:scaleX(0);transition:transform 1.6s linear}
 .mo .steps ol.in::after{transform:none}
 .mo .steps .circ{transition:background .35s,color .35s}

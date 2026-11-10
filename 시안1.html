@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/duotone/style.css">
 <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
 <style>
 :root{--p:#1d4ed8;--p2:#3b82f6;--pd:#0b1a3d;--ink:#0f1b33;--sub:#5d6b85;--line:#e3e9f3;--bg:#f4f7fc}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -32,13 +33,12 @@ img{display:block;max-width:100%}
 .top{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .top .wrap{display:flex;align-items:center;gap:12px;height:60px}
 .top .logo{height:30px;margin-right:auto}
-/* 상담 버튼 통일 : 카카오톡 = 노랑 + 검은 말풍선, 전화 = 흰색 + 파란 전화 아이콘 */
-.bk,.bt{display:inline-flex;align-items:center;justify-content:center;gap:7px;border-radius:4px;font-weight:800;white-space:nowrap}
-.bk{background:#fee500;color:#191919}
+/* 상담 버튼 통일 : 채널톡 문의 = 파랑 + 말풍선, 전화 = 흰색 + 파란 전화 아이콘 */
+.bc,.bt,.bw,.bo{display:inline-flex;align-items:center;justify-content:center;gap:7px;border-radius:4px;font-weight:800;white-space:nowrap}
+.bc{background:var(--p);color:#fff}
 .bt{background:#fff;color:var(--p);box-shadow:inset 0 0 0 1px #c5d3ea}
-.ico-kb{flex:none;width:20px;height:20px}
+.bc i,.bt i{font-size:1.25em}
 .top .cta{font-size:13px;padding:9px 12px}
-.top .cta .ico-kb{width:18px;height:18px}
 .top .cta.bt{display:none}
 .burger{width:40px;height:40px;border:0;background:none;display:grid;place-content:center;gap:5px;cursor:pointer}
 .burger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px}
@@ -54,24 +54,47 @@ img{display:block;max-width:100%}
 .notice b{color:var(--ink)}
 
 /* ① 첫 화면 */
+/* 첫 화면 = KPMG 첫 배너 실측값 그대로 (kpmg.com/kr 2026-11-10 측정)
+   · 휴대폰 : 사진 360px 위 + 아래 진한 파랑(#00338D) 칸, 안쪽 여백 24/16, 제목 40/48, 부제 20/28
+   · 태블릿(768~) : 배너 452px, 왼쪽 465px 파랑 덮개(88%, 48%까지 진하고 끝으로 투명), 여백 24, 제목 32/44
+   · PC(1024~) : 배너 476px(1366~ 540px), 덮개 696px, 여백 32(1366~ 48), 글 폭 464, 제목 48/56, 부제 24/32
+   · 버튼 : 흰 바탕 둥근 버튼 높이 48, 글자 16 (KPMG 파랑 #1E49E2) */
 .kv{position:relative;text-align:center;background:#fff}
-.kv-hero{padding-top:40px}
-.kv-fig{margin:28px 0 0;overflow:hidden;border-radius:4px}
-/* 휴대폰·태블릿 : 사람 기준(아래 가운데)으로 1.5배 확대해 위쪽 하늘·양옆 빈 곳을 잘라냄 */
-.kv-fig img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 100%;border-radius:4px;scale:1.5;transform-origin:50% 100%}
-.kv-lead{display:inline-block;font-size:14px;font-weight:700;color:var(--p);background:#fff;border:1px solid #c5d3ea;border-radius:4px;padding:6px 14px}
-.kv h1{font-size:34px;line-height:1.32;font-weight:700;letter-spacing:-.03em;margin:18px 0 12px}
-.kv h1 em{font-style:normal;color:var(--p)}
-.kv-sub{font-size:16px;color:var(--sub)}
-.kv-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:24px}
-.kv-btns a{height:52px;font-size:15px}
-.stats{position:relative;z-index:2;display:grid;grid-template-columns:repeat(2,1fr);background:#fff;border:1px solid var(--line);border-radius:4px;box-shadow:0 10px 28px rgba(30,60,140,.08);margin:16px 0 0;padding:0}
+.kv-hero{position:relative;overflow:hidden;background:#00338d;color:#fff}
+.kv-bg{display:block;width:100%;height:360px;object-fit:cover;object-position:50% 50%}
+.kv-box{position:relative}
+.kv-in{padding:24px 16px 72px;background:#00338d;text-align:left} /* 아래 48px는 숫자 상자가 올라와 덮는 자리 */
+.kv h1{margin:0 0 32px;font-size:36px;line-height:48px;font-weight:800;letter-spacing:-.03em;color:#fff}
+.kv-sub{font-size:20px;line-height:28px;font-weight:600}
+.kv-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:32px}
+.kv-btns a{height:48px;padding:12px 10px;border-radius:32px;font-size:16px;line-height:24px;font-weight:600;letter-spacing:.44px}
+/* 파란 배너 위 버튼 : 채널톡 = 흰 바탕 KPMG 파랑 글자, 전화 = 흰 테두리 */
+.bw{background:#fff;color:#1e49e2}
+.bo{background:transparent;color:#fff;box-shadow:inset 0 0 0 1px #fff}
+@media (min-width:768px){
+  .kv-hero{height:452px}
+  .kv-bg{position:absolute;inset:0;height:100%}
+  .kv-box{position:absolute;z-index:2;inset:0;max-width:1366px;margin:0 auto}
+  /* 파랑 덮개는 배너 전체에 한 장으로 (두 장을 이어 붙이면 이음새에 세로선이 생김). 왼쪽 260px까지 진하고 560px에서 사라짐 */
+  .kv-hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(0,51,141,.92) 0,rgba(0,51,141,.92) 260px,rgba(0,51,141,0) 560px)}
+  .kv-in{display:grid;align-items:center;width:465px;height:100%;padding:24px 24px 64px;background:none}
+  .kv-txt{max-width:310px}
+  .kv h1{margin-bottom:24px;font-size:32px;line-height:44px}
+
+  .kv-btns{display:flex;flex-wrap:wrap;gap:12px}
+  .kv-btns a{padding:12px 24px}
+}
+.stats{position:relative;z-index:2;display:grid;grid-template-columns:repeat(2,1fr);background:#fff;border:1px solid var(--line);border-radius:4px;box-shadow:0 10px 28px rgba(30,60,140,.08);margin:-48px 0 0;padding:0} /* 숫자 상자 : 첫 배너 아래쪽에 살짝 걸쳐 덮이게 */
 .stats div{padding:18px 6px}
 .stats div:nth-child(even){border-left:1px solid var(--line)}
 .stats div:nth-child(n+3){border-top:1px solid var(--line)}
 .stats dt{font-size:12px;color:var(--sub);font-weight:600}
 .stats dd{font-size:24px;font-weight:700;color:var(--p);letter-spacing:-.03em;margin-top:4px}
 .stats dd span{font-size:13px;font-weight:600;margin-left:2px}
+/* 누적 상담 : 휴대폰은 15만명+, 태블릿·PC는 150,000명+ */
+.stats dd i{font-style:normal}
+.stats dd .n-pc{display:none}
+@media (min-width:768px){.stats dd .n-pc{display:inline}.stats dd .n-mo{display:none}}
 .kv-note{font-size:11px;color:#98a3b8;margin:12px 0 0;padding-bottom:56px}
 
 /* ② 특징 5가지 */
@@ -123,25 +146,16 @@ img{display:block;max-width:100%}
 .plan.on ul{border-color:rgba(255,255,255,.2)}
 .plan.on li i{color:#fff}
 
-/* ⑤ 진행 절차 */
-.guide{display:grid;gap:20px}
-.guide-photo img{width:100%;aspect-ratio:16/11;object-fit:cover;border-radius:4px}
-.gsteps{list-style:none;display:grid;gap:10px}
-.gstep{display:flex;gap:14px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:4px;padding:16px 18px}
-.gstep em{flex:none;width:34px;height:34px;border-radius:50%;background:#e6efff;color:var(--p);font-style:normal;font-weight:900;display:grid;place-items:center}
-.gstep b{display:block;font-size:17px}
-.gstep span{font-size:14px;color:var(--sub)}
-.gstep.on{background:var(--p);border-color:var(--p);color:#fff}
-.gstep.on em{background:#fff;color:var(--p)}
-.gstep.on span{color:#dbe6ff}
-.usp{display:flex;flex-direction:column;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:4px;padding:20px;margin-top:20px;text-align:center}
-.usp p{font-size:15px;font-weight:700}
-.usp a{font-size:14px;font-weight:700;color:var(--p)}
 
 /* ⑥ 이용 기록 */
-.rev{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 20px 18px;scrollbar-width:none}
+/* 이용 기록 : 카드 12장이 옆으로 천천히 흘러감 (마우스 올리면 멈춤). JS가 카드를 한 벌 더 붙여 끊김 없이 이어짐 */
+.rev{overflow:hidden;padding:14px 0 30px}
+.rev-track{display:flex;gap:14px;width:max-content;animation:rev-flow 70s linear infinite}
+.rev:hover .rev-track{animation-play-state:paused}
+@keyframes rev-flow{to{transform:translateX(calc(-50% - 7px))}}
+@media (prefers-reduced-motion:reduce){.rev{overflow-x:auto;padding:4px 20px 18px}.rev-track{animation:none}}
 .rev::-webkit-scrollbar{display:none}
-.rcard{flex:none;width:250px;scroll-snap-align:center;background:#fff;border:1px solid var(--line);border-radius:4px;padding:22px;box-shadow:0 10px 28px rgba(30,60,140,.07)}
+.rcard{flex:none;width:250px;background:#fff;border:1px solid var(--line);border-radius:4px;padding:22px;box-shadow:0 8px 22px rgba(30,60,140,.10)}
 .rcard .tag{display:inline-flex;gap:5px;align-items:center;font-size:12px;font-weight:800;color:var(--p);background:#e6efff;border-radius:4px;padding:4px 8px}
 .rcard .num{font-size:34px;font-weight:900;letter-spacing:-.03em;margin:14px 0 2px}
 .rcard .num small{font-size:16px;margin-left:2px}
@@ -153,19 +167,13 @@ img{display:block;max-width:100%}
 .rnote{font-size:12px;color:#98a3b8;text-align:center}
 
 /* ⑦ 등록·인증 + 사칭 주의 */
-.certs{display:grid;gap:12px}
-.cert{display:flex;gap:16px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:4px;padding:14px}
-.cert img{flex:none;width:76px;height:100px;object-fit:cover;border-radius:4px;border:1px solid var(--line)}
-.cert h3{display:flex;align-items:center;gap:6px;font-size:16px;font-weight:800}
-.cert h3 i{color:var(--p)}
-.cert p{font-size:13px;color:var(--sub);margin-top:4px}
-.warn{display:flex;gap:14px;background:#fff4f4;border:1px solid #f6d0d0;border-radius:4px;padding:20px;margin-top:20px}
-.warn i{flex:none;font-size:28px;color:#d63a3a}
-.warn h3{font-size:17px;font-weight:800;color:#c02f2f;margin-bottom:6px}
-.warn p{font-size:14px;color:#6b4a4a}
+/* 사칭 피해 예방 안내 : 빨간 경고 대신 차분한 회색 안내 상자 */
+.warn{background:#f7f9fc;border:1px solid var(--line);border-radius:4px;padding:22px 24px;margin-top:20px}
+.warn h3 i{font-size:18px;color:var(--sub)}
+.warn h3{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:800;color:var(--ink);margin-bottom:8px}
+.warn p{font-size:14px;line-height:1.7;color:var(--sub)}
 
 /* ⑧ 연혁 */
-.hist{background:#0f2257;color:#fff}
 .hist-gap{height:48px}
 .hist .hline{max-width:1000px;margin:0 auto}
 .hist .intro h2{margin:0 0 12px}
@@ -193,12 +201,13 @@ details p{position:relative;margin-top:14px;padding:16px 18px 16px 54px;backgrou
 details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20px;font-weight:900;color:#8a97b0}
 
 /* ⑩ 마무리 띠 */
-.band{background:#102252;color:#fff;text-align:center}
+/* 마무리 띠 → 하단 정보로 끊김 없이 이어지게 : 위는 남색, 아래로 갈수록 하단과 같은 색 */
+.band{background:linear-gradient(180deg,#14296b 0%,#0e1d4a 60%,#08132e 100%);color:#fff;text-align:center}
 .band h2{font-size:27px;line-height:1.4;font-weight:700}
+.band-sub{margin-top:12px;font-size:16px;line-height:1.6;color:rgba(255,255,255,.78)}
 .bbtns{display:grid;gap:10px;max-width:420px;margin:28px auto 0}
 .bbtns a{display:flex;align-items:center;justify-content:center;gap:8px;height:58px;border-radius:4px;font-size:17px;font-weight:800}
 .bbtns i{font-size:22px}
-.bbtns .ico-kb{width:22px;height:22px}
 
 /* 푸터 */
 .legal{background:#08132e;color:#a7b4cc;font-size:13px;padding:44px 0 110px;line-height:1.75}
@@ -211,8 +220,9 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
 .fab{position:fixed;right:16px;bottom:18px;z-index:30;display:grid;gap:10px;justify-items:end}
 .fab a{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-size:27px;box-shadow:0 10px 24px rgba(0,0,0,.2)}
 .fab .t{background:#fff;color:var(--p);border:1px solid var(--line)}
-.fab .k{background:#fee500;color:#191919}
-.fab .k .ico-kb{width:30px;height:30px}
+.fab .c{background:var(--p);color:#fff}
+.fab{transition:opacity .25s}
+.fab.off{opacity:0;pointer-events:none} /* 첫 화면 상담 버튼이 보이는 동안은 숨김 (겹침 방지) */
 
 .reveal{opacity:0;transform:translateY(20px);transition:.7s cubic-bezier(.2,.7,.2,1)}
 .reveal.on{opacity:1;transform:none}
@@ -224,7 +234,8 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
   .head{margin-bottom:56px}
   .head h2{font-size:42px}
   .pill{font-size:15px;padding:8px 18px}
-  .top .wrap{height:76px}
+  /* 상단 메뉴 폭 = 첫 배너 글자 범위 (가운데 1366px, 양옆 여백 32 / 1366px 이상 48) → 로고 왼쪽 끝이 배너 제목과 나란히 */
+  .top .wrap{height:76px;max-width:1366px;padding:0 32px}
   .top .logo{height:38px;margin-right:0}
   .gnb{display:flex;gap:36px;margin:0 auto 0 56px}
   .gnb a{font-size:16px;font-weight:700}
@@ -234,17 +245,15 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
   .burger{display:none}
   .notice{font-size:15px}
 
-  .kv-hero{padding-top:72px}
-  .kv-fig{margin-top:44px}
-  .kv-fig img{aspect-ratio:1672/706;scale:none}
-  .kv h1{font-size:54px;margin:22px 0 14px}
-  .kv h1 br:nth-of-type(2){display:none}
-  .kv-sub{font-size:20px}
-  .kv-btns{display:flex;justify-content:center;gap:12px;margin-top:32px}
-  .kv-btns a{height:56px;min-width:200px;padding:0 28px;font-size:17px}
-  .kv-btns .ico-kb{width:22px;height:22px}
-  .kv-btns i{font-size:21px}
-  .stats{grid-template-columns:repeat(4,1fr);margin:20px 0 0;text-align:center}
+  /* PC : KPMG 실측 (배너 476 · 덮개 696 · 여백 32 · 글 폭 464 · 제목 48/56 · 부제 24/32) */
+  .kv-hero{height:476px}
+  .kv-in{width:696px;padding:32px 32px 104px}
+  /* PC : 글 상자 왼쪽 끝(화면 가운데 1366px 기준) + 400px까지 진하고, +820px에서 사라짐 (KPMG보다 약간 진하고 오른쪽으로) */
+  .kv-hero::before{background:linear-gradient(90deg,rgba(0,51,141,.92) 0,rgba(0,51,141,.92) calc(max(0px,(100% - 1366px) / 2) + 400px),rgba(0,51,141,0) calc(max(0px,(100% - 1366px) / 2) + 820px))}
+  .kv-txt{max-width:464px}
+  .kv h1{margin-bottom:24px;font-size:48px;line-height:56px}
+  .kv-sub{font-size:24px;line-height:32px}
+  .stats{grid-template-columns:repeat(4,1fr);margin:-72px 0 0;text-align:center}
   .stats div{padding:30px 10px}
   .stats div+div{border-left:1px solid var(--line)}
   .stats div:nth-child(n+3){border-top:0}
@@ -279,21 +288,10 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
   .plan{padding:40px 36px}
   .plan-amt b{font-size:52px}
 
-  .guide{grid-template-columns:1.1fr 1fr;gap:48px;align-items:center}
-  .guide-photo img{aspect-ratio:4/3.4}
-  .gstep{padding:22px 24px}
-  .gstep b{font-size:19px}
-  .usp{flex-direction:row;justify-content:space-between;padding:24px 32px;margin-top:32px}
-  .usp p{font-size:17px}
 
-  .rev{justify-content:center;flex-wrap:wrap;overflow:visible;padding:4px 0 24px}
+  .rev{padding:14px 0 34px}
   .rcard{width:340px;padding:28px}
 
-  .certs{grid-template-columns:repeat(3,1fr);gap:20px}
-  .cert{flex-direction:column;text-align:center;padding:28px 22px}
-  .cert img{width:150px;height:200px}
-  .cert h3{justify-content:center;font-size:18px}
-  .cert p{font-size:15px}
   .warn{padding:28px 32px;margin-top:32px}
 
   .hist-photo img{aspect-ratio:16/6}
@@ -304,6 +302,7 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
   .hline b{font-size:30px}
 
   .band h2{font-size:42px}
+  .band-sub{margin-top:14px;font-size:19px}
   .bbtns{grid-template-columns:1fr 1fr;max-width:600px;margin-top:40px}
   .bbtns a{height:66px;font-size:19px}
   .legal{font-size:14px;padding:60px 0 50px}
@@ -315,77 +314,186 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
 /* 수상·연혁 */
 .aw{display:grid;gap:36px}
 .aw-main{text-align:center}
-.aw-medal{width:130px;height:130px;object-fit:contain;margin:0 auto 18px}
 .hist .aw h2{font-size:26px;line-height:1.35;margin:0 0 8px}
 .aw h2 em{font-style:normal;color:#e3c169}
-.aw-cat{font-size:15px;color:#c9d6f2}
 .aw .aw-org{margin-top:26px;padding-top:22px;border-top:1px solid rgba(255,255,255,.15)}
-.aw-hist h3{font-size:15px;font-weight:800;color:#e3c169;padding-bottom:12px;border-bottom:2px solid #e3c169}
-.aw-hist ol{list-style:none;padding:0;margin:0}
-.aw-hist li{display:flex;gap:20px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.15)}
-.aw-hist b{flex:none;width:52px;font-size:18px;font-weight:900;color:#fff}
-.aw-hist p{font-size:16px;font-weight:600;color:#e6ecfa}
-.aw-hist small{display:block;font-size:13px;font-weight:500;color:#9fb0d4;margin-top:3px}
 @media (min-width:1024px){
   .aw{grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1100px;margin:0 auto}
-  .aw-medal{width:160px;height:160px}
   .hist .aw h2{font-size:36px}
-  .aw-cat{font-size:17px}
   .aw .aw-org{flex-direction:column;gap:14px;max-width:none;padding:22px 0 0}
   .aw .org-g+.org-g{padding-left:0;border-left:0}
   .aw .org-g{gap:14px 18px;flex-wrap:wrap}
   .aw .aw-org img{height:22px}
   .aw .aw-org .o-kpba{height:36px}
   .aw .aw-org .o-kcsb{height:26px}
-  .aw-hist h3{font-size:17px}
-  .aw-hist li{padding:22px 0;gap:28px}
-  .aw-hist b{width:64px;font-size:22px}
-  .aw-hist p{font-size:18px}
 }
 
-/* 수상·인증 */
-.awd{text-align:center}
-.awd h2{font-size:28px;line-height:1.3;color:#e8c977;margin:0 0 12px}
-.awd .aw-cat{font-size:16px;font-weight:700;color:#fff;margin-bottom:20px}
-.aw-who{display:inline-grid;gap:6px;margin:0 0 22px;text-align:left}
-.aw-who div{display:flex;gap:16px;font-size:15px}
-.aw-who dt{width:64px;color:#a9bbdc}
-.aw-who dd{font-weight:700;margin:0}
-.aw-msg{font-size:15px;line-height:1.8;color:#dbe3f5;padding:20px 0;border-top:1px solid rgba(227,193,105,.35);border-bottom:1px solid rgba(227,193,105,.35);margin-bottom:28px}
-.aw-docs{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 28px}
-.aw-docs li{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12px;color:#dbe3f5}
-.aw-docs img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:4px;border:1px solid rgba(255,255,255,.25);background:#fff}
-.awd .aw-org{margin-top:0}
-.awd + .aw-hist{max-width:760px;margin:56px auto 0}
+
+/* ───── 시안2에서 그대로 옮김 : ⑤ 네 단계 · 소비자 만족 브랜드 1위 (스타일·움직임 동일) ───── */
+:root{--p50:#eef3ff;--p100:#dbe5fd;--g800:#333c4b;--g600:#6b7684}
+.steps ol,.certs{list-style:none}
+.pc{color:var(--p)}
+.h2c{text-align:center;font-size:20px;line-height:1.35;font-weight:700;color:var(--g800)}
+.steps{max-width:1440px;margin:40px auto;padding:0 20px;text-align:center}
+.steps .sub{max-width:960px;margin:8px auto 0;font-size:16px;line-height:1.7;color:var(--g600)}
+/* 잇는 선 : 첫 원 가운데 ~ 마지막 원 가운데, 원 높이의 정가운데 (--sg = 칸 사이 간격, --cs = 원 크기) */
+.steps ol{--sg:16px;--cs:68px;position:relative;display:grid;grid-template-columns:repeat(2,1fr);gap:32px var(--sg);max-width:1200px;margin:40px auto 0}
+.steps ol::before{content:"";display:none;position:absolute;top:calc(var(--cs) / 2 - .5px);left:calc((100% - 3 * var(--sg)) / 8);right:calc((100% - 3 * var(--sg)) / 8);border-top:1px solid var(--p100)}
+.steps li{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px}
+.steps .circ{position:relative;z-index:1;display:grid;place-items:center;width:var(--cs);height:var(--cs);border-radius:9999px;background:var(--p50);color:var(--p);font-size:40px}
+.steps li span{font-size:16px;line-height:1.5;color:var(--g600)}
+.steps li strong{font-size:20px;line-height:1.5;font-weight:700;color:var(--g800)}
+.wide{max-width:1440px;margin:60px auto;padding:0 20px}
+.wide-box{display:none}
+.wide-m{display:flex;flex-direction:column;align-items:center;text-align:center}
+.wide-m h2{margin-bottom:8px;font-size:28px;line-height:1.4;font-weight:700;color:var(--g800)}
+.wide-m p{margin-bottom:40px;font-size:14px;line-height:1.6;color:var(--g800)}
+.wide-m-img{width:100%;margin-bottom:22px;overflow:hidden;border-radius:28px}
+.wide-m-img img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:0% 50%}
+.certs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;width:100%;max-width:360px;margin-top:32px;text-align:center}
+.certs li{min-width:0}
+.certs img{display:block;width:100%;aspect-ratio:170/237;object-fit:cover;padding:5px;border-radius:4px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+.certs span{display:block;margin-top:10px;font-size:13px;line-height:1.4;font-weight:600;letter-spacing:-.03em;white-space:nowrap;color:var(--g800)}
+.h2c .pc{background:linear-gradient(var(--p100),var(--p100)) 0 100%/100% .38em no-repeat;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.mo .h2c .pc{background-size:0 .38em;transition:background-size .9s cubic-bezier(.6,0,.2,1) .25s}
+.mo .h2c.in .pc{background-size:100% .38em}
+.steps ol::after{content:"";display:none;position:absolute;top:calc(var(--cs) / 2 - 1px);left:calc((100% - 3 * var(--sg)) / 8);right:calc((100% - 3 * var(--sg)) / 8);border-top:2px solid var(--p);transform-origin:0 50%}
+.mo .steps ol::after{display:block;transform:scaleX(0);transition:transform 1.6s linear}
+.mo .steps ol.in::after{transform:none}
+.mo .steps .circ{transition:background .35s,color .35s}
+.mo .steps ol.in .circ{background:var(--p);color:#fff}
+.mo .steps li:nth-child(1) .circ{transition-delay:.2s}
+.mo .steps li:nth-child(2) .circ{transition-delay:.6s}
+.mo .steps li:nth-child(3) .circ{transition-delay:1s}
+.mo .steps li:nth-child(4) .circ{transition-delay:1.4s}
+@media (max-width:767px){.mo .steps ol::after{display:none}}
+@media (min-width:768px){
+  .steps{margin:60px auto;padding:0 40px}
+  .wide{max-width:none;margin:240px auto 40px;padding:0 60px}
+  .wide-m{max-width:720px;margin:0 auto}
+  /* 큰 화면용 배너 (1360px 이상에서만 보임) : 상패는 왼쪽, 글자는 오른쪽 빈 바닥 위
+     사진 높이 964px 기준 사진 폭 1886px, 상패 오른쪽 끝 = 981px
+     --off : 배너가 좁으면 사진을 왼쪽으로 최대 170px 밀어 글자 자리를 확보
+     --pr  : 상패 오른쪽 끝 (아주 넓은 화면에서는 사진이 커지므로 52%) */
+  .wide-box{position:relative;height:964px;overflow:hidden;border-radius:48px;background:#c9c6c1;--off:clamp(-170px,calc(100% - 1401px),0px);--pr:calc(max(981px,52%) + var(--off))}
+  .wide-emb{position:absolute;top:0;left:var(--off);height:100%;width:auto;max-width:none;min-width:calc(100% - var(--off));object-fit:cover;object-position:0% 50%}
+  /* 글자 : 상패 오른쪽 끝에서 80px 띄움 (배너 오른쪽 끝과는 최소 40px) */
+  .wide-in{position:absolute;z-index:1;top:50%;left:min(calc(var(--pr) + 80px),calc(100% - 380px));width:340px;transform:translateY(-50%);text-align:left}
+  .wide-in h2{margin-bottom:12px;font-size:36px;line-height:1.4;font-weight:700;color:var(--g800)}
+  .wide-in p{margin-bottom:16px;font-size:18px;line-height:1.6;color:var(--g800)}
+  .steps ol{grid-template-columns:repeat(4,1fr)}
+  .steps ol::before{display:block}
+}
 @media (min-width:1024px){
-  .awd h2{font-size:48px}
-  .awd h2 br{display:none}
-  .awd .aw-cat{font-size:20px}
-  .aw-who div{font-size:17px}
-  .aw-msg{max-width:720px;margin:0 auto 36px;font-size:17px;padding:26px 0}
-  .aw-docs{max-width:640px;margin:0 auto 40px;gap:20px}
-  .aw-docs li{font-size:14px}
-  .awd .aw-org{flex-direction:row;max-width:900px;margin:0 auto}
-  .awd .org-g{flex-wrap:nowrap;gap:28px}
-  .awd + .aw-hist{margin-top:80px}
+  .h2c{font-size:32px}
+  .steps h2{font-size:36px}
+  .steps .sub{font-size:20px}
+  .steps ol{--sg:40px;--cs:92px;margin-top:60px;gap:40px}
+  .steps li span{font-size:20px}
+  .steps li strong{font-size:26px}
+}
+@media (min-width:1360px){
+  .wide-m{display:none}
+  .wide-box{display:block}
+}
+@media (min-width:1440px){
+  .steps{margin:80px auto 160px;padding:0 60px}
+}
+/* 첫 화면 배너 : 1366px 이상에서 덮개 안쪽 여백 48. 높이는 최소 540, 화면 폭의 34% (= 사진 원래 비율이라 위아래가 잘리지 않음), 최대 720 */
+@media (min-width:1366px){
+  .top .wrap{padding:0 48px}
+  .kv-hero{height:clamp(540px,34vw,720px)}
+  .kv-in{padding:48px 48px 120px}
 }
 /* 상단 메뉴의 전화 상담 버튼은 메뉴가 줄바꿈되지 않는 넓은 화면에서만 */
 @media (min-width:1280px){
   .top .cta.bt{display:inline-flex}
 }
+
+/* ═════ 움직임·반응 (페이지 전체)
+   · 누르는 것 : 마우스 올리면 색·그림자 변화, 누르면 살짝 눌림
+   · 나타나는 것 : 화면에 들어올 때 한 번 (.mo + .in / .on). 빛 번짐·반짝임은 쓰지 않음
+   · 숫자 : 0부터 올라감 (칸 넓이 고정이라 화면이 튀지 않음)
+   · '동작 줄이기'를 켠 기기는 .mo 가 안 붙어 움직임 없이 바로 보임 ═════ */
+
+/* ── 반응 : 버튼 ── */
+.bc,.bt,.bw,.bo,.fab a{transition:background .18s,box-shadow .18s,color .18s,transform .12s}
+.bc:hover{background:#1a43c0}
+.bt:hover{box-shadow:inset 0 0 0 1px var(--p);background:#f5f8ff}
+.bw:hover{background:#e8efff}
+.bo:hover{background:rgba(255,255,255,.12)}
+.bc:active,.bt:active,.bw:active,.bo:active{transform:scale(.97)}
+.fab a:hover{transform:scale(1.06)}
+.fab a:active{transform:scale(.95)}
+/* ── 반응 : 상단 메뉴 · 옆 메뉴 · 하단 링크 ── */
+.gnb a{position:relative;transition:color .15s}
+.gnb a::after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:2px;background:var(--p);transform:scaleX(0);transition:transform .2s}
+.gnb a:hover::after{transform:none}
+.drawer a{transition:color .15s,padding-left .15s}
+.drawer a:hover{color:var(--p);padding-left:10px}
+.legal a{transition:color .15s}
+.legal a:hover{color:#fff}
+/* ── 반응 : 카드 (특징 · 상품 · 이용 기록 · 증명서 · 네 단계) ── */
+.feat{transition:border-color .2s,box-shadow .2s}
+.feat i{transition:transform .25s}
+.feat:hover{border-color:#c9d7fb;box-shadow:0 14px 32px rgba(30,60,140,.12)}
+.feat:hover i{transform:scale(1.12)}
+.plan:hover{box-shadow:0 18px 40px rgba(29,78,216,.22)}
+.rcard{transition:transform .2s,box-shadow .2s}
+.rcard:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgba(30,60,140,.16)}
+.certs img{transition:transform .2s,box-shadow .2s}
+.certs li:hover img{transform:translateY(-3px);box-shadow:0 10px 22px rgba(0,0,0,.18)}
+.steps .circ{transition:transform .2s,background .35s,color .35s}
+.steps li:hover .circ{transform:scale(1.06)}
+/* ── 반응 : 자주 묻는 질문 ── */
+summary{transition:color .15s}
+summary:hover{color:var(--p)}
+
+/* ── 숫자 세기 : 칸 넓이 고정 ── */
+.cnt{display:inline-block;font-style:normal;text-align:right;font-variant-numeric:tabular-nums}
+
+/* ── 나타나기 : 첫 배너 (사진은 살짝 크게 시작해 제자리로, 글자는 차례로 또렷해짐) ── */
+@keyframes mo-settle{from{transform:scale(1.06)}}
+@keyframes mo-fade{from{opacity:0}}
+.mo .kv-bg{animation:mo-settle 1.8s cubic-bezier(.2,.6,.2,1) both}
+.mo .kv-txt>*{animation:mo-fade .7s ease both}
+.mo .kv-txt>:nth-child(2){animation-delay:.15s}
+.mo .kv-txt>:nth-child(3){animation-delay:.3s}
+/* ── 나타나기 : 섹션 제목 파란 글자에 형광펜 밑줄 ── */
+.head h2 em{background:linear-gradient(var(--p100),var(--p100)) 0 100%/100% .34em no-repeat;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.mo .head h2 em{background-size:0 .34em;transition:background-size .9s cubic-bezier(.6,0,.2,1) .3s}
+.mo .head.in h2 em{background-size:100% .34em}
+/* ── 나타나기 : 특징 5개가 위에서부터 차례로 ── */
+.mo .feats .feat{opacity:0;transition:opacity .5s,border-color .2s,box-shadow .2s}
+.mo .feats.on .feat{opacity:1}
+.mo .feats .feat:nth-child(2){transition-delay:.1s,0s,0s}
+.mo .feats .feat:nth-child(3){transition-delay:.2s,0s,0s}
+.mo .feats .feat:nth-child(4){transition-delay:.3s,0s,0s}
+.mo .feats .feat:nth-child(5){transition-delay:.4s,0s,0s}
+/* ── 나타나기 : 수상 사진이 살짝 크게 시작해 제자리로 ── */
+.mo .wide-emb,.mo .wide-m-img img{transform:scale(1.05);transition:transform 1.6s cubic-bezier(.2,.6,.2,1)}
+.mo .wide.in .wide-emb,.mo .wide.in .wide-m-img img{transform:none}
+/* ── 오른쪽 아래 전화 버튼 : 몇 초마다 전화가 울리듯 흔들림 ── */
+@keyframes mo-ring{0%,80%,100%{transform:none}83%{transform:rotate(-16deg)}86%{transform:rotate(14deg)}89%{transform:rotate(-10deg)}92%{transform:rotate(6deg)}95%{transform:none}}
+.mo .fab .t i{display:inline-block;animation:mo-ring 5s ease-in-out infinite}
+/* ── 자주 묻는 질문 : 답이 부드럽게 펼쳐짐 (지원 브라우저만) ── */
+@supports (interpolate-size:allow-keywords){
+  .mo{interpolate-size:allow-keywords}
+  .mo details::details-content{block-size:0;overflow:hidden;transition:block-size .3s ease,content-visibility .3s allow-discrete}
+  .mo details[open]::details-content{block-size:auto}
+}
 </style>
+<script>if('IntersectionObserver' in window&&matchMedia('(prefers-reduced-motion: no-preference)').matches)document.documentElement.classList.add('mo')</script>
 </head>
 <body>
-<!-- 카카오톡 말풍선 (노란 버튼 위 검은 말풍선) — 아래에서 <use href="#ico-kb"> 로 불러 씀 -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="ico-kb" viewBox="4 4.6 16 15"><path fill="#191919" d="M12 5.6c-3.9 0-7 2.45-7 5.5 0 1.95 1.3 3.67 3.27 4.64l-.66 2.44c-.06.22.19.4.38.27l2.9-1.93c.36.05.73.08 1.11.08 3.9 0 7-2.46 7-5.5s-3.1-5.5-7-5.5z"/></symbol></svg>
 
 <!-- 헤더 : 로고 · 메뉴 · 상담 신청 · 햄버거(휴대폰) -->
 <header class="top">
   <div class="wrap">
     <img class="logo" src="img/logo.png" alt="한국비상금협회">
     <nav class="gnb"><a href="#about">협회 소개</a><a href="#prod">상품 안내</a><a href="#step">진행 절차</a><a href="#review">이용 기록</a><a href="#faq">자주 묻는 질문</a></nav>
-    <a class="cta bk" data-kakao target="_blank" rel="noopener"><svg class="ico-kb" aria-hidden="true"><use href="#ico-kb"/></svg>카카오톡 상담</a>
-    <a class="cta bt" data-tel><i class="ph-bold ph-phone"></i>전화 상담</a>
+    <a class="cta bc" data-channel><i class="ph-fill ph-chat-circle"></i>채널톡 문의</a>
+    <a class="cta bt" data-tel><i class="ph-fill ph-phone"></i>전화 상담</a>
     <button class="burger" type="button" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
   </div>
 </header>
@@ -403,23 +511,22 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
 <!-- ① 첫 화면 -->
 <section class="kv">
   <div class="kv-hero">
-  <div class="wrap">
-    <p class="kv-lead">맞춤형 생활지원 서비스</p>
-    <h1>급하게 필요한 자금<br><em>365일 지원 받으세요</em></h1>
-    <p class="kv-sub">상황에 맞는 소액대출 상품을 안내해 드립니다</p>
-    <div class="kv-btns">
-      <a class="bk" data-kakao target="_blank" rel="noopener"><svg class="ico-kb" aria-hidden="true"><use href="#ico-kb"/></svg>카카오톡 상담</a>
-      <a class="bt" data-tel><i class="ph-bold ph-phone"></i>전화 상담 신청</a>
-    </div>
-    <figure class="kv-fig"><img src="img/한국 기관 캠퍼스의 전문적인 초상2.png" alt="한국비상금협회" fetchpriority="high"></figure>
-  </div>
+    <img class="kv-bg" src="img/현대적인-사무실-비즈니스-상담.jpg" alt="" fetchpriority="high">
+    <div class="kv-box"><div class="kv-in"><div class="kv-txt">
+      <h1>급하게 필요한 자금<br>365일 지원 받으세요</h1>
+      <p class="kv-sub">맞춤형 생활지원 서비스</p>
+      <div class="kv-btns">
+        <a class="bw" data-channel><i class="ph-fill ph-chat-circle"></i>채널톡 문의</a>
+        <a class="bo" data-tel><i class="ph-fill ph-phone"></i>전화 상담 신청</a>
+      </div>
+    </div></div></div>
   </div>
   <div class="wrap">
     <dl class="stats">
-      <div><dt>운영 기간</dt><dd>6<span>년+</span></dd></div>
-      <div><dt>누적 상담</dt><dd>15<span>만 명+</span></dd></div>
-      <div><dt>평균 처리</dt><dd>5<span>분</span></dd></div>
-      <div><dt>연중무휴</dt><dd>365<span>일</span></dd></div>
+      <div><dt>운영 기간</dt><dd><i class="cnt">6</i><span>년+</span></dd></div>
+      <div><dt>누적 상담</dt><dd><i class="n-pc"><i class="cnt">150,000</i><span>명+</span></i><i class="n-mo"><i class="cnt">15</i><span>만명+</span></i></dd></div>
+      <div><dt>평균 처리</dt><dd><i class="cnt">5</i><span>분</span></dd></div>
+      <div><dt>연중무휴</dt><dd><i class="cnt">365</i><span>일</span></dd></div>
     </dl>
     <p class="kv-note">*누적 상담은 【집계 시작 연도】부터 집계한 기준입니다.</p>
   </div>
@@ -433,7 +540,7 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
       <li class="feat"><i class="ph-duotone ph-device-mobile"></i><div><b>휴대폰 하나로 상담</b><span>본인 명의 휴대폰만 있으면 시작할 수 있습니다</span></div></li>
       <li class="feat"><i class="ph-duotone ph-shield-check"></i><div><b>신용점수 영향 없음</b><span>상담 단계에서는 신용조회를 하지 않습니다</span></div></li>
       <li class="feat"><i class="ph-duotone ph-check-circle"></i><div><b>기대출·저신용 상담 가능</b><span>기존 대출이 있어도 상담받을 수 있습니다</span></div></li>
-      <li class="feat"><i class="ph-duotone ph-file-x"></i><div><b>100% 비대면</b><span>방문과 서류 제출 없이 카카오톡으로 진행됩니다</span></div></li>
+      <li class="feat"><i class="ph-duotone ph-file-x"></i><div><b>100% 비대면</b><span>방문과 서류 제출 없이 채널톡으로 진행됩니다</span></div></li>
       <li class="feat"><i class="ph-duotone ph-clock"></i><div><b>365일 24시간</b><span>야간과 주말에도 상담해 드립니다</span></div></li>
     </ul>
   </div>
@@ -447,13 +554,13 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
     <div class="plans reveal">
       <article class="plan">
         <div class="plan-h"><i class="ph-duotone ph-device-mobile"></i><h3>모바일 생활자금</h3></div>
-        <p class="plan-amt">한도 최대<b>500<span>만원</span></b></p>
+        <p class="plan-amt">한도 최대<b><i class="cnt">200</i><span>만원</span></b></p>
         <p>본인 명의 휴대폰 사용자 대상</p>
         <ul><li><i class="ph-bold ph-check"></i>휴대폰 본인인증 후 진행</li><li><i class="ph-bold ph-check"></i>비대면 계약</li></ul>
       </article>
       <article class="plan on">
         <div class="plan-h"><i class="ph-duotone ph-credit-card"></i><h3>신용카드 생활자금</h3><small>큰 금액</small></div>
-        <p class="plan-amt">한도 최대<b>1,000<span>만원</span></b></p>
+        <p class="plan-amt">한도 최대<b><i class="cnt">5,000</i><span>만원</span></b></p>
         <p>신용카드 소지자 대상</p>
         <ul><li><i class="ph-bold ph-check"></i>카드 보유 확인 후 진행</li><li><i class="ph-bold ph-check"></i>비대면 계약</li></ul>
       </article>
@@ -462,64 +569,61 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
   </div>
 </section>
 
-<!-- ⑤ 진행 절차 -->
-<section class="sec" id="step">
-  <div class="wrap">
-    <div class="head reveal"><span class="pill">진행 절차</span><h2>상담부터 입금까지<br><em>네 단계</em>로 진행됩니다</h2></div>
-    <div class="guide reveal">
-      <div class="guide-photo"><img src="img/한국비상금협회 깃발과 푸른 하늘.png" alt="" loading="lazy"></div>
-      <ol class="gsteps">
-        <li class="gstep"><em>1</em><div><b>상담 신청</b><span>카카오톡 또는 전화</span></div></li>
-        <li class="gstep"><em>2</em><div><b>상황 확인</b><span>필요 금액과 조건 확인</span></div></li>
-        <li class="gstep"><em>3</em><div><b>상품 안내</b><span>이용 가능한 상품 안내</span></div></li>
-        <li class="gstep on"><em>4</em><div><b>입금 완료</b><span>진행 완료 후 5분 내 입금</span></div></li>
-      </ol>
-    </div>
-    <div class="usp reveal"><p>방문 · 서류 제출 없이 비대면으로 진행됩니다</p><a href="#faq">자주 묻는 질문 보기 →</a></div>
-  </div>
+<!-- ⑤ 진행 절차 (시안2 그대로) -->
+<section class="steps" id="step">
+  <h2 class="h2c"><span class="pc">상담부터 입금까지</span> 네 단계</h2>
+  <p class="sub">평균 처리 5분 · 365일 24시간 상담</p>
+  <ol>
+    <li><div class="circ"><i class="ph-bold ph-chat-circle-dots"></i></div><span>채널톡 또는 전화</span><strong>상담 신청</strong></li>
+    <li><div class="circ"><i class="ph-bold ph-list-checks"></i></div><span>필요 금액과 조건 확인</span><strong>상황 확인</strong></li>
+    <li><div class="circ"><i class="ph-bold ph-cards"></i></div><span>이용 가능한 상품 안내</span><strong>상품 안내</strong></li>
+    <li><div class="circ"><i class="ph-bold ph-wallet"></i></div><span>진행 완료 후 5분 내</span><strong>입금 완료</strong></li>
+  </ol>
 </section>
 
 <!-- ⑥ 이용 기록 (★ 예시 — 실제 기록으로 교체) -->
-<section class="sec alt" id="review">
+<section class="sec" id="review">
   <div class="wrap"><div class="head reveal"><span class="pill">이용 기록</span><h2>한국비상금협회는<br><em>꾸준히 이용하는 고객</em>이 가장 많습니다</h2></div></div>
-  <div class="rev reveal">
+  <div class="rev reveal"><div class="rev-track">
     <article class="rcard"><span class="tag"><i class="ph-bold ph-check"></i>재이용 고객</span><p class="num">8<small>회 이용</small></p><p class="sum">누적 이용 <b>1,960만원</b></p><p class="who"><b>직장인 김OO 님</b><span>첫 이용 2021.07</span></p></article>
     <article class="rcard"><span class="tag"><i class="ph-bold ph-check"></i>재이용 고객</span><p class="num">11<small>회 이용</small></p><p class="sum">누적 이용 <b>2,410만원</b></p><p class="who"><b>자영업자 이OO 님</b><span>첫 이용 2023.01</span></p></article>
     <article class="rcard"><span class="tag"><i class="ph-bold ph-check"></i>재이용 고객</span><p class="num">15<small>회 이용</small></p><p class="sum">누적 이용 <b>1,790만원</b></p><p class="who"><b>프리랜서 박OO 님</b><span>첫 이용 2022.08</span></p></article>
-  </div>
+    <article class="rcard"><span class="tag"><i class="ph-bold ph-check"></i>재이용 고객</span><p class="num">6<small>회 이용</small></p><p class="sum">누적 이용 <b>840만원</b></p><p class="who"><b>주부 최OO 님</b><span>첫 이용 2022.03</span></p></article>
+    <article class="rcard"><span class="tag"><i class="ph-bold ph-check"></i>재이용 고객</span><p class="num">12<small>회 이용</small></p><p class="sum">누적 이용 <b>3,120만원</b></p><p class="who"><b>직장인 정OO 님</b><span>첫 이용 2020.11</span></p></article>
+    <article class="rcard"><span class="tag"><i class="ph-bold ph-check"></i>재이용 고객</span><p class="num">4<small>회 이용</small></p><p class="sum">누적 이용 <b>520만원</b></p><p class="who"><b>사회초년생 강OO 님</b><span>첫 이용 2024.05</span></p></article>
+    <article class="rcard"><span class="tag"><i class="ph-bold ph-check"></i>재이용 고객</span><p class="num">9<small>회 이용</small></p><p class="sum">누적 이용 <b>4,350만원</b></p><p class="who"><b>자영업자 조OO 님</b><span>첫 이용 2021.12</span></p></article>
+    <article class="rcard"><span class="tag"><i class="ph-bold ph-check"></i>재이용 고객</span><p class="num">7<small>회 이용</small></p><p class="sum">누적 이용 <b>1,260만원</b></p><p class="who"><b>프리랜서 윤OO 님</b><span>첫 이용 2023.06</span></p></article>
+    <article class="rcard"><span class="tag"><i class="ph-bold ph-check"></i>재이용 고객</span><p class="num">13<small>회 이용</small></p><p class="sum">누적 이용 <b>2,880만원</b></p><p class="who"><b>직장인 장OO 님</b><span>첫 이용 2021.02</span></p></article>
+    <article class="rcard"><span class="tag"><i class="ph-bold ph-check"></i>재이용 고객</span><p class="num">5<small>회 이용</small></p><p class="sum">누적 이용 <b>690만원</b></p><p class="who"><b>주부 임OO 님</b><span>첫 이용 2024.01</span></p></article>
+    <article class="rcard"><span class="tag"><i class="ph-bold ph-check"></i>재이용 고객</span><p class="num">10<small>회 이용</small></p><p class="sum">누적 이용 <b>3,640만원</b></p><p class="who"><b>자영업자 한OO 님</b><span>첫 이용 2022.05</span></p></article>
+    <article class="rcard"><span class="tag"><i class="ph-bold ph-check"></i>재이용 고객</span><p class="num">6<small>회 이용</small></p><p class="sum">누적 이용 <b>1,140만원</b></p><p class="who"><b>직장인 오OO 님</b><span>첫 이용 2023.09</span></p></article>
+  </div></div>
   <p class="rnote">개인 사례이며 결과는 상황에 따라 다를 수 있습니다.</p>
 </section>
 
-<!-- ⑦ 수상·인증·연혁 -->
-<section class="sec hist" id="hist">
-  <div class="wrap">
-    <div id="about"></div>
-    <div class="awd reveal">
-      <img class="aw-medal" src="img/emblem.png" alt="2026 대한민국 소비자 만족 브랜드 1위 엠블럼">
-      <h2>2026 대한민국 <br>소비자 만족 브랜드 1위</h2>
-      <p class="aw-cat">금융서비스 (디지털 금융 플랫폼) 부문 수상</p>
-      <dl class="aw-who">
-        <div><dt>기업명</dt><dd>한국비상금협회</dd></div>
-        <div><dt>브랜드명</dt><dd>한국비상금협회</dd></div>
-      </dl>
-      <p class="aw-msg">6년 넘게 이어온 안정적인 운영과 이용자 만족도를 인정받아<br>2026 대한민국 소비자 만족 브랜드로 선정되었습니다.</p>
-      <ul class="aw-docs">
-        <li><img src="img/award.jpg" alt="소비자 만족 브랜드 1위 상패" loading="lazy"><span>수상 상패</span></li>
+<!-- ⑦ 소비자 만족 브랜드 1위 (시안2 그대로) -->
+<section class="wide" id="about">
+  <div class="wide-box">
+    <img class="wide-emb" src="img/수상2_web.jpg?v=2" alt="2026 대한민국 소비자 만족 브랜드 1위 상패" loading="lazy">
+    <div class="wide-in">
+      <h2>2026 대한민국<br>소비자 만족 브랜드 1위</h2>
+      <p>금융서비스 (디지털 금융 플랫폼) 부문 수상<br>6년 이상 운영 · 누적 상담 15만 명+</p>
+      <ul class="certs">
         <li><img src="img/사업자.jpg" alt="사업자등록증" loading="lazy"><span>사업자등록증</span></li>
         <li><img src="img/통신판매업.jpg" alt="통신판매업 신고증" loading="lazy"><span>통신판매업 신고증</span></li>
         <li><img src="img/배상책임.jpg" alt="배상책임보험 5억 가입증서" loading="lazy"><span>배상책임보험 5억</span></li>
       </ul>
-      <div class="aw-org"><div class="org-g"><img src="img/logo-kpba-d.png" alt="한국프리미엄브랜드진흥원" class="o-kpba"><img src="img/logo-kcsb-d.png" alt="대한민국 고객만족브랜드협회" class="o-kcsb"><img src="img/logo-enews-d.png" alt="이뉴스투데이"><img src="img/logo-daily-d.png" alt="데일리경제"><img src="img/logo-sisa.jpg" alt="시사타임"></div></div>
     </div>
-    <div class="aw-hist reveal">
-      <h3>연혁</h3>
-      <ol>
-        <li><b>2026</b><p>대한민국 소비자 만족 브랜드 1위<small>금융서비스 (디지털 금융 플랫폼) 부문 · 미주중앙일보 보도</small></p></li>
-        <li><b>2025</b><p>디지털데일리 서비스 소개 보도<small>365일 24시간 상담 체계 운영</small></p></li>
-        <li><b>2024</b><p>ICBA 브랜드혁신기업대상 수상<small>금융경제 부문 · AP신문 보도</small></p></li>
-        <li><b>2020</b><p>한국비상금협회 설립</p></li>
-      </ol>
-    </div>
+  </div>
+  <div class="wide-m">
+    <h2>2026 대한민국<br><span class="pc">소비자 만족</span><br><span class="pc">브랜드 1위</span></h2>
+    <p>금융서비스 (디지털 금융 플랫폼) 부문 수상<br>6년 이상 운영 · 누적 상담 15만 명+</p>
+    <div class="wide-m-img"><img src="img/수상2_web.jpg?v=2" alt="2026 대한민국 소비자 만족 브랜드 1위 상패" loading="lazy"></div>
+    <ul class="certs">
+      <li><img src="img/사업자.jpg" alt="사업자등록증" loading="lazy"><span>사업자등록증</span></li>
+      <li><img src="img/통신판매업.jpg" alt="통신판매업 신고증" loading="lazy"><span>통신판매업 신고증</span></li>
+      <li><img src="img/배상책임.jpg" alt="배상책임보험 5억 가입증서" loading="lazy"><span>배상책임보험 5억</span></li>
+    </ul>
   </div>
 </section>
 
@@ -534,19 +638,20 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
       <details><summary>개인정보는 안전한가요?</summary><p>진행을 정하기 전까지는 개인정보를 받지 않습니다. 진행할 때도 꼭 필요한 정보만 확인하며, 상담과 진행 외의 다른 용도로 쓰지 않습니다. 만일의 경우에 대비해 배상책임보험(5억 원)에 가입되어 있습니다.</p></details>
       <details><summary>시간이 얼마나 걸리나요?</summary><p>상담부터 진행 완료까지 <b>평균 5분</b>이고, 진행이 끝나면 5분 안에 입금됩니다. 문의가 몰리는 시간에는 조금 더 걸릴 수 있지만, 한도와 조건을 확인하는 데에는 오래 걸리지 않습니다.</p></details>
       <details><summary>준비해야 할 서류가 있나요?</summary><p>본인 명의 휴대폰 하나면 됩니다. 방문할 필요가 없고, 소득증빙·통장사본·재직증명서 같은 서류도 따로 내지 않습니다.</p></details>
-      <details><summary>주말이나 밤에도 상담할 수 있나요?</summary><p>네. 365일 24시간 카카오톡과 전화로 상담을 받습니다. 주말과 공휴일, 늦은 밤에도 같은 방식으로 진행됩니다.</p></details>
+      <details><summary>주말이나 밤에도 상담할 수 있나요?</summary><p>네. 365일 24시간 채널톡과 전화로 상담을 받습니다. 주말과 공휴일, 늦은 밤에도 같은 방식으로 진행됩니다.</p></details>
     </div>
-    <div class="warn reveal" style="max-width:760px;margin:32px auto 0"><i class="ph-duotone ph-warning"></i><div><h3>사칭 업체 주의</h3><p>한국비상금협회는 이 페이지의 상담 버튼과 대표번호 외의 채널을 운영하지 않습니다. 대출 전 입금을 요구하는 경우 응하면 안 됩니다.</p></div></div>
+    <div class="warn reveal" style="max-width:760px;margin:32px auto 0"><h3><i class="ph-bold ph-info"></i>사칭 피해 예방 안내</h3><p>한국비상금협회는 이 페이지의 상담 버튼과 대표번호 외의 채널을 운영하지 않습니다. 대출 전에 보증금이나 수수료 명목으로 입금을 요구하는 경우 사칭이므로 응하면 안 됩니다.</p></div>
   </div>
 </section>
 
 <!-- ⑩ 마무리 -->
 <section class="sec band">
   <div class="wrap">
-    <h2 class="reveal">이용 가능한 상품이 있는지<br>먼저 확인할 수 있습니다</h2>
+    <h2 class="reveal">내 한도는 얼마나 나올지 궁금하다면?</h2>
+    <p class="band-sub reveal">상담 무료 · 신용조회 없음 · 365일 24시간</p>
     <div class="bbtns reveal">
-      <a class="bk" data-kakao target="_blank" rel="noopener"><svg class="ico-kb" aria-hidden="true"><use href="#ico-kb"/></svg>카카오톡 상담</a>
-      <a class="bt" data-tel><i class="ph-bold ph-phone"></i>전화 상담 신청</a>
+      <a class="bc" data-channel><i class="ph-fill ph-chat-circle"></i>채널톡 문의</a>
+      <a class="bt" data-tel><i class="ph-fill ph-phone"></i>전화 상담 신청</a>
     </div>
   </div>
 </section>
@@ -563,16 +668,17 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
   </div>
 </footer>
 
-<div class="fab">
-  <a class="t" data-tel aria-label="전화 상담"><i class="ph-bold ph-phone"></i></a>
-  <a class="k" data-kakao target="_blank" rel="noopener" aria-label="카카오톡 상담"><svg class="ico-kb" aria-hidden="true"><use href="#ico-kb"/></svg></a>
+<div class="fab off">
+  <a class="t" data-tel aria-label="전화 상담"><i class="ph-fill ph-phone"></i></a>
+  <a class="c" data-channel aria-label="채널톡 문의"><i class="ph-fill ph-chat-circle"></i></a>
 </div>
 
 <script>
 (function(){
   // ★ 여기 두 줄만 바꾸면 모든 버튼이 따라 바뀝니다
-  var KAKAO='https://han.gl/EE2MC', TEL='1600-0000';
-  document.querySelectorAll('[data-kakao]').forEach(function(a){a.href=KAKAO});
+  //   CHANNEL = 채널톡 상담 링크 (받으면 '' 안에 넣기 — 비어 있으면 채널톡 문의 버튼은 눌러도 움직이지 않음)
+  var CHANNEL='', TEL='1600-0000';
+  if(CHANNEL)document.querySelectorAll('[data-channel]').forEach(function(a){a.href=CHANNEL;a.target='_blank';a.rel='noopener'});
   document.querySelectorAll('[data-tel]').forEach(function(a){a.href='tel:'+TEL});
   document.querySelectorAll('[data-tel-text]').forEach(function(s){s.textContent=TEL});
   // 메뉴 열고 닫기
@@ -587,6 +693,44 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
   // 스크롤하면 나타나기
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{threshold:.12});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+  // 동그라미 상담 버튼 : 첫 화면 상담 버튼이 화면에 보이는 동안은 숨김
+  var fab=document.querySelector('.fab');
+  new IntersectionObserver(function(es){fab.classList.toggle('off',es[0].isIntersecting)}).observe(document.querySelector('.kv-btns'));
+  // 이용 기록 : 카드를 한 벌 더 붙여 흐르는 줄이 끊기지 않게 ('동작 줄이기'면 붙이지 않고 옆으로 넘겨 보기)
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var tr=document.querySelector('.rev-track');
+    [].slice.call(tr.children).forEach(function(c){var d=c.cloneNode(true);d.setAttribute('aria-hidden','true');tr.appendChild(d)});
+  }
+  // 움직임 : 화면에 35% 들어오면 .in 을 붙여 한 번 재생
+  //   형광펜 밑줄(섹션 제목) · 네 단계 선 차오르기 · 수상 사진 · 숫자 세기(운영 기간 등, 상품 한도)
+  if(document.documentElement.classList.contains('mo')){
+    var count=function(el){
+      var to=+el.dataset.to,t0=0;
+      requestAnimationFrame(function f(t){
+        if(!t0)t0=t;
+        var p=Math.min((t-t0)/1200,1);
+        el.textContent=Math.round(to*(1-Math.pow(1-p,3))).toLocaleString('ko-KR');
+        if(p<1)requestAnimationFrame(f);
+      });
+    };
+    var io2=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(!e.isIntersecting)return;
+      e.target.classList.add('in');
+      e.target.querySelectorAll('.cnt[data-to]').forEach(count);
+      io2.unobserve(e.target);
+    })},{threshold:.35});
+    // 숫자 칸 넓이를 글꼴이 다 불러와진 뒤 원래 숫자 기준으로 고정하고 0부터 시작 (지금 화면 크기에서 숨겨진 숫자는 그대로 둠)
+    (document.fonts?document.fonts.ready:Promise.resolve()).then(function(){
+      document.querySelectorAll('.cnt').forEach(function(el){
+        var w=el.getBoundingClientRect().width;
+        if(!w)return;
+        el.style.minWidth=w+'px';
+        el.dataset.to=el.textContent.replace(/,/g,'');
+        el.textContent='0';
+      });
+      document.querySelectorAll('.h2c,.steps ol,.head,.stats,.plans,.wide').forEach(function(el){io2.observe(el)});
+    });
+  }
 })();
 </script>
 </body>
