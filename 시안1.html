@@ -43,8 +43,8 @@ img{display:block;max-width:100%}
 .burger{width:40px;height:40px;border:0;background:none;display:grid;place-content:center;gap:5px;cursor:pointer}
 .burger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px}
 .gnb{display:none}
-.drawer{position:fixed;inset:0 0 0 auto;width:min(300px,82vw);background:#fff;z-index:60;transform:translateX(100%);transition:.3s;padding:24px;box-shadow:-10px 0 30px rgba(0,0,0,.1)}
-.drawer.open{transform:none}
+.drawer{position:fixed;inset:0 0 0 auto;width:min(300px,82vw);background:#fff;z-index:60;transform:translateX(100%);transition:.3s;padding:24px}
+.drawer.open{transform:none;box-shadow:-10px 0 30px rgba(0,0,0,.1)}
 .drawer button{border:0;background:none;font-size:30px;line-height:1;cursor:pointer;display:block;margin:0 0 20px auto}
 .drawer a{display:flex;align-items:center;gap:12px;font-size:17px;font-weight:700;padding:16px 4px;border-bottom:1px solid var(--line)}
 .drawer a i{color:var(--p);font-size:22px}
@@ -57,8 +57,9 @@ img{display:block;max-width:100%}
 /* ① 첫 화면 */
 .kv{position:relative;text-align:center;background:#fff}
 .kv-hero{padding-top:40px}
-.kv-fig{margin:28px 0 0}
-.kv-fig img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 100%;border-radius:4px}
+.kv-fig{margin:28px 0 0;overflow:hidden;border-radius:4px}
+/* 휴대폰·태블릿 : 사람 기준(아래 가운데)으로 1.5배 확대해 위쪽 하늘·양옆 빈 곳을 잘라냄 */
+.kv-fig img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 100%;border-radius:4px;scale:1.5;transform-origin:50% 100%}
 .kv-lead{display:inline-block;font-size:14px;font-weight:700;color:var(--p);background:#fff;border:1px solid #c5d3ea;border-radius:4px;padding:6px 14px}
 .kv h1{font-size:34px;line-height:1.32;font-weight:700;letter-spacing:-.03em;margin:18px 0 12px}
 .kv h1 em{font-style:normal;color:var(--p)}
@@ -195,9 +196,7 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
 /* ⑩ 마무리 띠 */
 .band{background:#102252;color:#fff;text-align:center}
 .band h2{font-size:27px;line-height:1.4;font-weight:700}
-.bchips{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:22px 0 28px}
-.bchips li{font-size:14px;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:4px;padding:7px 12px}
-.bbtns{display:grid;gap:10px;max-width:420px;margin:0 auto}
+.bbtns{display:grid;gap:10px;max-width:420px;margin:28px auto 0}
 .bbtns a{display:flex;align-items:center;justify-content:center;gap:8px;height:58px;border-radius:4px;font-size:17px;font-weight:800}
 .bbtns i{font-size:22px}
 .bbtns .ico-kb{width:22px;height:22px}
@@ -238,7 +237,7 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
 
   .kv-hero{padding-top:72px}
   .kv-fig{margin-top:44px}
-  .kv-fig img{aspect-ratio:1672/706}
+  .kv-fig img{aspect-ratio:1672/706;scale:none}
   .kv h1{font-size:54px;margin:22px 0 14px}
   .kv h1 br:nth-of-type(2){display:none}
   .kv-sub{font-size:20px}
@@ -306,7 +305,7 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
   .hline b{font-size:30px}
 
   .band h2{font-size:42px}
-  .bbtns{grid-template-columns:1fr 1fr;max-width:600px}
+  .bbtns{grid-template-columns:1fr 1fr;max-width:600px;margin-top:40px}
   .bbtns a{height:66px;font-size:19px}
   .legal{font-size:14px;padding:60px 0 50px}
   .fab{right:28px;bottom:28px}
@@ -545,10 +544,7 @@ details p::before{content:"A";position:absolute;left:18px;top:14px;font-size:20p
 <!-- ⑩ 마무리 -->
 <section class="sec band">
   <div class="wrap">
-    <p class="reveal" style="font-size:15px;opacity:.8;margin-bottom:8px">2026 대한민국 소비자 만족 브랜드 1위 · 동종분야 최초 선정</p>
     <h2 class="reveal">이용 가능한 상품이 있는지<br>먼저 확인할 수 있습니다</h2>
-    <p class="reveal" style="margin-top:12px;opacity:.9">상담은 무료이며, 진행 여부는 직접 결정할 수 있습니다</p>
-    <ul class="bchips reveal"><li>상담 무료</li><li>24시간 상담</li><li>신용조회 없음</li></ul>
     <div class="bbtns reveal">
       <a class="bk" data-kakao target="_blank" rel="noopener"><svg class="ico-kb" aria-hidden="true"><use href="#ico-kb"/></svg>카카오톡 상담</a>
       <a class="bt" data-tel><i class="ph-bold ph-phone"></i>전화 상담 신청</a>

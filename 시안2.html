@@ -65,16 +65,20 @@ body.no-bar .topbar{display:none}
 .dim.open{opacity:1;pointer-events:auto}
 
 /* ① 배너 */
-.hero{padding:96px 20px 0}
-.hero-box{position:relative;height:652px;overflow:hidden;border-radius:28px;background:var(--g50)}
-.hero-img{position:absolute;top:0;left:0;width:100%;height:60%;object-fit:cover;object-position:50% 30%;-webkit-mask-image:linear-gradient(180deg,#000 50%,transparent 100%);mask-image:linear-gradient(180deg,#000 50%,transparent 100%)}
-.hero-ov{position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,transparent 45%,#fff 78%)}
-.hero-txt{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:40px;text-align:center}
-.hero h1{font-size:20px;line-height:1.3;font-weight:400;color:var(--g800)}
+/* 휴대폰·태블릿 : 사진 위, 글자·버튼 아래 (겹치지 않음) */
+.hero{padding:80px 20px 0}
+.hero-box{position:relative;overflow:hidden;border-radius:28px;background:var(--g50)}
+/* 사람을 크게 : 정사각 칸에 맞춘 뒤 아래(사람) 기준으로 1.55배 확대해 위쪽 하늘·양옆 빈 곳을 잘라냄 */
+.hero-img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:50% 100%;scale:1.55;transform-origin:50% 100%}
+.hero-ov{display:none}
+.hero-txt{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;padding:24px 16px 28px;text-align:center}
+.hero h1{font-size:28px;line-height:1.3;font-weight:400;letter-spacing:-.02em;color:var(--g800)}
 .hero h1 strong{font-weight:700}
-.hero p{margin-top:20px;font-size:16px;line-height:1.7;color:var(--g700)}
-.hero .btn-pair{flex-direction:column;align-items:center;margin-top:44px}
-.hero .btn-pair a{width:220px}
+.hero p{margin-top:12px;font-size:15px;line-height:1.6;color:var(--g700)}
+.hero .btn-pair{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;margin-top:24px}
+.hero .btn-pair a{gap:6px;padding:12px 6px;font-size:15px}
+.hero .btn-pair .ico-k{width:20px;height:20px}
+.hero .btn-pair i{font-size:18px}
 
 /* ② 안내 띠 */
 .notice{max-width:1440px;margin:0 auto;padding:20px 20px 0}
@@ -167,7 +171,6 @@ body.no-bar .topbar{display:none}
 .wide-m p{margin-bottom:40px;font-size:14px;line-height:1.6;color:var(--g800)}
 .wide-m-img{width:100%;margin-bottom:22px;overflow:hidden;border-radius:28px}
 .wide-m-img img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:0% 50%}
-.wide a.lk{font-size:14px;line-height:1.7;font-weight:700;color:var(--link);text-decoration:underline;text-underline-offset:4px}
 .certs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;width:100%;max-width:360px;margin-top:32px;text-align:center}
 .certs li{min-width:0}
 .certs img{display:block;width:100%;aspect-ratio:170/237;object-fit:cover;padding:5px;border-radius:4px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.12)}
@@ -230,7 +233,7 @@ body.no-bar .topbar{display:none}
 .ft-in{display:flex;flex-direction:column;gap:24px;max-width:1200px;margin:0 auto}
 .ft-l{display:flex;flex-direction:column;gap:24px}
 .ft-top{display:flex;flex-direction:column;gap:24px}
-.ft-logo{height:28px;width:auto}
+.ft-logo{align-self:flex-start;height:28px;width:auto}
 .ft-note{display:none}
 .ft-info{display:flex;flex-direction:column;gap:8px;font-size:12px;line-height:1.6;color:var(--g900)}
 .ft-info .ln{display:flex;flex-direction:column}
@@ -249,14 +252,55 @@ body.no-bar .topbar{display:none}
 .fab .fk{background:#fff}
 .fab .fk .ico-k{width:30px;height:30px}
 .fab .fp{background:var(--p);color:#fff;font-size:26px}
+.fab{transition:opacity .25s}
+.fab.off{opacity:0;pointer-events:none} /* 첫 화면 상담 버튼이 보이는 동안은 숨김 (겹침 방지) */
 
 /* 오른쪽 상담 창 (큰 화면에서 스크롤하면 나타남) */
 .aside{display:none}
+
+/* ───── 휴대폰 최적화 (767px 이하) ───── */
+@media (max-width:767px){
+  /* 그래프·대화 카드 : 빈 높이 없이 내용만큼 */
+  .art{min-height:0}
+  .art-txt{gap:10px;padding:28px 24px 4px}
+  .art h3{font-size:22px}
+  .art p{font-size:15px;line-height:1.6}
+  .art-img{min-height:0;padding:20px 0 28px}
+  .viz,.chat{position:relative;top:auto;left:auto;transform:none;margin:0 auto}
+  /* 상품 : 두 상품을 한 줄씩, 카드는 2칸씩 */
+  .prods .sub{margin-bottom:28px;font-size:14px}
+  .prods .sub .ln{display:block}
+  .prods .sub .dot,.prods .sub br{display:none}
+  .prods .sub strong{display:block;margin-top:6px}
+  .pcards{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .pcard{padding:24px 10px 14px;border-radius:16px}
+  .pc-ico{width:52px;height:52px;font-size:28px}
+  .pcard h3{margin-top:12px;font-size:16px;letter-spacing:-.02em}
+  .pc-prod{font-size:13px}
+  .pc-amt{margin:14px 0 16px}
+  .pc-amt>span{font-size:12px}
+  .pc-amt b{font-size:26px}
+  .pc-amt b small{font-size:14px}
+  .pc-more{width:100%;height:40px;padding:0 8px;font-size:13px}
+  /* 자주 묻는 질문 : 양옆 여백을 줄여 질문이 되도록 한 줄에 */
+  .faq{padding:40px 16px 56px}
+  .faq-box{gap:24px;padding:40px 12px 44px;border-radius:20px}
+  .faqs summary{gap:10px;padding:18px 16px;font-size:16px}
+  .faqs details p{gap:10px;margin:0 16px;padding:14px 0 18px;font-size:15px}
+  /* 동그라미 상담 버튼 : 화면 끝에 더 붙임 */
+  .fab{right:16px;bottom:calc(env(safe-area-inset-bottom) + 20px)}
+}
 
 @media (min-width:768px){
   :root{--bh:60px}
   .topbar{padding:0 64px;gap:16px}
   .hero{padding:96px 60px 0}
+  .hero-img{aspect-ratio:16/9;scale:1.35}
+  .hero-txt{padding:36px 40px 40px}
+  .hero h1{font-size:36px}
+  .hero p{font-size:17px}
+  .hero .btn-pair{display:flex;justify-content:center;width:auto}
+  .hero .btn-pair a{min-width:200px;padding:12px 24px;font-size:16px}
   .notice p,.m-notice p{font-size:14px;letter-spacing:-.01em}
   .limit{padding:120px 60px}
   .bq{padding:24px 32px}
@@ -276,7 +320,6 @@ body.no-bar .topbar{display:none}
   .wide-in{position:absolute;z-index:1;top:50%;left:min(calc(var(--pr) + 80px),calc(100% - 380px));width:340px;transform:translateY(-50%);text-align:left}
   .wide-in h2{margin-bottom:12px;font-size:36px;line-height:1.4;font-weight:700;color:var(--g800)}
   .wide-in p{margin-bottom:16px;font-size:18px;line-height:1.6;color:var(--g800)}
-  .wide a.lk{font-size:18px;line-height:1.8}
   .broch{padding:64px 20px}
   .steps ol{grid-template-columns:repeat(4,1fr)}
   .steps ol::before{display:block}
@@ -304,15 +347,17 @@ body.no-bar .topbar{display:none}
   .burger{display:none}
 
   .hero-box{height:600px}
-  .hero-img{left:auto;right:0;width:60%;height:100%;object-position:50% 100%;-webkit-mask-image:none;mask-image:none}
-  .hero-ov{background:linear-gradient(to top,#fff,var(--hero-tint));-webkit-mask-image:var(--hero-fade);mask-image:var(--hero-fade)}
+  .hero-img{position:absolute;top:0;left:auto;right:0;width:60%;height:100%;aspect-ratio:auto;scale:none;object-position:50% 100%;-webkit-mask-image:none;mask-image:none}
+  .hero-ov{display:block;position:absolute;inset:0;background:linear-gradient(to top,#fff,var(--hero-tint));-webkit-mask-image:var(--hero-fade);mask-image:var(--hero-fade)}
   /* 글자 오른쪽 끝(가운데에서 약 160px 왼쪽)은 완전히 덮고, 가운데 조금 왼쪽부터 오른쪽으로 400px 동안 사진이 나타남 */
   :root{--hero-fade:linear-gradient(90deg,#000 0,#000 calc(50% - 80px),rgba(0,0,0,.85) 50%,rgba(0,0,0,.62) calc(50% + 80px),rgba(0,0,0,.38) calc(50% + 160px),rgba(0,0,0,.16) calc(50% + 240px),rgba(0,0,0,.05) calc(50% + 290px),transparent calc(50% + 320px))}
-  .hero-txt{max-width:1200px;margin:0 auto;align-items:flex-start;justify-content:flex-start;padding:100px 60px;text-align:left}
-  .hero h1{font-size:40px;line-height:1.2}
-  .hero p{font-size:18px;line-height:1.6}
-  .hero .btn-pair{flex-direction:row;justify-content:flex-start}
-  .hero .btn-pair a{width:auto;min-width:180px}
+  .hero-txt{height:100%;max-width:1200px;margin:0 auto;align-items:flex-start;justify-content:flex-start;padding:100px 60px;text-align:left}
+  .hero h1{font-size:40px;line-height:1.2;letter-spacing:0}
+  .hero p{margin-top:20px;font-size:18px;line-height:1.6}
+  .hero .btn-pair{display:flex;flex-direction:row;justify-content:flex-start;width:auto;margin-top:44px}
+  .hero .btn-pair a{width:auto;min-width:180px;gap:8px;padding:12px 24px;font-size:16px}
+  .hero .btn-pair .ico-k{width:22px;height:22px}
+  .hero .btn-pair i{font-size:20px}
 
   .lbl{font-size:24px}
   .h2c{font-size:32px}
@@ -620,7 +665,7 @@ body.no-bar .topbar{display:none}
 <section class="prods" id="prod">
   <div class="prods-in">
     <h2 class="h2c">대상에 맞춘 <span class="pc">생활자금</span></h2>
-    <p class="sub">모바일 생활자금 최대 500만원 · 신용카드 생활자금 최대 1,000만원<br><strong>한도와 금리는 심사 결과에 따라 달라질 수 있습니다</strong></p>
+    <p class="sub"><span class="ln">모바일 생활자금 최대 500만원</span><span class="dot"> · </span><span class="ln">신용카드 생활자금 최대 1,000만원</span><br><strong>한도와 금리는 심사 결과에 따라 달라질 수 있습니다</strong></p>
     <div class="pcards">
       <a class="pcard" data-kakao target="_blank" rel="noopener"><div class="pc-ico"><i class="ph-duotone ph-briefcase"></i></div><h3>직장인·자영업자</h3><p class="pc-prod">신용카드 생활자금</p><p class="pc-amt"><span>한도 최대</span><b><span class="cnt">1,000</span><small>만원</small></b></p><span class="pc-more">상담하기<i class="ph-bold ph-caret-right"></i></span></a>
       <a class="pcard" data-kakao target="_blank" rel="noopener"><div class="pc-ico"><i class="ph-duotone ph-laptop"></i></div><h3>프리랜서</h3><p class="pc-prod">모바일 생활자금</p><p class="pc-amt"><span>한도 최대</span><b><span class="cnt">500</span><small>만원</small></b></p><span class="pc-more">상담하기<i class="ph-bold ph-caret-right"></i></span></a>
@@ -637,7 +682,6 @@ body.no-bar .topbar{display:none}
     <div class="wide-in">
       <h2>2026 대한민국<br>소비자 만족 브랜드 1위</h2>
       <p>금융서비스 (디지털 금융 플랫폼) 부문 수상<br>6년 이상 운영 · 누적 상담 15만 명+</p>
-      <a class="lk" data-kakao target="_blank" rel="noopener">카카오톡 상담 →</a>
       <ul class="certs">
         <li><img src="img/사업자.jpg" alt="사업자등록증" loading="lazy"><span>사업자등록증</span></li>
         <li><img src="img/통신판매업.jpg" alt="통신판매업 신고증" loading="lazy"><span>통신판매업 신고증</span></li>
@@ -649,7 +693,6 @@ body.no-bar .topbar{display:none}
     <h2>2026 대한민국<br><span class="pc">소비자 만족</span><br><span class="pc">브랜드 1위</span></h2>
     <p>금융서비스 (디지털 금융 플랫폼) 부문 수상<br>6년 이상 운영 · 누적 상담 15만 명+</p>
     <div class="wide-m-img"><img src="img/수상2_web.jpg?v=2" alt="2026 대한민국 소비자 만족 브랜드 1위 상패" loading="lazy"></div>
-    <a class="lk" data-kakao target="_blank" rel="noopener">카카오톡 상담 →</a>
     <ul class="certs">
       <li><img src="img/사업자.jpg" alt="사업자등록증" loading="lazy"><span>사업자등록증</span></li>
       <li><img src="img/통신판매업.jpg" alt="통신판매업 신고증" loading="lazy"><span>통신판매업 신고증</span></li>
@@ -681,9 +724,9 @@ body.no-bar .topbar{display:none}
 <!-- ⑧ 상담 안내 (휴대폰·태블릿에서만 보임) -->
 <section class="broch">
   <div class="broch-in">
-    <span class="badge">365일 24시간</span>
-    <h2><span>카카오톡으로</span><span>바로 상담</span></h2>
-    <p class="desc">상담 무료 · 신용조회 없음</p>
+    <span class="badge">국내 인증 업체</span>
+    <h2><span>정식 등록 업체에서</span><span>즉시 비대면 상담</span></h2>
+    <p class="desc">365일 24시간 · 상담 무료 · 신용조회 없음</p>
     <div class="cta-row">
       <a class="k" data-kakao target="_blank" rel="noopener"><svg class="ico-k" aria-hidden="true"><use href="#ico-k"/></svg>카카오톡 상담</a>
       <a class="t" data-tel><i class="ph-bold ph-phone"></i>전화 상담 신청</a>
@@ -752,7 +795,7 @@ body.no-bar .topbar{display:none}
   </div>
 </aside>
 
-<div class="fab">
+<div class="fab off">
   <a class="fk" data-kakao target="_blank" rel="noopener" aria-label="카카오톡 상담"><svg class="ico-k" aria-hidden="true"><use href="#ico-k"/></svg></a>
   <a class="fp" data-tel aria-label="전화 상담"><i class="ph-bold ph-phone"></i></a>
 </div>
@@ -776,6 +819,9 @@ body.no-bar .topbar{display:none}
   var as=document.querySelector('.aside'),hero=document.querySelector('.hero'),closed=false;
   as.querySelector('.as-x').onclick=function(){closed=true;as.classList.remove('show')};
   addEventListener('scroll',function(){as.classList.toggle('show',!closed&&hero.getBoundingClientRect().bottom<0)},{passive:true});
+  // 동그라미 상담 버튼 : 첫 화면 상담 버튼이 화면에 보이는 동안은 숨김
+  var fab=document.querySelector('.fab'),hb=document.querySelector('.hero .btn-pair');
+  if('IntersectionObserver' in window)new IntersectionObserver(function(es){fab.classList.toggle('off',es[0].isIntersecting)}).observe(hb);
   // 움직임 : 화면에 35% 들어오면 .in 을 붙여 한 번만 재생
   if(!document.documentElement.classList.contains('mo'))return;
   function count(el){
@@ -800,7 +846,7 @@ body.no-bar .topbar{display:none}
       el.dataset.to=el.textContent.replace(/,/g,'');
       el.textContent='0';
     });
-    document.querySelectorAll('.h2c,.bubbles,.viz,.chat,.steps ol,.pcards').forEach(function(el){io.observe(el)});
+    document.querySelectorAll('.h2c,.bubbles,.viz,.chat,.steps ol,.pcard').forEach(function(el){io.observe(el)});
   });
 })();
 </script>
