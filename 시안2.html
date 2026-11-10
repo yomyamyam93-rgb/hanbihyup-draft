@@ -19,12 +19,13 @@
   --p50:#eef3ff;        /* 단계 동그라미 바탕 */
   --p100:#dbe5fd;       /* 단계 잇는 선 */
   --p-light:#9cbcff;    /* 상단 띠 버튼 */
-  --hero-tint:#f3f7ff;  /* 배너 왼쪽 은은한 색 */
+  --hero-tint:#f3f7ff;  /* 첫 화면 바탕색 */
   --tint:#eaf0ff;--tint-line:#c2d3fb;--tint-bg:#f4f7fd;
   --deep:#0b1a3d;
   --warm:#fffaf0;--cool:#f5f8ff;--link:#3182f6;--err:#ff4d4f;
   --g900:#191e28;--g800:#333c4b;--g700:#4e5968;--g600:#6b7684;--g300:#d1d6db;--g200:#e5e8eb;--g100:#f2f4f6;--g50:#f9fafb;
   --bh:60px;            /* 상단 띠 높이 (닫으면 0) */
+  --ink:var(--g800);--sub:var(--g600);--line:#e3e9f3;--bg:#f4f7fc; /* 시안1에서 옮긴 이용 안내·상품 안내용 (글자색은 시안2 회색) */
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:calc(var(--bh) + 80px)}
@@ -65,16 +66,18 @@ body.no-bar .topbar{display:none}
 .dim.open{opacity:1;pointer-events:auto}
 
 /* ① 배너 */
-/* 휴대폰·태블릿 : 사진 위, 글자·버튼 아래 (겹치지 않음) */
-.hero{padding:80px 20px 0}
-.hero-box{position:relative;overflow:hidden;border-radius:28px;background:var(--g50)}
-/* 사람을 크게 : 정사각 칸에 맞춘 뒤 아래(사람) 기준으로 1.55배 확대해 위쪽 하늘·양옆 빈 곳을 잘라냄 */
-.hero-img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:50% 100%;scale:1.55;transform-origin:50% 100%}
-.hero-ov{display:none}
+/* 휴대폰·태블릿 : 대화 위, 글자·버튼 아래 / 큰 화면 : 글자 왼쪽, 대화 오른쪽 */
+.hero{max-width:1440px;margin:0 auto;padding:80px 20px 0} /* 큰 화면에서도 아래 안내 띠와 양끝을 맞춤 */
+.hero-box{position:relative;overflow:hidden;border-radius:28px;background:var(--hero-tint)}
+.hero-chat{padding:24px 20px 4px}
+/* 첫 화면 대화창 : 아래 '꾸준한 신뢰'의 대화창과 같은 모양 (자리만 글 흐름 안, 글자는 조금 크게) */
+.hero .chat{position:relative;top:auto;left:auto;width:100%;max-width:400px;margin:0 auto;transform:none}
+.hero .av{font-size:22px;line-height:1}
+.hero .chat .bb{max-width:230px;font-size:15px}
 .hero-txt{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;padding:24px 16px 28px;text-align:center}
 .hero h1{font-size:28px;line-height:1.3;font-weight:400;letter-spacing:-.02em;color:var(--g800)}
 .hero h1 strong{font-weight:700}
-.hero p{margin-top:12px;font-size:15px;line-height:1.6;color:var(--g700)}
+.hero-txt>p{margin-top:12px;font-size:15px;line-height:1.6;color:var(--g700)}
 .hero .btn-pair{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;margin-top:24px}
 .hero .btn-pair a{gap:6px;padding:12px 6px;font-size:15px}
 .hero .btn-pair .ico-k{width:20px;height:20px}
@@ -117,23 +120,24 @@ body.no-bar .topbar{display:none}
 .viz .v-leg{font-size:13px;font-weight:600;fill:var(--g600)}
 .viz .v-yr{font-size:13px;text-anchor:middle;fill:var(--g600)}
 .viz .v-tick{font-size:13px;text-anchor:end;fill:var(--g600)}
-/* 카카오톡 상담 대화 */
-.chat{position:absolute;top:50%;left:50%;width:min(340px,calc(100% - 40px));transform:translate(-50%,-50%);overflow:hidden;border-radius:20px;background:#b2c7da;box-shadow:0 12px 32px rgba(11,26,61,.14);text-align:left}
-.chat-hd{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid rgba(0,0,0,.06);font-size:15px;color:#191919}
+/* 상담 대화창 (첫 화면 · '꾸준한 신뢰' 공통) : 메신저 모양, 바탕 흰색 · 받은 말풍선 연회색 · 보낸 말풍선 파랑 */
+.chat{position:absolute;top:50%;left:50%;width:min(340px,calc(100% - 40px));transform:translate(-50%,-50%);overflow:hidden;border-radius:20px;background:#fff;box-shadow:0 12px 32px rgba(11,26,61,.10);text-align:left}
+.chat-hd{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--g100);font-size:15px;color:var(--g900)}
 .chat-hd b{flex:1;font-weight:700}
 .chat-hd i{font-size:18px}
 .chat-bd{display:flex;flex-direction:column;gap:12px;padding:14px 14px 20px}
-.chat .chat-day{align-self:center;border-radius:9999px;background:rgba(0,0,0,.16);padding:3px 10px;font-size:11px;line-height:1.5;letter-spacing:0;color:#fff}
+.chat .chat-day{align-self:center;border-radius:9999px;background:var(--g100);padding:3px 10px;font-size:11px;line-height:1.5;letter-spacing:0;color:var(--g600)}
 .msg{display:flex;align-items:flex-end;gap:6px}
 .msg.l{align-items:flex-start;gap:8px}
 .msg.r{justify-content:flex-end}
-.av{flex:none;display:grid;place-items:center;width:36px;height:36px;border-radius:14px;background:#fff}
+.av{flex:none;display:grid;place-items:center;width:36px;height:36px;border-radius:14px;background:var(--g100)}
 .av img{width:26px;height:26px}
-.mc em{display:block;margin-bottom:4px;font-style:normal;font-size:12px;color:#4a5562}
+.mc em{display:block;margin-bottom:4px;font-style:normal;font-size:12px;color:var(--g600)}
 .mc .row{display:flex;align-items:flex-end;gap:6px}
-.chat .bb{max-width:210px;border-radius:12px;background:#fff;padding:8px 11px;font-size:13px;line-height:1.5;letter-spacing:0;color:#191919}
-.chat .msg.r .bb{background:#fee500}
-.msg time{flex:none;font-size:10px;color:#556170}
+.chat .bb{max-width:210px;border-radius:12px;background:var(--g100);padding:8px 11px;font-size:13px;line-height:1.5;letter-spacing:0;color:var(--g900)}
+.chat .bb b{font-weight:700;color:var(--p)}
+.chat .msg.r .bb{background:var(--p);color:#fff}
+.msg time{flex:none;font-size:10px;color:var(--g600)}
 
 /* ④ 단계 4개 (휴대폰은 2칸×2줄, 태블릿 이상은 4칸 한 줄 + 잇는 선) */
 .steps{max-width:1440px;margin:40px auto;padding:0 20px;text-align:center}
@@ -296,10 +300,12 @@ body.no-bar .topbar{display:none}
   :root{--bh:60px}
   .topbar{padding:0 64px;gap:16px}
   .hero{padding:96px 60px 0}
-  .hero-img{aspect-ratio:16/9;scale:1.35}
+  .notice{padding:20px 60px 0} /* 첫 화면 상자와 양끝을 맞춤 */
+  .hero-chat{max-width:560px;margin:0 auto;padding:48px 40px 8px}
+  .hero .chat .bb{max-width:250px;font-size:16px}
   .hero-txt{padding:36px 40px 40px}
   .hero h1{font-size:36px}
-  .hero p{font-size:17px}
+  .hero-txt>p{font-size:17px}
   .hero .btn-pair{display:flex;justify-content:center;width:auto}
   .hero .btn-pair a{min-width:200px;padding:12px 24px;font-size:16px}
   .notice p,.m-notice p{font-size:14px;letter-spacing:-.01em}
@@ -348,13 +354,12 @@ body.no-bar .topbar{display:none}
   .burger{display:none}
 
   .hero-box{height:600px}
-  .hero-img{position:absolute;top:0;left:auto;right:0;width:60%;height:100%;aspect-ratio:auto;scale:none;object-position:50% 100%;-webkit-mask-image:none;mask-image:none}
-  .hero-ov{display:block;position:absolute;inset:0;background:linear-gradient(to top,#fff,var(--hero-tint));-webkit-mask-image:var(--hero-fade);mask-image:var(--hero-fade)}
-  /* 글자 오른쪽 끝(가운데에서 약 160px 왼쪽)은 완전히 덮고, 가운데 조금 왼쪽부터 오른쪽으로 400px 동안 사진이 나타남 */
-  :root{--hero-fade:linear-gradient(90deg,#000 0,#000 calc(50% - 80px),rgba(0,0,0,.85) 50%,rgba(0,0,0,.62) calc(50% + 80px),rgba(0,0,0,.38) calc(50% + 160px),rgba(0,0,0,.16) calc(50% + 240px),rgba(0,0,0,.05) calc(50% + 290px),transparent calc(50% + 320px))}
-  .hero-txt{height:100%;max-width:1200px;margin:0 auto;align-items:flex-start;justify-content:flex-start;padding:100px 60px;text-align:left}
+  /* 대화 : 오른쪽 세로 가운데. 오른쪽 끝을 글자 왼쪽 끝과 대칭으로 (가운데 1200px 안, 양옆 60px) */
+  .hero-chat{position:absolute;top:50%;right:max(60px,calc(50% - 540px));width:clamp(320px,calc(100% - 600px),420px);max-width:none;margin:0;padding:0;transform:translateY(-50%)}
+  .hero .chat{max-width:420px}
+  .hero-txt{height:100%;max-width:1200px;margin:0 auto;align-items:flex-start;justify-content:center;padding:0 60px;text-align:left}
   .hero h1{font-size:40px;line-height:1.2;letter-spacing:0}
-  .hero p{margin-top:20px;font-size:18px;line-height:1.6}
+  .hero-txt>p{margin-top:20px;font-size:18px;line-height:1.6}
   .hero .btn-pair{display:flex;flex-direction:row;justify-content:flex-start;width:auto;margin-top:44px}
   .hero .btn-pair a{width:auto;min-width:180px;gap:8px;padding:12px 24px;font-size:16px}
   .hero .btn-pair .ico-k{width:22px;height:22px}
@@ -379,7 +384,6 @@ body.no-bar .topbar{display:none}
   .prods-in{max-width:1420px;padding:0}
   .prods .h2c{line-height:56px;letter-spacing:-.96px}
   .prods .sub{margin-bottom:40px;font-size:18px;line-height:32px;letter-spacing:-.36px}
-  .pcards{grid-template-columns:repeat(4,minmax(0,340px));gap:20px}
   .pcard{max-width:none;padding:48px 20px 32px}
 
   .uses{padding:120px 0}
@@ -441,15 +445,10 @@ body.no-bar .topbar{display:none}
 }
 
 @media (min-width:1440px){
-  .notice{padding:20px 60px 0}
   .steps{margin:80px auto 160px;padding:0 60px}
   .aside{right:32px}
 }
 
-/* 좁은 컴퓨터 화면 : 글자가 가운데 가까이 와서 덮는 범위를 오른쪽으로 늘림 */
-@media (min-width:1024px) and (max-width:1334px){
-  :root{--hero-fade:linear-gradient(90deg,#000 0,#000 48%,rgba(0,0,0,.8) 52%,rgba(0,0,0,.5) 57%,rgba(0,0,0,.2) 62%,transparent 67%)}
-}
 
 /* ───── 움직임·강조
    · html 에 .mo 가 붙을 때만 작동 (기기에서 '동작 줄이기'를 켠 사람은 꺼짐)
@@ -467,13 +466,10 @@ body.no-bar .topbar{display:none}
 /* 섹션 제목의 파란 글자 : 형광펜 밑줄 */
 .h2c .pc{background:linear-gradient(var(--p100),var(--p100)) 0 100%/100% .38em no-repeat;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 /* 숫자 세기 : 숫자 칸 넓이 고정 */
-.cnt{display:inline-block;text-align:right;font-variant-numeric:tabular-nums}
+.cnt{display:inline-block;font-style:normal;text-align:right;font-variant-numeric:tabular-nums}
 
 .mo .h2c .pc{background-size:0 .38em;transition:background-size .9s cubic-bezier(.6,0,.2,1) .25s}
 .mo .h2c.in .pc{background-size:100% .38em}
-/* 첫 화면 사진 : 살짝 크게 시작해서 제자리로 */
-.mo .hero-img{animation:mo-settle 1.8s cubic-bezier(.2,.6,.2,1) both}
-@keyframes mo-settle{from{transform:scale(1.06)}}
 /* 말풍선 : 꼬리 쪽에서 톡 하고 차례로 */
 .mo .bq{opacity:0;transform:scale(.9);transition:opacity .35s,transform .5s cubic-bezier(.3,1.5,.5,1)}
 .mo .bq.l{transform-origin:50px 100%}
@@ -520,6 +516,76 @@ body.no-bar .topbar{display:none}
   .mo .faqs details::details-content{block-size:0;overflow:hidden;transition:block-size .3s ease,content-visibility .3s allow-discrete}
   .mo .faqs details[open]::details-content{block-size:auto}
 }
+
+/* ───── 시안1에서 옮김 : 이용 안내 · 상품 안내 (모양·움직임은 시안1 그대로, 글자 크기·굵기·색은 시안2에 맞춤) ───── */
+/* 글자 기준 : 제목 = .h2c (20px · PC 32px · 700) / 카드 제목 = 생활자금 카드 (20px · 700) / 금액 = 생활자금 금액 (36px · 800 · 파랑) */
+.sec{color:var(--ink)}
+.wrap{max-width:560px;margin:0 auto;padding:0 20px}
+.sec{padding:80px 0}
+.alt{background:var(--bg)}
+.head{text-align:center;margin-bottom:32px}
+.pill{display:inline-block;font-size:13px;font-weight:700;color:var(--p);background:#e6efff;border-radius:99px;padding:6px 14px;margin-bottom:14px}
+.head h2{font-size:20px;line-height:1.35;font-weight:700;color:var(--g800)}
+.head h2 em{font-style:normal;color:var(--p)}
+.foot{font-size:14px;color:var(--sub);text-align:center;margin-top:14px}
+.feat-sec{background:#fff}
+.feats{display:grid;gap:12px;padding:0;max-width:560px;margin:0 auto}
+.feat{display:flex;align-items:center;gap:18px;background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:4px;padding:20px 22px;box-shadow:0 10px 28px rgba(30,60,140,.08)}
+.feat i{flex:none;width:44px;color:var(--p);font-size:36px;line-height:44px;text-align:center}
+.feat b{display:block;font-size:18px;line-height:1.4;font-weight:700}
+.feat span{display:block;font-size:15px;line-height:1.6;color:var(--sub);margin-top:2px}
+.plans{display:grid;gap:14px}
+.plan{background:#fff;border:1.5px solid var(--line);border-radius:4px;padding:26px 22px;transition:.25s}
+.plan-h{display:flex;align-items:center;gap:10px}
+.plan-h i{width:40px;height:40px;border-radius:4px;background:#e6efff;color:var(--p);font-size:22px;line-height:40px;text-align:center}
+.plan-h h3{font-size:20px;line-height:1.4;font-weight:700;letter-spacing:-.4px}
+.plan-h small{margin-left:auto;font-size:12px;font-weight:700;color:var(--p);background:#e6efff;border-radius:4px;padding:4px 8px}
+.plan .plan-amt{margin:20px 0 6px;font-size:14px;color:var(--sub)}
+.plan-amt b{display:block;font-size:36px;font-weight:800;color:var(--p);letter-spacing:-.03em;line-height:1.2}
+.plan-amt b span{font-size:18px;font-weight:700;margin-left:2px}
+.plan p{font-size:16px;line-height:1.6;color:var(--sub)}
+.plan ul{list-style:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--line);display:grid;gap:8px}
+.plan li{display:flex;gap:8px;align-items:center;font-size:15px;font-weight:500}
+.plan li i{color:var(--p)}
+.plan.on{background:linear-gradient(160deg,var(--p),#1e3a8a);border-color:transparent;color:#fff;box-shadow:0 20px 44px rgba(29,78,216,.3)}
+.plan.on .plan-amt,.plan.on p{color:#c9d8ff}
+.plan.on .plan-amt b{color:#fff}
+.plan.on .plan-h i,.plan.on .plan-h small{background:rgba(255,255,255,.16);color:#fff}
+.plan.on ul{border-color:rgba(255,255,255,.2)}
+.plan.on li i{color:#fff}
+.reveal{opacity:0;transform:translateY(20px);transition:.7s cubic-bezier(.2,.7,.2,1)}
+.reveal.on{opacity:1;transform:none}
+@media (min-width:1024px){
+  .wrap{max-width:1160px;padding:0 40px}
+  .sec{padding:120px 0}
+  .head{margin-bottom:56px}
+  .head h2{font-size:32px}
+  .pill{font-size:15px;padding:8px 18px}
+  .feats{max-width:640px;gap:14px}
+  .feat{padding:24px 30px}
+  .feat b{font-size:20px}
+  .feat span{font-size:16px}
+  .plans{grid-template-columns:1fr 1fr;gap:24px;max-width:900px;margin:0 auto}
+  .plan{padding:40px 36px}
+}
+/* 말풍선 아래에 이용 안내가 바로 이어지므로 빈 공간을 줄임 (말풍선 꼬리 24px 포함) */
+.limit.lim-a{padding-bottom:0}
+.lim-a .bubbles{margin-bottom:32px}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+.feat{transition:border-color .2s,box-shadow .2s}
+.feat i{transition:transform .25s}
+.feat:hover{border-color:#c9d7fb;box-shadow:0 14px 32px rgba(30,60,140,.12)}
+.feat:hover i{transform:scale(1.12)}
+.plan:hover{box-shadow:0 18px 40px rgba(29,78,216,.22)}
+.head h2 em{background:linear-gradient(var(--p100),var(--p100)) 0 100%/100% .38em no-repeat;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.mo .head h2 em{background-size:0 .38em;transition:background-size .9s cubic-bezier(.6,0,.2,1) .25s}
+.mo .head.in h2 em{background-size:100% .38em}
+.mo .feats .feat{opacity:0;transition:opacity .5s,border-color .2s,box-shadow .2s}
+.mo .feats.on .feat{opacity:1}
+.mo .feats .feat:nth-child(2){transition-delay:.1s,0s,0s}
+.mo .feats .feat:nth-child(3){transition-delay:.2s,0s,0s}
+.mo .feats .feat:nth-child(4){transition-delay:.3s,0s,0s}
+.mo .feats .feat:nth-child(5){transition-delay:.4s,0s,0s}
 </style>
 <script>if('IntersectionObserver' in window&&matchMedia('(prefers-reduced-motion: no-preference)').matches)document.documentElement.classList.add('mo')</script>
 </head>
@@ -561,11 +627,21 @@ body.no-bar .topbar{display:none}
 <div class="dim"></div>
 
 <main>
-<!-- ① 배너 -->
+<!-- ① 배너 : 대화가 오가는 첫 화면 (★ 대화 문구는 예시) -->
 <section class="hero">
   <div class="hero-box">
-    <img class="hero-img" src="img/한국 기관 캠퍼스의 전문적인 초상2.png" alt="" fetchpriority="high">
-    <div class="hero-ov"></div>
+    <div class="hero-chat">
+      <div class="chat">
+        <div class="chat-hd"><i class="ph-bold ph-caret-left"></i><b>친구</b><i class="ph-bold ph-magnifying-glass"></i></div>
+        <div class="chat-bd">
+          <p class="chat-day">오늘</p>
+          <div class="msg l"><span class="av" aria-hidden="true">🙋🏻‍♀️</span><div class="mc"><em>친구</em><div class="row"><p class="bb">돈 필요해?</p><time>오후 2:01</time></div></div></div>
+          <div class="msg r"><time>오후 2:01</time><p class="bb">응, 급한데 어디서 빌리지?</p></div>
+          <div class="msg l"><span class="av" aria-hidden="true">🙋🏻‍♀️</span><div class="mc"><em>친구</em><div class="row"><p class="bb"><b>국가에서 허가된 업체</b>에서<br>바로 빌려봐!</p><time>오후 2:02</time></div></div></div>
+          <div class="msg r"><time>오후 2:02</time><p class="bb">지금 바로 상담해볼게!</p></div>
+        </div>
+      </div>
+    </div>
     <div class="hero-txt">
       <h1><strong>급하게 필요한 자금</strong><br><strong>365일</strong> 지원 받으세요<br><strong>한국비상금협회</strong></h1>
       <p>대상과 상황에 맞는 생활자금<br>모바일 생활자금 · 신용카드 생활자금 서비스</p>
@@ -580,14 +656,55 @@ body.no-bar .topbar{display:none}
 <!-- ② 안내 띠 -->
 <div class="notice"><p><b>한국비상금협회</b>는 국내 최초 <b>정식 등록 업체</b>입니다 · 대부업 등록번호 【2026-서울강남-0000】</p></div>
 
-<!-- ③ 말풍선 2개 + 큰 설명 카드 2개 (★ 말풍선은 예시) -->
-<section class="limit">
+<!-- ③ 말풍선 2개 (★ 말풍선은 예시) -->
+<section class="limit lim-a">
   <p class="lbl"><span>급하게 돈이 필요할 때</span> 자주 듣는</p>
   <h2 class="h2c">기존 대출의 <span class="pc">높은 문턱</span></h2>
   <div class="bubbles">
     <blockquote class="bq l">🤦🏻‍♂️ : "<span>월급은 </span>꼬박꼬박<span> 받는데, </span>기존 대출<span> 때문에 은행에선 바로 </span>거절<span>이래요.</span>"</blockquote>
     <blockquote class="bq r">🙍🏻 : "<span>월급날은 </span>열흘<span>이나 남았는데, </span>병원비 200만원<span>이 당장 어떻게 구하죠..?</span>"</blockquote>
   </div>
+</section>
+
+<!-- 이용 안내 (시안1에서 옮김) -->
+<section class="sec feat-sec">
+  <div class="wrap">
+    <div class="head reveal"><span class="pill">이용 안내</span><h2>부담 없이<br><em>상담받을 수 있습니다</em></h2></div>
+    <ul class="feats reveal" style="list-style:none">
+      <li class="feat"><i class="ph-duotone ph-device-mobile"></i><div><b>휴대폰 하나로 상담</b><span>본인 명의 휴대폰만 있으면 시작할 수 있습니다</span></div></li>
+      <li class="feat"><i class="ph-duotone ph-shield-check"></i><div><b>신용점수 영향 없음</b><span>상담 단계에서는 신용조회를 하지 않습니다</span></div></li>
+      <li class="feat"><i class="ph-duotone ph-check-circle"></i><div><b>기대출·저신용 상담 가능</b><span>기존 대출이 있어도 상담받을 수 있습니다</span></div></li>
+      <li class="feat"><i class="ph-duotone ph-file-x"></i><div><b>100% 비대면</b><span>방문과 서류 제출 없이 카카오톡으로 진행됩니다</span></div></li>
+      <li class="feat"><i class="ph-duotone ph-clock"></i><div><b>365일 24시간</b><span>야간과 주말에도 상담해 드립니다</span></div></li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- 상품 안내 (시안1에서 옮김 · ★ 한도는 예시) -->
+<section class="sec alt" id="prod">
+  <div class="wrap">
+    <div class="head reveal"><span class="pill">상품 안내</span><h2>상황에 따라<br><em>이용할 수 있는 상품</em>이 있습니다</h2></div>
+    <div class="plans reveal">
+      <article class="plan">
+        <div class="plan-h"><i class="ph-duotone ph-device-mobile"></i><h3>모바일 생활자금</h3></div>
+        <p class="plan-amt">한도 최대<b><i class="cnt">200</i><span>만원</span></b></p>
+        <p>본인 명의 휴대폰 사용자 대상</p>
+        <ul><li><i class="ph-bold ph-check"></i>휴대폰 본인인증 후 진행</li><li><i class="ph-bold ph-check"></i>비대면 계약</li></ul>
+      </article>
+      <article class="plan on">
+        <div class="plan-h"><i class="ph-duotone ph-credit-card"></i><h3>신용카드 생활자금</h3><small>큰 금액</small></div>
+        <p class="plan-amt">한도 최대<b><i class="cnt">5,000</i><span>만원</span></b></p>
+        <p>신용카드 소지자 대상</p>
+        <ul><li><i class="ph-bold ph-check"></i>카드 보유 확인 후 진행</li><li><i class="ph-bold ph-check"></i>비대면 계약</li></ul>
+      </article>
+    </div>
+    <p class="foot reveal">※ 한도와 금리는 심사 결과에 따라 달라질 수 있습니다.</p>
+  </div>
+</section>
+
+<!-- ③-2 큰 설명 카드 2개 -->
+<section class="limit lim-b">
   <p class="lbl g">많은 사람이 다시 찾는 이유</p>
   <h2 class="h2c"><span class="pc">꾸준한 신뢰</span>에 <span class="pc">간편함</span>을 더하다</h2>
   <div class="arts">
@@ -661,16 +778,14 @@ body.no-bar .topbar{display:none}
   </ol>
 </section>
 
-<!-- ⑤ 대상별 카드 4개 (★ 대상별 추천 상품은 예시) -->
-<section class="prods" id="prod">
+<!-- ⑤ 대상별 카드 2개 (★ 대상별 추천 상품은 예시 · 한도는 상품 안내와 같게) -->
+<section class="prods">
   <div class="prods-in">
     <h2 class="h2c">대상에 맞춘 <span class="pc">생활자금</span></h2>
-    <p class="sub"><span class="ln">모바일 생활자금 최대 500만원</span><span class="dot"> · </span><span class="ln">신용카드 생활자금 최대 1,000만원</span><br><strong>한도와 금리는 심사 결과에 따라 달라질 수 있습니다</strong></p>
+    <p class="sub"><span class="ln">모바일 생활자금 최대 200만원</span><span class="dot"> · </span><span class="ln">신용카드 생활자금 최대 5,000만원</span><br><strong>한도와 금리는 심사 결과에 따라 달라질 수 있습니다</strong></p>
     <div class="pcards">
-      <a class="pcard" data-kakao target="_blank" rel="noopener"><div class="pc-ico"><i class="ph-duotone ph-briefcase"></i></div><h3>직장인·자영업자</h3><p class="pc-prod">신용카드 생활자금</p><p class="pc-amt"><span>한도 최대</span><b><span class="cnt">1,000</span><small>만원</small></b></p><span class="pc-more">상담하기<i class="ph-bold ph-caret-right"></i></span></a>
-      <a class="pcard" data-kakao target="_blank" rel="noopener"><div class="pc-ico"><i class="ph-duotone ph-laptop"></i></div><h3>프리랜서</h3><p class="pc-prod">모바일 생활자금</p><p class="pc-amt"><span>한도 최대</span><b><span class="cnt">500</span><small>만원</small></b></p><span class="pc-more">상담하기<i class="ph-bold ph-caret-right"></i></span></a>
-      <a class="pcard" data-kakao target="_blank" rel="noopener"><div class="pc-ico"><i class="ph-duotone ph-house-line"></i></div><h3>주부·사회초년생</h3><p class="pc-prod">모바일 생활자금</p><p class="pc-amt"><span>한도 최대</span><b><span class="cnt">500</span><small>만원</small></b></p><span class="pc-more">상담하기<i class="ph-bold ph-caret-right"></i></span></a>
-      <a class="pcard" data-kakao target="_blank" rel="noopener"><div class="pc-ico"><i class="ph-duotone ph-handshake"></i></div><h3>기대출·저신용</h3><p class="pc-prod">두 상품 모두 상담</p><p class="pc-amt"><span>한도 최대</span><b><span class="cnt">1,000</span><small>만원</small></b></p><span class="pc-more">상담하기<i class="ph-bold ph-caret-right"></i></span></a>
+      <a class="pcard" data-kakao target="_blank" rel="noopener"><div class="pc-ico"><i class="ph-duotone ph-briefcase"></i></div><h3>직장인·자영업자</h3><p class="pc-prod">신용카드 생활자금</p><p class="pc-amt"><span>한도 최대</span><b><span class="cnt">5,000</span><small>만원</small></b></p><span class="pc-more">상담하기<i class="ph-bold ph-caret-right"></i></span></a>
+      <a class="pcard" data-kakao target="_blank" rel="noopener"><div class="pc-ico"><i class="ph-duotone ph-laptop"></i></div><h3>프리랜서</h3><p class="pc-prod">모바일 생활자금</p><p class="pc-amt"><span>한도 최대</span><b><span class="cnt">200</span><small>만원</small></b></p><span class="pc-more">상담하기<i class="ph-bold ph-caret-right"></i></span></a>
     </div>
   </div>
 </section>
@@ -690,7 +805,7 @@ body.no-bar .topbar{display:none}
     </div>
   </div>
   <div class="wide-m">
-    <h2>2026 대한민국<br><span class="pc">소비자 만족</span><br><span class="pc">브랜드 1위</span></h2>
+    <h2>2026 대한민국<br><span class="pc">소비자 만족 브랜드 1위</span></h2>
     <p>금융서비스 (디지털 금융 플랫폼) 부문 수상<br>6년 이상 운영 · 누적 상담 15만 명+</p>
     <div class="wide-m-img"><img src="img/수상2_web.jpg?v=2" alt="2026 대한민국 소비자 만족 브랜드 1위 상패" loading="lazy"></div>
     <ul class="certs">
@@ -822,6 +937,12 @@ body.no-bar .topbar{display:none}
   // 동그라미 상담 버튼 : 첫 화면 상담 버튼이 화면에 보이는 동안은 숨김
   var fab=document.querySelector('.fab'),hb=document.querySelector('.hero .btn-pair');
   if('IntersectionObserver' in window)new IntersectionObserver(function(es){fab.classList.toggle('off',es[0].isIntersecting)}).observe(hb);
+  // (시안1 그대로) 상품 카드 : 마우스를 댄 카드로 파란색이 옮겨감
+  var plans=document.querySelectorAll('.plan');
+  plans.forEach(function(p){p.addEventListener('mouseenter',function(){plans.forEach(function(q){q.classList.toggle('on',q===p)})})});
+  // (시안1 그대로) 스크롤하면 나타나기
+  var rv=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');rv.unobserve(e.target)}})},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){rv.observe(el)});
   // 움직임 : 화면에 35% 들어오면 .in 을 붙여 한 번만 재생
   if(!document.documentElement.classList.contains('mo'))return;
   function count(el){
@@ -846,7 +967,7 @@ body.no-bar .topbar{display:none}
       el.dataset.to=el.textContent.replace(/,/g,'');
       el.textContent='0';
     });
-    document.querySelectorAll('.h2c,.bubbles,.viz,.chat,.steps ol,.pcard').forEach(function(el){io.observe(el)});
+    document.querySelectorAll('.h2c,.bubbles,.viz,.chat,.steps ol,.pcard,.head,.plans').forEach(function(el){io.observe(el)});
   });
 })();
 </script>

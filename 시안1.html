@@ -23,7 +23,7 @@ img{display:block;max-width:100%}
 .alt{background:var(--bg)}
 .head{text-align:center;margin-bottom:32px}
 .pill{display:inline-block;font-size:13px;font-weight:700;color:var(--p);background:#e6efff;border-radius:99px;padding:6px 14px;margin-bottom:14px}
-.head h2{font-size:27px;line-height:1.38;font-weight:700;letter-spacing:-.03em}
+.head h2{font-size:min(27px,6.1vw);line-height:1.38;font-weight:700;letter-spacing:-.03em} /* 휴대폰 폭에 맞춰 줄어들어 두 줄로 (360px 폰 약 22px · 375px 약 23px · 443px 이상 27px) */
 .head h2 em{font-style:normal;color:var(--p)}
 .more{display:inline-flex;align-items:center;gap:6px;font-size:15px;font-weight:700;color:var(--p);border:1.5px solid #c9d7fb;border-radius:99px;padding:11px 22px;background:#fff}
 .center{text-align:center;margin-top:28px}
@@ -633,7 +633,7 @@ summary:hover{color:var(--p)}
     </div>
   </div>
   <div class="wide-m">
-    <h2>2026 대한민국<br><span class="pc">소비자 만족</span><br><span class="pc">브랜드 1위</span></h2>
+    <h2>2026 대한민국<br><span class="pc">소비자 만족 브랜드 1위</span></h2>
     <p>금융서비스 (디지털 금융 플랫폼) 부문 수상<br>6년 이상 운영 · 누적 상담 15만 명+</p>
     <div class="wide-m-img"><img src="img/수상2_web.jpg?v=2" alt="2026 대한민국 소비자 만족 브랜드 1위 상패" loading="lazy"></div>
     <ul class="certs">
