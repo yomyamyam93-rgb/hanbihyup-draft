@@ -72,13 +72,15 @@ img{display:block;max-width:100%}
 /* 파란 배너 위 버튼 : 채널톡 = 흰 바탕 KPMG 파랑 글자, 전화 = 흰 테두리 */
 .bw{background:#fff;color:#1e49e2}
 .bo{background:transparent;color:#fff;box-shadow:inset 0 0 0 1px #fff}
-/* 휴대폰 첫 화면 : 세로로 더 긴 사무실 사진(…상담2.jpg)을 위에 크게 깔고(손짓·서류·웃는 고객), 아래 책상 부분부터 짙은 파랑으로 자연스럽게 이어지며 그 위에 글자
-   (파랑 덮개는 첫 화면 전체에 한 장 → 사진이 움직여도 아래로 삐져나와 갈라져 보이지 않음) */
+/* 휴대폰 첫 화면 : 세로로 긴 사무실 사진(…상담3.jpg)을 위에 크게 깔고(손짓·서류·웃는 고객), 아래 책상 부분부터 짙은 파랑으로 자연스럽게 이어지며 그 위에 글자
+   (사진 높이는 화면 높이의 62% · 420~540px 사이 → 숫자 띠까지 첫 화면에 들어옴. 사진 칸 밖으로는 안 삐져나오게 잘라서 움직여도 갈라지지 않음) */
 @media (max-width:767px){
   .notice{display:none} /* 회색 안내 띠 대신 첫 화면 안 제목 위에 한 줄로 */
   .kv-hero{display:block}
-  .kv-bg{height:420px;object-position:66% 0%}
-  .kv-hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,51,141,0) 0,rgba(0,51,141,0) 190px,rgba(0,51,141,.72) 290px,#00338d 380px,#00338d 100%)}
+  .kv-hero picture{display:block;position:relative;overflow:hidden}
+  .kv-hero picture::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,51,141,0) 0,rgba(0,51,141,0) 50%,rgba(0,51,141,.72) 68%,#00338d 84%)}
+  .kv-bg{height:clamp(420px,62vh,540px);height:clamp(420px,62svh,540px);object-position:66% 0%}
+  .kv-hero::before{content:none}
   .kv-badge{display:flex;align-items:center;gap:6px;margin-bottom:10px;font-size:14px;font-weight:600;color:rgba(255,255,255,.88)}
   .kv-badge i{font-size:17px;color:#9cc0ff}
   .kv-box{z-index:2}
@@ -525,7 +527,7 @@ summary:hover{color:var(--p)}
 <!-- ① 첫 화면 -->
 <section class="kv">
   <div class="kv-hero">
-    <picture><source media="(max-width:767px)" srcset="img/현대적인-사무실-비즈니스-상담2.jpg"><img class="kv-bg" src="img/현대적인-사무실-비즈니스-상담.jpg" alt="" fetchpriority="high"></picture>
+    <picture><source media="(max-width:767px)" srcset="img/현대적인-사무실-비즈니스-상담3.jpg"><img class="kv-bg" src="img/현대적인-사무실-비즈니스-상담.jpg" alt="" fetchpriority="high"></picture>
     <div class="kv-box"><div class="kv-in"><div class="kv-txt">
       <p class="kv-badge"><i class="ph-fill ph-seal-check"></i>국내 최초 정식 등록 업체</p>
       <h1>급하게 필요한 자금<br>365일 지원 받으세요</h1>
